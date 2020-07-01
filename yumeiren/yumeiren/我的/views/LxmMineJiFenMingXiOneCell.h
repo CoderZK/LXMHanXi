@@ -1,0 +1,21 @@
+//
+//  LxmMineJiFenMingXiOneCell.h
+//  yumeiren
+//
+//  Created by zk on 2020/7/1.
+//  Copyright © 2020 李晓满. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface LxmMineJiFenMingXiOneCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleLB;
+@property (weak, nonatomic) IBOutlet UILabel *timeLB;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLB;
+@property (weak, nonatomic) IBOutlet UIButton *typeBt;
+
+@end
+
+NS_ASSUME_NONNULL_END
