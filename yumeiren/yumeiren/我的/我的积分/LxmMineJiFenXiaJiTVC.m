@@ -7,7 +7,11 @@
 //
 
 #import "LxmMineJiFenXiaJiTVC.h"
-
+#import "LxmMineJifenMingXiTVC.h"
+#import "LxmJiFenDeatilOneTVC.h"
+#import "LxmZhuanChuJiFenVC.h"
+#import "LxmMineYeJiKaoTVC.h"
+#import "LxmMineTeamJiFenMingXiTVC.h"
 @interface LxmMineJiFenXiaJiTVC ()
 @property(nonatomic,strong)UIButton *leftButton,*rightButton;
 @property(nonatomic,strong)UIView *navTitleV;
@@ -90,6 +94,7 @@
     
     UIImageView * imageV = [[UIImageView alloc] init];
     imageV.image = [UIImage imageNamed:@"kkjifenback"];
+    imageV.userInteractionEnabled = YES;
     [self.headViewOne addSubview:imageV];
     
     
@@ -107,6 +112,8 @@
     [mingXiBt setTitle:@"我的积分 >" forState:UIControlStateNormal];
     [mingXiBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBt.titleLabel.font = [UIFont systemFontOfSize:13];
+    mingXiBt.tag = 100;
+    [mingXiBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     [imageV addSubview:mingXiBt];
     
     
@@ -124,8 +131,9 @@
     [mingXiBtTwo setTitle:@"剩余待转积分 >" forState:UIControlStateNormal];
     [mingXiBtTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBtTwo.titleLabel.font = [UIFont systemFontOfSize:13];
+    mingXiBtTwo.tag = 101;
     [imageV addSubview:mingXiBtTwo];
-    
+    [mingXiBtTwo addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     UIView * lineV = [[UIView alloc] init];
     lineV.backgroundColor = [UIColor whiteColor];
     [imageV addSubview:lineV];
@@ -139,6 +147,8 @@
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
     [imageV addSubview:tixianBt];
     tixianBt.layer.cornerRadius = 5;
+    tixianBt.tag = 102;
+    [tixianBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     tixianBt.clipsToBounds = YES;
     
     self.btView = [[UIView alloc] init];
@@ -182,7 +192,7 @@
         make.height.equalTo(@20);
     }];
     [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@190);
+        make.height.equalTo(@200);
         make.width.equalTo(@(ScreenW - 10));
         make.centerX.equalTo(self.headViewOne);
         make.top.equalTo(numberLb.mas_bottom).offset(7);
@@ -200,6 +210,7 @@
             make.height.equalTo(@20);
             make.top.equalTo(jiFenLB.mas_bottom).offset(12);
         }];
+        [tixianBt setTitle:@"转出积分" forState:UIControlStateNormal];
     }else {
         lineV.hidden = NO;
         [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -234,6 +245,7 @@
             make.height.equalTo(@20);
             make.top.equalTo(jiFenLB.mas_bottom).offset(12);
         }];
+        [tixianBt setTitle:@"提现" forState:UIControlStateNormal];
     }
     
     
@@ -314,6 +326,8 @@
     [mingXiBt setTitle:@"明细 >   " forState:UIControlStateNormal];
     [mingXiBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
     mingXiBt.titleLabel.font = [UIFont systemFontOfSize:12];
+    mingXiBt.tag = 103;
+    [mingXiBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.headViewTwo addSubview:mingXiBt];
     
     [mingXiBt mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -366,6 +380,8 @@
     tixianBt.titleLabel.font = [UIFont systemFontOfSize:15];
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
     [self.headViewTwo addSubview:tixianBt];
+    tixianBt.tag = 104;
+    [tixianBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     [tixianBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.headViewTwo.mas_centerX);
         make.width.equalTo(@180);
@@ -427,6 +443,48 @@
     
   
 
+}
+
+// 100 我的积分 101 剩余待转积分 102 提现(或者转出积分) 103 明细 104 申请提现
+- (void)jifenAction:(UIButton *)button {
+    if (button.tag == 100) {
+        
+        LxmMineJifenMingXiTVC * vc =[[LxmMineJifenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (button.tag == 101) {
+        LxmMineYeJiKaoTVC * vc =[[LxmMineYeJiKaoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else if (button.tag == 102) {
+        if ([button.titleLabel.text isEqualToString:@"转出积分"]) {
+            LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+           //提现
+            LxmMineTeamJiFenMingXiTVC * vc =[[LxmMineTeamJiFenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+    }else if (button.tag == 103) {
+        
+        LxmMineJifenMingXiTVC * vc =[[LxmMineJifenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }else if (button.tag == 104) {
+        LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+    
 }
 
 @end
