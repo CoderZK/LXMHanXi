@@ -171,13 +171,13 @@
             }
                 break;
             case 1:
-                _yhdjCell.textField.text = @"县代";
+                _yhdjCell.textField.text = @"经理";
                 break;
             case 2:
-                _yhdjCell.textField.text = @"市代";
+                _yhdjCell.textField.text = @"高级经理";
                 break;
             case 3:
-                _yhdjCell.textField.text = @"省代";
+                _yhdjCell.textField.text = @"董事";
                 break;
             case 4:
                 _yhdjCell.textField.text = @"CEO";

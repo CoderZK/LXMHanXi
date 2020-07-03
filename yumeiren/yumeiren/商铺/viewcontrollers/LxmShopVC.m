@@ -18,6 +18,9 @@
 #import "LxmShopCarVC.h"
 
 #import "LxmShengjiGouWuVC.h"
+#import "LxmMyOrderVC.h"
+#import "LxmSubCaiGouAndXiaoShouVC.h"
+#import "LxmOrderChaXunVC.h"
 
 @interface LxmShopVC ()<TYTabPagerBarDelegate,TYTabPagerBarDataSource,TYPagerControllerDataSource,TYPagerControllerDelegate>
 
@@ -124,7 +127,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self.view addSubview:self.topBgView];
     [self.view addSubview:self.titleView];
     [self.view addSubview:self.tabBar];
@@ -186,26 +189,71 @@
     [self.view addSubview:addBtn];
     [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.view).offset(-20);
-        make.bottom.equalTo(self.view).offset(-64);
+        make.bottom.equalTo(self.view).offset(-130);
         make.width.height.equalTo(@50);
     }];
+    
+    if (self.isHaoCai) {
+        WeakObj(self);
+        LxmPanButton *orderBtn = [LxmPanButton new];
+           orderBtn.iconImgView.image = [UIImage imageNamed:@"kk167"];
+        [selfWeak.view addSubview:orderBtn];
+           [orderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+               make.trailing.equalTo(self.view).offset(-20);
+               make.bottom.equalTo(self.view).offset(-64);
+               make.width.height.equalTo(@50);
+           }];
+        
+        orderBtn.panBlock = ^{
+            
+//            LxmSubCaiGouAndXiaoShouVC *vc = [[LxmSubCaiGouAndXiaoShouVC alloc] init];
+//            vc.type = @(3);
+//            vc.status = @(0);
+//            [selfWeak.navigationController pushViewController:vc animated:YES];
+            
+         
+            LxmOrderChaXunVC *vc = [[LxmOrderChaXunVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.isHaoCai = self.isHaoCai;
+            [selfWeak.navigationController pushViewController:vc animated:YES];
+            
+//            LxmMyOrderVC *vc = [[LxmMyOrderVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+//            vc.selectIndex = 0;
+//            vc.hidesBottomBarWhenPushed = YES;
+//            vc.isHaoCai = self.isHaoCai;
+//            [selfWeak.navigationController pushViewController:vc animated:YES];
+        };
+        
+    }
+    
+    
     WeakObj(self);
     addBtn.panBlock = ^{
-        if (selfWeak.isGotoGouwuChe) {
-            if (self.roleType.isValid) {
-                LxmShengjiGouWuVC *vc = [[LxmShengjiGouWuVC alloc] init];
-                vc.shengjiModel = self.shengjiModel;
-                vc.roleType = self.roleType;
-                vc.isDeep = YES;
-                [selfWeak.navigationController pushViewController:vc animated:YES];
-            } else {
+        
+        if (selfWeak.isHaoCai) {
                 LxmShopCarVC *vc = [[LxmShopCarVC alloc] init];
                 vc.isDeep = self.isDeep;
+                vc.isHaoCai = self.isHaoCai;
                 [selfWeak.navigationController pushViewController:vc animated:YES];
+        }else {
+            if (selfWeak.isGotoGouwuChe) {
+                if (self.roleType.isValid) {
+                    LxmShengjiGouWuVC *vc = [[LxmShengjiGouWuVC alloc] init];
+                    vc.shengjiModel = self.shengjiModel;
+                    vc.roleType = self.roleType;
+                    vc.isDeep = YES;
+                    [selfWeak.navigationController pushViewController:vc animated:YES];
+                } else {
+                    LxmShopCarVC *vc = [[LxmShopCarVC alloc] init];
+                    vc.isDeep = self.isDeep;
+                    [selfWeak.navigationController pushViewController:vc animated:YES];
+                }
+            } else {
+                [selfWeak.navigationController popViewControllerAnimated:YES];
             }
-        } else {
-             [selfWeak.navigationController popViewControllerAnimated:YES];
         }
+        
+        
     };
 }
 
@@ -223,6 +271,7 @@
     vc.roleType = self.roleType;
     vc.type_id = self.model.result.list[index].id;
     vc.isAddLocolGoods = self.isAddLocolGoods;
+    vc.isHaoCai = self.isHaoCai;
     return vc;
 }
 
@@ -262,7 +311,13 @@
 - (void)loadListData {
     [SVProgressHUD show];
     WeakObj(self);
-    [LxmNetworking networkingPOST:good_first_type_list parameters:nil returnClass:LxmSuCaiContentTypeRootModel.class success:^(NSURLSessionDataTask *task, LxmSuCaiContentTypeRootModel *responseObject) {
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    if (self.isHaoCai) {
+        dict[@"noVip"] = @"2";
+    }else {
+        dict[@"noVip"] = @"1";
+    }
+    [LxmNetworking networkingPOST:good_first_type_list parameters:dict returnClass:LxmSuCaiContentTypeRootModel.class success:^(NSURLSessionDataTask *task, LxmSuCaiContentTypeRootModel *responseObject) {
         [SVProgressHUD dismiss];
         if (responseObject.key.integerValue == 1000) {
             selfWeak.model = responseObject;
@@ -288,6 +343,7 @@
     vc.roleType = self.roleType;
     vc.isDeep = self.isDeep;
     vc.isAddLocolGoods = self.isAddLocolGoods;
+    vc.isHaoCai = self.isHaoCai;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:NO];
 }

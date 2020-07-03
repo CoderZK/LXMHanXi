@@ -387,6 +387,7 @@
             }
         } else {
             LxmShopCarVC *vc = [[LxmShopCarVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+            vc.isHaoCai = self.isHaoCai;
             [self.navigationController pushViewController:vc animated:YES];
         }
         

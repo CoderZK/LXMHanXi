@@ -154,30 +154,11 @@
 
 - (void)addCar:(LxmHomeGoodsModel *)goodModel {
     
-    if (self.shengjiModel) {
-        if ( ([self.roleType isEqualToString:@"-0.5"] || [self.roleType isEqualToString:@"-0.4"] || [self.roleType isEqualToString:@"-0.3"] || [self.roleType isEqualToString:@"1.1"] || [self.roleType isEqualToString:@"2.1"] || [self.roleType isEqualToString:@"3.1"]) && goodModel.special_type.intValue != 2) {
-            [SVProgressHUD showErrorWithStatus:@"不属于减肥单项商品，无法购买"];
-            return;
-        }
-    } else {
-        if (([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.5"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.4"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.3"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"1.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"2.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3.1"]) && goodModel.special_type.intValue != 2) {
-            [SVProgressHUD showErrorWithStatus:@"不属于减肥单项商品，无法购买"];
-            return;
-        }
-    }
     
-    NSInteger shopStatus = LxmTool.ShareTool.userModel.shopStatus.intValue;
-    if (shopStatus == 0 || shopStatus == 1 || shopStatus == 2 || shopStatus == 4 || shopStatus == 5) {//有升级中的状态 不能直接加入购物车 要提示进入升级通道
-        UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"进入升级通道,下单更便宜哦!" message:@"是否进入升级通道?" preferredStyle:UIAlertControllerStyleAlert];
-        [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
-        [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-           LxmShengJiVC *vc = [[LxmShengJiVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
-        }]];
-        [self.navigationController presentViewController:alertView animated:YES completion:nil];
-        
-    } else {
+    
+    WeakObj(self);
+    void(^addCar)(void) = ^{
+      
         NSDictionary *dict = @{
                                @"token" : SESSION_TOKEN,
                                @"goodId" : goodModel.id,
@@ -197,7 +178,41 @@
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             [SVProgressHUD dismiss];
         }];
+        
+    };
+    
+    if (self.isHaoCai) {
+        addCar();
+    }else {
+        if (self.shengjiModel) {
+            if ( ([self.roleType isEqualToString:@"-0.5"] || [self.roleType isEqualToString:@"-0.4"] || [self.roleType isEqualToString:@"-0.3"] || [self.roleType isEqualToString:@"1.1"] || [self.roleType isEqualToString:@"2.1"] || [self.roleType isEqualToString:@"3.1"]) && goodModel.special_type.intValue != 2) {
+                [SVProgressHUD showErrorWithStatus:@"不属于减肥单项商品，无法购买"];
+                return;
+            }
+        } else {
+            if (([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.5"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.4"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.3"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"1.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"2.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3.1"]) && goodModel.special_type.intValue != 2) {
+                [SVProgressHUD showErrorWithStatus:@"不属于减肥单项商品，无法购买"];
+                return;
+            }
+        }
+        
+        NSInteger shopStatus = LxmTool.ShareTool.userModel.shopStatus.intValue;
+        if (shopStatus == 0 || shopStatus == 1 || shopStatus == 2 || shopStatus == 4 || shopStatus == 5) {//有升级中的状态 不能直接加入购物车 要提示进入升级通道
+            UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"进入升级通道,下单更便宜哦!" message:@"是否进入升级通道?" preferredStyle:UIAlertControllerStyleAlert];
+            [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+            [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+               LxmShengJiVC *vc = [[LxmShengJiVC alloc] init];
+               vc.hidesBottomBarWhenPushed = YES;
+               [self.navigationController pushViewController:vc animated:YES];
+            }]];
+            [self.navigationController presentViewController:alertView animated:YES completion:nil];
+            
+        } else {
+            addCar();
+        }
     }
+    
+    
     
     
 }
@@ -209,6 +224,7 @@
     vc.roleType = self.roleType;
     vc.goodsID = self.dataArr[indexPath.item].id;
     vc.isAddLocolGoods = self.isAddLocolGoods;
+    vc.isHaoCai = self.isHaoCai;
     [self.navigationController pushViewController:vc animated:YES];
 }
 /**
@@ -225,6 +241,11 @@
     dict[@"pageSize"] = @10;
     if (self.roleType.isValid) {
         dict[@"role_type"] = self.roleType;
+    }
+    if (self.isHaoCai) {
+        dict[@"noVip"] = @"2";
+    }else {
+        dict[@"noVip"] = @"1";
     }
     WeakObj(self);
     [LxmNetworking networkingPOST:group_good_list parameters:dict returnClass:LxmShopListRootModel.class success:^(NSURLSessionDataTask *task, LxmShopListRootModel *responseObject) {

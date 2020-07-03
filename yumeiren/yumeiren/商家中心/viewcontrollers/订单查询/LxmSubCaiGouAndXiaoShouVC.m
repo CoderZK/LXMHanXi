@@ -187,6 +187,11 @@
         } else {
             dict[@"status"] = self.status;
         }
+        if (self.isHaoCai) {
+            dict[@"noVip"] = @"2";
+        }else {
+            dict[@"noVip"] = @"1";
+        }
         dict[@"type"] = self.type;
         [LxmNetworking networkingPOST:order_list parameters:dict returnClass:LxmShopCenterOrderRootModel.class success:^(NSURLSessionDataTask *task, LxmShopCenterOrderRootModel *responseObject) {
             [self endRefrish];

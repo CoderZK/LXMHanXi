@@ -177,9 +177,9 @@
 - (void)initHeaderView {
     [self.headerView addSubview:self.shopNameCell];
     [self.headerView addSubview:self.phoneCell];
-    [self.headerView addSubview:self.shengCell];
-    [self.headerView addSubview:self.shiCell];
-    [self.headerView addSubview:self.quCell];
+//    [self.headerView addSubview:self.shengCell];
+//    [self.headerView addSubview:self.shiCell];
+//    [self.headerView addSubview:self.quCell];
     [self.headerView addSubview:self.quGouwuButton];
 //    [self.headerView addSubview:self.detailCell];
     [self.headerView addSubview:self.addressCell];
@@ -198,28 +198,28 @@
         make.leading.trailing.equalTo(self.headerView);
         make.height.equalTo(@50);
     }];
-    [self.shengCell mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [self.shengCell mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.phoneCell.mas_bottom);
+//        make.leading.trailing.equalTo(self.headerView);
+//        make.height.equalTo(@50);
+//    }];
+//    [self.shiCell mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.shengCell.mas_bottom);
+//        make.leading.trailing.equalTo(self.headerView);
+//        make.height.equalTo(@50);
+//    }];
+//    [self.quCell mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.shiCell.mas_bottom);
+//        make.leading.trailing.equalTo(self.headerView);
+//        make.height.equalTo(@50);
+//    }];
+    [self.addressCell mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.phoneCell.mas_bottom);
         make.leading.trailing.equalTo(self.headerView);
         make.height.equalTo(@50);
     }];
-    [self.shiCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shengCell.mas_bottom);
-        make.leading.trailing.equalTo(self.headerView);
-        make.height.equalTo(@50);
-    }];
-    [self.quCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shiCell.mas_bottom);
-        make.leading.trailing.equalTo(self.headerView);
-        make.height.equalTo(@50);
-    }];
-    [self.addressCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.quCell.mas_bottom);
-        make.leading.trailing.equalTo(self.headerView);
-        make.height.equalTo(@50);
-    }];
 //    [self.detailCell mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.quCell.mas_bottom);
+//        make.top.equalTo(self.phoneCell.mas_bottom);
 //        make.leading.trailing.equalTo(self.headerView);
 //        make.height.equalTo(@50);
 //    }];
@@ -229,19 +229,19 @@
         make.trailing.equalTo(self.headerView).offset(-20);
         make.height.equalTo(@44);
     }];
-    if (![self.model.roleType isEqualToString:@"-0.5"] && ![self.model.roleType isEqualToString:@"-0.4"] && ![self.model.roleType isEqualToString:@"-0.3"] && ![self.model.roleType isEqualToString:@"1.1"] && ![self.model.roleType isEqualToString:@"2.1"] && ![self.model.roleType isEqualToString:@"3.1"]) {
-        [self.addressCell mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.quCell.mas_bottom);
-            make.leading.trailing.equalTo(self.headerView);
-            make.height.equalTo(@50);
-        }];
-    } else {
-        [self.addressCell mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.quCell.mas_bottom);
-            make.leading.trailing.equalTo(self.headerView);
-            make.height.equalTo(@0);
-        }];
-    }
+//    if (![self.model.roleType isEqualToString:@"-0.5"] && ![self.model.roleType isEqualToString:@"-0.4"] && ![self.model.roleType isEqualToString:@"-0.3"] && ![self.model.roleType isEqualToString:@"1.1"] && ![self.model.roleType isEqualToString:@"2.1"] && ![self.model.roleType isEqualToString:@"3.1"]) {
+//        [self.addressCell mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.quCell.mas_bottom);
+//            make.leading.trailing.equalTo(self.headerView);
+//            make.height.equalTo(@50);
+//        }];
+//    } else {
+//        [self.addressCell mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.quCell.mas_bottom);
+//            make.leading.trailing.equalTo(self.headerView);
+//            make.height.equalTo(@0);
+//        }];
+//    }
     [self.headerView layoutIfNeeded];
     
 }
@@ -325,15 +325,20 @@
         [SVProgressHUD showErrorWithStatus:@"请输入11位的联系电话!"];
         return;
     }
-    if ([self.shengCell.detailLabel.text isEqualToString:@"请选择"]) {
-        [SVProgressHUD showErrorWithStatus:@"请选择省市区!"];
+//    if ([self.shengCell.detailLabel.text isEqualToString:@"请选择"]) {
+//        [SVProgressHUD showErrorWithStatus:@"请选择省市区!"];
+//        return;
+//    }
+//    if (![self.model.roleType isEqualToString:@"-0.5"] && ![self.model.roleType isEqualToString:@"-0.4"] && ![self.model.roleType isEqualToString:@"-0.3"] && ![self.model.roleType isEqualToString:@"1.1"] && ![self.model.roleType isEqualToString:@"2.1"] && ![self.model.roleType isEqualToString:@"3.1"]) {
+//        if (self.addressCell.textField.text.length == 0) {
+//               [SVProgressHUD showErrorWithStatus:@"请输入详细地址"];
+//               return;
+//           }
+//    }
+    
+    if (self.addressCell.textField.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入详细地址"];
         return;
-    }
-    if (![self.model.roleType isEqualToString:@"-0.5"] && ![self.model.roleType isEqualToString:@"-0.4"] && ![self.model.roleType isEqualToString:@"-0.3"] && ![self.model.roleType isEqualToString:@"1.1"] && ![self.model.roleType isEqualToString:@"2.1"] && ![self.model.roleType isEqualToString:@"3.1"]) {
-        if (self.addressCell.textField.text.length == 0) {
-               [SVProgressHUD showErrorWithStatus:@"请输入详细地址"];
-               return;
-           }
     }
     
     NSMutableDictionary *panduanDict = [NSMutableDictionary dictionary];

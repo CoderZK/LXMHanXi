@@ -155,9 +155,21 @@
     if ([self.shopInfoModel.roleType isEqualToString:@"-1"] || [self.shopInfoModel.roleType isEqualToString:@"0"] || [self.shopInfoModel.roleType isEqualToString:@"1"] || [self.shopInfoModel.roleType isEqualToString:@"-0.5"] || [self.shopInfoModel.roleType isEqualToString:@"-0.4"] || [self.shopInfoModel.roleType isEqualToString:@"-0.3"]) {
         switch (index) {
             case 0: {// 我的店铺
-                LxmMyDianPuVC *vc = [[LxmMyDianPuVC alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
+                
+                LxmShopVC *vc = [[LxmShopVC alloc] init];
+                vc.roleType = [NSString stringWithFormat:@"%@",self.shopInfoModel.roleType];
+                vc.shengjiModel = nil;
+                vc.isDeep = YES;
+                vc.isHaoCai = YES;
+                vc.isAddLocolGoods = NO;
+                vc.isGotoGouwuChe = YES;
                 [self.navigationController pushViewController:vc animated:YES];
+                
+           
+                
+//                LxmMyDianPuVC *vc = [[LxmMyDianPuVC alloc] init];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 1: {//购进商品
