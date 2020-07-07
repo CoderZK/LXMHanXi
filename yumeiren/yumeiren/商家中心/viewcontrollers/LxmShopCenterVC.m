@@ -89,12 +89,12 @@
     
     
     [self.tableView registerNib:[UINib nibWithNibName:@"LxmShopCenterTwoCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-
+    
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -108,11 +108,6 @@
         }
         cell.shopInfoModel = self.shopInfoModel;
         cell.dataArr = self.dataArr;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }else if (indexPath.section == 1) {
-        
-        LxmShopCenterTwoCell * cell =  [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -130,18 +125,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        //原本为考核内容,现在隐藏
-        if ([self.shopInfoModel.roleType isEqualToString:@"-1"] || [self.shopInfoModel.roleType isEqualToString:@"0"] || [self.shopInfoModel.roleType isEqualToString:@"1"] || [self.shopInfoModel.roleType isEqualToString:@"-0.5"] || [self.shopInfoModel.roleType isEqualToString:@"-0.4"] || [self.shopInfoModel.roleType isEqualToString:@"-0.3"]) {
-            return 0;
-        }
-        return 0;
-    }else if (indexPath.section == 1) {
-        
-        return 146;
-        
-        
-    }
+     if (indexPath.section == 0) {
+           if ([self.shopInfoModel.roleType isEqualToString:@"-1"] || [self.shopInfoModel.roleType isEqualToString:@"0"] || [self.shopInfoModel.roleType isEqualToString:@"1"] || [self.shopInfoModel.roleType isEqualToString:@"-0.5"] || [self.shopInfoModel.roleType isEqualToString:@"-0.4"] || [self.shopInfoModel.roleType isEqualToString:@"-0.3"]) {
+               return 0.01;
+           }
+           return 150;
+       }
     if ([self.shopInfoModel.roleType isEqualToString:@"-1"] || [self.shopInfoModel.roleType isEqualToString:@"0"] || [self.shopInfoModel.roleType isEqualToString:@"1"] || [self.shopInfoModel.roleType isEqualToString:@"-0.5"] || [self.shopInfoModel.roleType isEqualToString:@"-0.4"] || [self.shopInfoModel.roleType isEqualToString:@"-0.3"]) {
         return 80*ceil(6/3.0) + 60;
     }
@@ -155,21 +144,9 @@
     if ([self.shopInfoModel.roleType isEqualToString:@"-1"] || [self.shopInfoModel.roleType isEqualToString:@"0"] || [self.shopInfoModel.roleType isEqualToString:@"1"] || [self.shopInfoModel.roleType isEqualToString:@"-0.5"] || [self.shopInfoModel.roleType isEqualToString:@"-0.4"] || [self.shopInfoModel.roleType isEqualToString:@"-0.3"]) {
         switch (index) {
             case 0: {// 我的店铺
-                
-                LxmShopVC *vc = [[LxmShopVC alloc] init];
-                vc.roleType = [NSString stringWithFormat:@"%@",self.shopInfoModel.roleType];
-                vc.shengjiModel = nil;
-                vc.isDeep = YES;
-                vc.isHaoCai = YES;
-                vc.isAddLocolGoods = NO;
-                vc.isGotoGouwuChe = YES;
+                LxmMyDianPuVC *vc = [[LxmMyDianPuVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
-                
-           
-                
-//                LxmMyDianPuVC *vc = [[LxmMyDianPuVC alloc] init];
-//                vc.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 1: {//购进商品
@@ -215,10 +192,20 @@
             }
                 break;
             case 4: {//年度考核
-                LxmNianDuKaoHeVC *vc = [[LxmNianDuKaoHeVC alloc] init];
-                vc.shopInfoModel = self.shopInfoModel;
-                vc.hidesBottomBarWhenPushed = YES;
+                
+                LxmShopVC *vc = [[LxmShopVC alloc] init];
+                vc.roleType = [NSString stringWithFormat:@"%@",self.shopInfoModel.roleType];
+                vc.shengjiModel = nil;
+                vc.isDeep = YES;
+                vc.isHaoCai = YES;
+                vc.isAddLocolGoods = NO;
+                vc.isGotoGouwuChe = YES;
                 [self.navigationController pushViewController:vc animated:YES];
+                
+                //                LxmNianDuKaoHeVC *vc = [[LxmNianDuKaoHeVC alloc] init];
+                //                vc.shopInfoModel = self.shopInfoModel;
+                //                vc.hidesBottomBarWhenPushed = YES;
+                //                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 5: {//消息通知
@@ -284,10 +271,20 @@
             }
                 break;
             case 6: {//年度考核
-                LxmNianDuKaoHeVC *vc = [[LxmNianDuKaoHeVC alloc] init];
-                vc.shopInfoModel = self.shopInfoModel;
-                vc.hidesBottomBarWhenPushed = YES;
+                
+                LxmShopVC *vc = [[LxmShopVC alloc] init];
+                vc.roleType = [NSString stringWithFormat:@"%@",self.shopInfoModel.roleType];
+                vc.shengjiModel = nil;
+                vc.isDeep = YES;
+                vc.isHaoCai = YES;
+                vc.isAddLocolGoods = NO;
+                vc.isGotoGouwuChe = YES;
                 [self.navigationController pushViewController:vc animated:YES];
+                
+                //                LxmNianDuKaoHeVC *vc = [[LxmNianDuKaoHeVC alloc] init];
+                //                vc.shopInfoModel = self.shopInfoModel;
+                //                vc.hidesBottomBarWhenPushed = YES;
+                //                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 7: {//消息通知

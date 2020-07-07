@@ -67,6 +67,9 @@
 
 @property (nonatomic, strong) NSString *comNum;//公司库存数量
 
+@property(nonatomic,assign)NSInteger noVip;
+
+
 @end
 
 

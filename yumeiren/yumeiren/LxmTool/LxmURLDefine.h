@@ -516,6 +516,13 @@
 #define year_group_list  Base_URL"/app/user/year_group_list"
 
 /**
+   我的积分
+ */
+#define my_inner_score  Base_URL"/app/user/my_inner_score"
+
+
+
+/**
  获取图片地址
  */
 +(NSString *)getPicImgWthPicStr:(NSString *)pic;

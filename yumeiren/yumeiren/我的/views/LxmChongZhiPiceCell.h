@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)void(^choosePhotoBlock)();
+@property(nonatomic,strong)NSString *titleStr;
 @end
 
 NS_ASSUME_NONNULL_END

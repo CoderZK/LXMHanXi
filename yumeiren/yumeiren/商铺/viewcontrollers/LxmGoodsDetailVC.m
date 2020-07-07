@@ -296,8 +296,12 @@
                         break;
                     }
                 }
+                
                 self.bottomView.carButton.num = iscunzai ? mm.num : @"0";
             } else {
+                self.bottomView.carButton.num = self.detailModel.cartNum;
+            }
+            if (self.detailModel.good.noVip == 2) {
                 self.bottomView.carButton.num = self.detailModel.cartNum;
             }
             NSMutableArray *temp = [NSMutableArray array];
@@ -368,31 +372,49 @@
 
 /**
  底部操作按钮
-
+ 
  @param index 400 401 402
  */
 - (void)bottomButtonClickAtIndex:(NSInteger)index {
     if (index == 400) {//购物车
-        if (self.isAddLocolGoods) {
-            if (self.roleType.isValid) {
-                LxmShengjiGouWuVC *vc = [LxmShengjiGouWuVC  new];
-                [self.navigationController pushViewController:vc animated:YES];
-            } else {
-                WeakObj(self);
-                for (UIViewController *vc in selfWeak.navigationController.viewControllers) {
-                    if ([vc isKindOfClass:[LxmYiJianBuHuoVC1 class]]) {
-                       [selfWeak.navigationController popToViewController:vc animated:YES];
-                   }
-               }
-            }
-        } else {
+        
+        
+        if (self.detailModel.good.noVip == 2) {
             LxmShopCarVC *vc = [[LxmShopCarVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
-            vc.isHaoCai = self.isHaoCai;
+            vc.isHaoCai = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            if (self.isAddLocolGoods) {
+                if (self.roleType.isValid) {
+                    LxmShengjiGouWuVC *vc = [LxmShengjiGouWuVC  new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    WeakObj(self);
+                    for (UIViewController *vc in selfWeak.navigationController.viewControllers) {
+                        if ([vc isKindOfClass:[LxmYiJianBuHuoVC1 class]]) {
+                            [selfWeak.navigationController popToViewController:vc animated:YES];
+                        }
+                    }
+                }
+            } else {
+                LxmShopCarVC *vc = [[LxmShopCarVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+                vc.isHaoCai = NO;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
         
+        
+        
     } else if (index == 401) {//加入购物车
-        [self addCarClick];
+        
+        
+        if (self.detailModel.good.noVip == 2) {
+            [self addgoodsAction];
+        }else {
+            [self addCarClick];
+        }
+        
+        
     } else {//立即购买
         LxmPayVC *vc = [[LxmPayVC alloc] initWithTableViewStyle:UITableViewStyleGrouped type:LxmPayVC_type_zjgm];
         vc.zhijieGoumaiMoney = self.detailModel.good.goodPrice;
@@ -418,7 +440,7 @@
             return;
         }
     }
-
+    
     if (self.isAddLocolGoods) {
         LxmGoodsDetailModel *temp = self.detailModel.good;
         LxmHomeGoodsModel *goodModel = [LxmHomeGoodsModel new];
@@ -446,23 +468,23 @@
                 }
             }
             
-                if (!iscunzai) {
-                    mm.num = @"1";
-                    [SVProgressHUD showSuccessWithStatus:@"添加成功"];
-                    [[LxmTool ShareTool] saveShengJiSubGoods:mm];
-                    [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
-                    return;
-                } else {
-                        mm.num = [NSString stringWithFormat:@"%d",mm.num.integerValue + 1];
-                        [SVProgressHUD showSuccessWithStatus:@"添加成功"];
-                        [[LxmTool ShareTool] saveShengJiSubGoods:mm];
-                        [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
-                    NSLog(@"%@",[LxmTool ShareTool].shengjiGoodsList);
+            if (!iscunzai) {
+                mm.num = @"1";
+                [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                [[LxmTool ShareTool] saveShengJiSubGoods:mm];
+                [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
+                return;
+            } else {
+                mm.num = [NSString stringWithFormat:@"%d",mm.num.integerValue + 1];
+                [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                [[LxmTool ShareTool] saveShengJiSubGoods:mm];
+                [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
+                NSLog(@"%@",[LxmTool ShareTool].shengjiGoodsList);
                 self.bottomView.carButton.num = [NSString stringWithFormat:@"%ld",(long)mm.num.integerValue];
-            return;
-        }
-        
-    } else {
+                return;
+            }
+            
+        } else {
             bool iscunzai = NO;
             for (LxmHomeGoodsModel *m in [LxmTool ShareTool].goodsList) {
                 if (m.id.integerValue == goodModel.id.integerValue) {
@@ -518,40 +540,48 @@
         UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"进入升级通道,下单更便宜哦!" message:@"是否进入升级通道?" preferredStyle:UIAlertControllerStyleAlert];
         [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
         [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-           LxmShengJiVC *vc = [[LxmShengJiVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
+            LxmShengJiVC *vc = [[LxmShengJiVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }]];
         [self.navigationController presentViewController:alertView animated:YES completion:nil];
         
     }  else {
-        NSDictionary *dict = @{
-                                  @"token" : SESSION_TOKEN,
-                                  @"goodId" : self.detailModel.good.id,
-                                  @"num" : @1
-                                  };
-           [SVProgressHUD show];
-           WeakObj(self);
-           [LxmNetworking networkingPOST:add_cart parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-               [SVProgressHUD dismiss];
-               StrongObj(self);
-               if ([responseObject[@"key"] integerValue] == 1000) {
-                   [SVProgressHUD showSuccessWithStatus:@"添加成功!"];
-                   NSInteger num = self.detailModel.cartNum.integerValue;
-                   num++;
-                   self.detailModel.cartNum = @(num).stringValue;
-                   self.bottomView.carButton.num = self.detailModel.cartNum;
-                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                       [LxmEventBus sendEvent:@"addCarSuccess" data:nil];
-                   });
-               } else {
-                   [UIAlertController showAlertWithmessage:responseObject[@"message"]];
-               }
-           } failure:^(NSURLSessionDataTask *task, NSError *error) {
-               [SVProgressHUD dismiss];
-           }];
+        [self addgoodsAction];
     }
 }
+
+- (void)addgoodsAction {
+    
+    NSDictionary *dict = @{
+        @"token" : SESSION_TOKEN,
+        @"goodId" : self.detailModel.good.id,
+        @"num" : @1
+    };
+    [SVProgressHUD show];
+    WeakObj(self);
+    [LxmNetworking networkingPOST:add_cart parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        StrongObj(self);
+        if ([responseObject[@"key"] integerValue] == 1000) {
+            [SVProgressHUD showSuccessWithStatus:@"添加成功!"];
+            NSInteger num = self.detailModel.cartNum.integerValue;
+            num++;
+            self.detailModel.cartNum = @(num).stringValue;
+            self.bottomView.carButton.num = self.detailModel.cartNum;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [LxmEventBus sendEvent:@"addCarSuccess" data:nil];
+            });
+        } else {
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+    
+    
+}
+
 @end
 
 
@@ -658,7 +688,7 @@
 - (void)initSubViews {
     [self addSubview:self.addCarButton];
     [self addSubview:self.carButton];
-//    [self addSubview:self.lijiGoumaiButton];
+    //    [self addSubview:self.lijiGoumaiButton];
 }
 
 /**
@@ -675,10 +705,10 @@
         make.top.trailing.equalTo(self);
         make.height.equalTo(@50);
     }];
-//    [self.lijiGoumaiButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.trailing.bottom.equalTo(self);
-//        make.leading.equalTo(self.addCarButton.mas_trailing);
-//    }];
+    //    [self.lijiGoumaiButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.trailing.bottom.equalTo(self);
+    //        make.leading.equalTo(self.addCarButton.mas_trailing);
+    //    }];
 }
 
 - (LxmGoodsDetailButton *)carButton {
@@ -696,7 +726,7 @@
         [_addCarButton setTitle:@"加入购物车" forState:UIControlStateNormal];
         [_addCarButton setTitleColor:[UIColor.whiteColor colorWithAlphaComponent:0.8] forState:UIControlStateNormal];
         _addCarButton.titleLabel.font = [UIFont systemFontOfSize:15];
-         [_addCarButton setBackgroundImage:[UIImage imageNamed:@"pink"] forState:UIControlStateNormal];
+        [_addCarButton setBackgroundImage:[UIImage imageNamed:@"pink"] forState:UIControlStateNormal];
         _addCarButton.tag = 401;
         [_addCarButton addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

@@ -428,7 +428,7 @@
             case 3: {
                 self.iconImgView.image = [UIImage imageNamed:@"jifen935"];
                 self.detaillabel.hidden = YES;
-                self.titleLabel.text = @"积分";
+                self.titleLabel.text = @"小晞";
                 self.detaillabel.text = @"500";
             }
                 break;

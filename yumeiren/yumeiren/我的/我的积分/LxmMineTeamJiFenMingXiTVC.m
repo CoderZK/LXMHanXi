@@ -47,7 +47,7 @@
     
     
     UILabel * lb  = [[UILabel alloc] initWithFrame:CGRectMake(50, StateBarH, ScreenW - 100, 44)];
-    lb.text = @"团队积分明细";
+    lb.text = @"团队小晞明细";
     lb.textAlignment = NSTextAlignmentCenter;
     lb.font = [UIFont systemFontOfSize:18];
     lb.textColor = [UIColor whiteColor];

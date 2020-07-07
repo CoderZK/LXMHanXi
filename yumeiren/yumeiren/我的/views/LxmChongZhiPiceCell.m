@@ -10,6 +10,7 @@
 
 @interface LxmChongZhiPiceCell()
 @property(nonatomic,strong)UIScrollView *scrollview;
+@property(nonatomic,strong)UILabel *titleLB;
 @end
 
 
@@ -19,7 +20,13 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, ScreenW, (ScreenW - 60)/3)];
+        self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, ScreenW- 30, 40)];
+        self.titleLB.font = [UIFont systemFontOfSize:14];
+        self.titleLB.textColor = CharacterDarkColor;
+        self.titleLB.numberOfLines = 2;
+        [self addSubview:self.titleLB];
+        
+        self.scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 5+50, ScreenW, (ScreenW - 60)/3)];
         [self addSubview:self.scrollview];
         
         
@@ -51,7 +58,7 @@
         UIButton * deleteBt = [[UIButton alloc] initWithFrame:CGRectMake((ScreenW - 60) /3 - 20 , 0, 20, 20)];
         [deleteBt setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         deleteBt.tag = 200+i;
-        deleteBt.backgroundColor = RGB(245, 245, 245);
+//        deleteBt.backgroundColor = RGB(250, 250, 250);
         [deleteBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
         [deleteBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [button addSubview:deleteBt];
@@ -63,7 +70,7 @@
         button.layer.cornerRadius = 3;
         button.tag = 100+picsArr.count;
         button.clipsToBounds = YES;
-        button.backgroundColor = RGB(245, 245, 245);
+        button.backgroundColor = RGB(250, 250, 250);
         [button setImage:[UIImage imageNamed:@"kk30"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollview addSubview:button];
@@ -93,7 +100,10 @@
     }
 }
 
-
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    self.titleLB.text = titleStr;
+}
 
 
 - (void)awakeFromNib {

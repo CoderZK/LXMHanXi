@@ -7,7 +7,7 @@
 //
 
 #import "LxmZhangDanDetailVC.h"
-
+#import "LxmChongZhiOderDetailPicsCell.h"
 @interface LxmZhangDanDetailHeaderView : UIView
 
 @property (nonatomic, strong) UIImageView *iconImgView;
@@ -286,64 +286,116 @@
     }];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    if (section == 0) {
+        return 3;
+    }
+    return 2;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LxmZhangDanDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmZhangDanDetailCell"];
-    if (!cell) {
-        cell = [[LxmZhangDanDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmZhangDanDetailCell"];
-    }
-    if (indexPath.row == 0) {
-        cell.titleLabel.text = @"创建时间";
-        NSString *time = @"";
-        if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
-            time = self.detailModel.create_time;
-            
-        } else if (self.type == LxmZhangDanDetailVC_type_tixian) {
-            time = self.detailModel.create_time;
-        } else if (self.type == LxmZhangDanDetailVC_type_zhuanzhang) {
-           time = self.detailModel.time;
+    
+    if (indexPath.section == 0) {
+        
+        LxmZhangDanDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmZhangDanDetailCell"];
+        if (!cell) {
+            cell = [[LxmZhangDanDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmZhangDanDetailCell"];
         }
-        if (time.length > 10) {
-            cell.detailLabel.text = [[time substringToIndex:10] getIntervalToZHXLongTime];
+        if (indexPath.row == 0) {
+            cell.titleLabel.text = @"创建时间";
+            NSString *time = @"";
+            if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
+                time = self.detailModel.create_time;
+                
+            } else if (self.type == LxmZhangDanDetailVC_type_tixian) {
+                time = self.detailModel.create_time;
+            } else if (self.type == LxmZhangDanDetailVC_type_zhuanzhang) {
+               time = self.detailModel.time;
+            }
+            if (time.length > 10) {
+                cell.detailLabel.text = [[time substringToIndex:10] getIntervalToZHXLongTime];
+            } else {
+                cell.titleLabel.text = [time getIntervalToZHXLongTime];
+            }
+            
+        } else if (indexPath.row == 1) {
+            if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
+                cell.titleLabel.text = @"支付方式";
+                cell.detailLabel.text = self.detailModel.pay_type.intValue == 1 ? @"支付宝" : @"微信";
+            } else if (self.type == LxmZhangDanDetailVC_type_tixian) {
+                cell.titleLabel.text = @"状态";
+                cell.detailLabel.text = self.detailModel.status.intValue == 1 ? @"审核中" : self.detailModel.status.intValue == 2 ? @"审核成功" : @"审核失败";
+            } else if (self.type == LxmZhangDanDetailVC_type_zhuanzhang) {
+                /** 1-转出，2：转入 */
+                if (self.detailModel.type.intValue == 1) {
+                    cell.titleLabel.text = @"对方账户";
+                    cell.detailLabel.text = self.detailModel.toName;
+                } else {
+                    cell.titleLabel.text = @"对方账户";
+                    cell.detailLabel.text = self.detailModel.fromName;
+                }
+            }
         } else {
-            cell.titleLabel.text = [time getIntervalToZHXLongTime];
+            cell.titleLabel.text = @"第三方订单号";
+            cell.detailLabel.text = self.detailModel.third_code;
+        }
+        return cell;
+        
+    }else {
+        
+        if (indexPath.row == 0) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+            }
+            cell.textLabel.text = @"支付凭证:";
+            return cell;
+        }else {
+            LxmChongZhiOderDetailPicsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LxmChongZhiOderDetailPicsCell"];
+            if (!cell) {
+                cell = [[LxmChongZhiOderDetailPicsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmChongZhiOderDetailPicsCell"];
+            }
+            cell.pics = self.detailModel.pay_img;
+            return cell;
         }
         
-    } else if (indexPath.row == 1) {
-        if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
-            cell.titleLabel.text = @"支付方式";
-            cell.detailLabel.text = self.detailModel.pay_type.intValue == 1 ? @"支付宝" : @"微信";
-        } else if (self.type == LxmZhangDanDetailVC_type_tixian) {
-            cell.titleLabel.text = @"状态";
-            cell.detailLabel.text = self.detailModel.status.intValue == 1 ? @"审核中" : self.detailModel.status.intValue == 2 ? @"审核成功" : @"审核失败";
-        } else if (self.type == LxmZhangDanDetailVC_type_zhuanzhang) {
-            /** 1-转出，2：转入 */
-            if (self.detailModel.type.intValue == 1) {
-                cell.titleLabel.text = @"对方账户";
-                cell.detailLabel.text = self.detailModel.toName;
-            } else {
-                cell.titleLabel.text = @"对方账户";
-                cell.detailLabel.text = self.detailModel.fromName;
-            }
-        }
-    } else {
-        cell.titleLabel.text = @"第三方订单号";
-        cell.detailLabel.text = self.detailModel.third_code;
+        
+        
     }
-    return cell;
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
-        return 50;
-    } else  {
-        if (indexPath.row == 2) {
-            return 0.01;
+    if (indexPath.section == 0) {
+        if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
+            return 50;
+        } else  {
+            if (indexPath.row == 2) {
+                return 0.01;
+            }
+            return 50;
         }
-        return 50;
+    }else {
+     
+        if (self.detailModel.pay_img.length == 0) {
+            return 0;
+        }else {
+            if (indexPath.row == 0) {
+                return 40;
+            }else {
+                CGFloat ww = (ScreenW - 20 -  30) / 3;
+                NSArray * arr = [self.detailModel.pay_img componentsSeparatedByString:@","];
+                NSInteger lines = arr.count / 3 + (arr.count % 3 >0 ? 1:0);
+                return 20 + (lines * (ww+10) - 10);
+            }
+        }
+        
     }
+    
 }
 
 /**

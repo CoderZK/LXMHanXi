@@ -31,6 +31,7 @@
 
 
 
+
 @end
 @implementation LxmChongZhiHeaderView
 
@@ -144,7 +145,7 @@
         _textLabel1 = [UILabel new];
         _textLabel1.font = [UIFont boldSystemFontOfSize:14];
         _textLabel1.textColor = CharacterDarkColor;
-        _textLabel1.text = @"上传凭证";
+        _textLabel1.text = @"选择充值方式";
     }
     return _textLabel1;
 }
@@ -163,6 +164,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property(nonatomic,strong)NSMutableArray *picArr;
+@property(nonatomic,strong)NSMutableArray *imgs;
 
 @end
 
@@ -212,6 +214,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self initSubviews];
     self.picArr = @[].mutableCopy;
+    self.imgs = @[].mutableCopy;
     [self.tableView registerClass:[LxmChongZhiPiceCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -242,38 +245,45 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 3;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    LxmChongZhiPiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.dataArray = self.picArr;
-    WeakObj(self);
-    cell.choosePhotoBlock = ^{
-        
-        [selfWeak modify];
-        
-        
-    };
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    if  (indexPath.row == 2) {
+        LxmChongZhiPiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+           cell.dataArray = self.picArr;
+           WeakObj(self);
+           cell.choosePhotoBlock = ^{
+               
+               [selfWeak modify];
+               
+               
+           };
+        cell.titleStr = @"账户: 1234569872522451;账户名称: 张小飞";
+           cell.selectionStyle = UITableViewCellSelectionStyleNone;
+           return cell;
+           
+    }else {
+        LxmPayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmPayCell"];
+        if (!cell) {
+            cell = [[LxmPayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmPayCell"];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectImgView.image = self.currentIndex == indexPath.row ? [UIImage imageNamed:@"xuanzhong_y"] : [UIImage imageNamed:@"xuanzhong_n"];
+        if (indexPath.row == 0) {
+            cell.iconImgView.image = [UIImage imageNamed:@"alipay_pay"];
+            cell.titleLabel.text = @"支付宝";
+        } else {
+            cell.iconImgView.image = [UIImage imageNamed:@"yinhangka"];
+            cell.titleLabel.text = @"银行卡";
+        }
+        return cell;
+    }
+    
+   
     
     
-    
-//    LxmPayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmPayCell"];
-//    if (!cell) {
-//        cell = [[LxmPayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmPayCell"];
-//    }
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.selectImgView.image = self.currentIndex == indexPath.row ? [UIImage imageNamed:@"xuanzhong_y"] : [UIImage imageNamed:@"xuanzhong_n"];
-//    if (indexPath.row == 0) {
-//        cell.iconImgView.image = [UIImage imageNamed:@"alipay_pay"];
-//        cell.titleLabel.text = @"支付宝支付";
-//    } else {
-//        cell.iconImgView.image = [UIImage imageNamed:@"wechat_pay"];
-//        cell.titleLabel.text = @"微信支付";
-//    }
-//    return cell;
+
 }
 
 
@@ -324,14 +334,22 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (ScreenW - 60)/3 + 40;
-//    return 60;
+    if (indexPath.row == 2) {
+        return (ScreenW - 60)/3 + 25 + 50;
+    }else {
+        return 60;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    self.currentIndex = indexPath.row;
-//    [self.tableView reloadData];
+    
+    if  (indexPath.row != 2) {
+        self.currentIndex = indexPath.row;
+        [self.tableView reloadData];
+    }
+
 }
 
 /**
@@ -348,47 +366,104 @@
         return;
     }
     
-    NSDictionary *dict = @{
-                           @"token" : SESSION_TOKEN,
-                           @"payMoney" : self.headerView.moneyTF.text,
-                           @"type" : @(self.currentIndex + 1),
-                           };
-    [SVProgressHUD show];
-    self.chongzhiButton.userInteractionEnabled = NO;
-    WeakObj(self);
-    [LxmNetworking networkingPOST:up_recharge parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        [SVProgressHUD dismiss];
-        selfWeak.chongzhiButton.userInteractionEnabled = YES;
+    [self updateFile];
+    
+//    self.chongzhiButton.userInteractionEnabled = NO;
+//    WeakObj(self);
+//    [LxmNetworking networkingPOST:up_recharge parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+//        [SVProgressHUD dismiss];
+//        selfWeak.chongzhiButton.userInteractionEnabled = YES;
+//        if ([responseObject[@"key"] integerValue] == 1000) {
+//            [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
+//            if (self.currentIndex == 0) {//支付宝
+//                NSString *payStr = responseObject[@"result"][@"data"];
+//                if (payStr.isValid) {
+//                    [[AlipaySDK defaultService] payOrder:payStr fromScheme:@"com.biuwork.yumeiren.alipaysafety" callback:nil];
+//                } else {
+//                    [SVProgressHUD showErrorWithStatus:@"支付信息获取失败!"];
+//                }
+//
+//            } else {//微信
+//                NSDictionary * dict = responseObject[@"result"][@"map"];
+//                NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+//                //调起微信支付
+//                PayReq* req             = [[PayReq alloc] init];
+//                req.partnerId           = [dict objectForKey:@"partnerid"];
+//                req.prepayId            = [dict objectForKey:@"prepayid"];
+//                req.nonceStr            = [dict objectForKey:@"noncestr"];
+//                req.timeStamp           = stamp.intValue;
+//                req.package             = [dict objectForKey:@"package"];
+//                req.sign                = [dict objectForKey:@"sign"];
+//                [WXApi sendReq:req];
+//            }
+//
+//        } else {
+//            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+//        }
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        selfWeak.chongzhiButton.userInteractionEnabled = YES;
+//    }];
+}
+
+/**
+ 多张图片上传
+ */
+- (void)updateFile {
+    [SVProgressHUD showWithStatus:@"正在上传图片,请稍后..."];
+    [LxmNetworking NetWorkingUpLoad:Base_upload_multi_img_URL images:self.picArr parameters:nil name:@"files" success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] integerValue] == 1000) {
-            [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
-            if (self.currentIndex == 0) {//支付宝
-                NSString *payStr = responseObject[@"result"][@"data"];
-                if (payStr.isValid) {
-                    [[AlipaySDK defaultService] payOrder:payStr fromScheme:@"com.biuwork.yumeiren.alipaysafety" callback:nil];
-                } else {
-                    [SVProgressHUD showErrorWithStatus:@"支付信息获取失败!"];
+            [SVProgressHUD dismiss];
+            NSArray *arr = responseObject[@"result"][@"list"];
+            if ([arr isKindOfClass:NSArray.class]) {
+                for (NSDictionary *dict in arr) {
+                     LxmPublishTouSutModel *model = [LxmPublishTouSutModel mj_objectWithKeyValues:dict];
+                    [self.imgs addObject:model.path];
                 }
-                
-            } else {//微信
-                NSDictionary * dict = responseObject[@"result"][@"map"];
-                NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
-                //调起微信支付
-                PayReq* req             = [[PayReq alloc] init];
-                req.partnerId           = [dict objectForKey:@"partnerid"];
-                req.prepayId            = [dict objectForKey:@"prepayid"];
-                req.nonceStr            = [dict objectForKey:@"noncestr"];
-                req.timeStamp           = stamp.intValue;
-                req.package             = [dict objectForKey:@"package"];
-                req.sign                = [dict objectForKey:@"sign"];
-                [WXApi sendReq:req];
+               
             }
-            
+            [self tijiao];
         } else {
+            [SVProgressHUD dismiss];
             [UIAlertController showAlertWithmessage:responseObject[@"message"]];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        selfWeak.chongzhiButton.userInteractionEnabled = YES;
+        [SVProgressHUD dismiss];
     }];
+}
+
+
+- (void)tijiao {
+    
+    NSMutableDictionary *dict = @{
+                           @"token" : SESSION_TOKEN,
+                           @"payMoney" : self.headerView.moneyTF.text,
+                           @"type" : @(3),
+                           @"info_type":@(2-self.currentIndex),
+                           
+    }.mutableCopy;
+    dict[@"payImg"] = [self.imgs componentsJoinedByString:@","];
+    [SVProgressHUD show];
+     self.chongzhiButton.userInteractionEnabled = NO;
+    [LxmNetworking networkingPOST:up_recharge parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+         self.chongzhiButton.userInteractionEnabled = YES;
+        if ([responseObject[@"key"] integerValue] == 1000) {
+            [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
+            
+            
+            
+            
+        }else {
+           [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD dismiss];
+         self.chongzhiButton.userInteractionEnabled = YES;
+        
+    }];
+    
+    
 }
 
 - (void)zhiFuBaoNoti:(NSNotification *)noti{

@@ -341,5 +341,7 @@
 
 @property (nonatomic, strong) NSString *bank_code;/** 银行卡号 */
 
+@property(nonatomic,strong)NSString *pay_img;//充值图片
+
 @end
 

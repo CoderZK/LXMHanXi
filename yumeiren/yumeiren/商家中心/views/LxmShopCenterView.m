@@ -869,7 +869,7 @@
                           @"购进商品",
                           @"订单查询",
                           @"我要升级",
-                          @"年度考核",
+                          @"购买耗材",
                           @"消息通知"
                           ];
         self.iconArr = @[
@@ -877,7 +877,7 @@
                          @"goujinshangpin",
                          @"dingdanchaxun",
                          @"woyaoshengji",
-                         @"niandukaohe",
+                         @"hc1559",
                          @"xiaoxitongzhi"
                          ];
     } else {
@@ -888,9 +888,9 @@
                           @"我的团队",
                           @"我的业绩",
                           @"我要升级",
-                          @"年度考核",
-                          @"消息通知",
-                          @"购买耗材"
+                          @"购买耗材",
+                          @"消息通知"
+                          
                           ];
         self.iconArr = @[
                          @"wddp",
@@ -899,9 +899,8 @@
                          @"wodetuandui",
                          @"wodeyeji",
                          @"woyaoshengji",
-                         @"niandukaohe",
-                         @"xiaoxitongzhi",
-                         @"hc1559"
+                         @"hc1559",
+                         @"xiaoxitongzhi"
                          ];
     }
     self.collectionView.frame = CGRectMake(0, 0, ScreenW - 30, 80*ceil(self.titleArr.count/3.0) + 30);

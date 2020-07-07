@@ -12,6 +12,7 @@
 #import "LxmZhuanChuJiFenVC.h"
 #import "LxmMineYeJiKaoTVC.h"
 #import "LxmMineTeamJiFenMingXiTVC.h"
+#import "LxmMineJiFenXiaJiSubTVC.h"
 @interface LxmMineJiFenXiaJiTVC ()
 @property(nonatomic,strong)UIButton *leftButton,*rightButton;
 @property(nonatomic,strong)UIView *navTitleV;
@@ -21,6 +22,7 @@
 @property(nonatomic,strong)UIImageView *imgV1,*imgV2;
 @property(nonatomic,strong)UIView  *redV;
 @property(nonatomic,strong)UIView *btView;
+@property(nonatomic,strong)LxmMineJiFenXiaJiSubTVC *subTVC;
 
 
 @end
@@ -34,7 +36,7 @@
         [_leftButton setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
         [_leftButton setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
         [_leftButton setBackgroundImage:[UIImage imageNamed:@"pink"] forState:UIControlStateSelected];
-        [_leftButton setTitle:@"我的积分" forState:UIControlStateNormal];
+        [_leftButton setTitle:@"我的小晞" forState:UIControlStateNormal];
         _leftButton.titleLabel.font = [UIFont systemFontOfSize:13];
         [_leftButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _leftButton.selected = YES;
@@ -50,7 +52,7 @@
         [_rightButton setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
         [_rightButton setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
         [_rightButton setBackgroundImage:[UIImage imageNamed:@"pink"] forState:UIControlStateSelected];
-        [_rightButton setTitle:@"直属推荐积分" forState:UIControlStateNormal];
+        [_rightButton setTitle:@"直属推荐小晞" forState:UIControlStateNormal];
         _rightButton.titleLabel.font = [UIFont systemFontOfSize:13];
         [_rightButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _rightButton.tag = 444;
@@ -72,23 +74,31 @@
 
 - (void)addHeadViewOne {
     
+    self.subTVC = [[LxmMineJiFenXiaJiSubTVC alloc] init];
+    [self addChildViewController:self.subTVC];
+    [self.view addSubview:self.subTVC.view];
+    
+   
+    
+    
     self.headViewOne = [[UIView alloc] init];
     self.headViewOne.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.headViewOne];
     
     
-//    UIView * backV =[[UIView alloc] init];
-//    backV.backgroundColor = CharacterLightGrayColor;
-//    [self.headViewOne addSubview:backV];
+    //    UIView * backV =[[UIView alloc] init];
+    //    backV.backgroundColor = CharacterLightGrayColor;
+    //    [self.headViewOne addSubview:backV];
     
-
+    
     
     UILabel * numberLb = [[UILabel alloc] init];
     numberLb.text = @"同级别业绩排名:55";
     numberLb.font = [UIFont systemFontOfSize:14];
     numberLb.textColor = CharacterDarkColor;
     [self.headViewOne addSubview:numberLb];
+    self.numberLB = numberLb;
     
     
     
@@ -96,6 +106,22 @@
     imageV.image = [UIImage imageNamed:@"kkjifenback"];
     imageV.userInteractionEnabled = YES;
     [self.headViewOne addSubview:imageV];
+    
+    
+    UILabel * tuanDuiJiFen  = [[UILabel alloc] init];
+    tuanDuiJiFen.font = [UIFont systemFontOfSize:30 weight:0.2];
+    tuanDuiJiFen.text = @"5000";
+    tuanDuiJiFen.textAlignment = NSTextAlignmentCenter;
+    tuanDuiJiFen.textColor = [UIColor whiteColor];
+    [imageV  addSubview:tuanDuiJiFen];
+    
+    UILabel * tuanDuiJiFendes  = [[UILabel alloc] init];
+    tuanDuiJiFendes.font = [UIFont systemFontOfSize:14];
+    tuanDuiJiFendes.text = @"团队小晞";
+    tuanDuiJiFendes.textAlignment = NSTextAlignmentCenter;
+    tuanDuiJiFendes.textColor = [UIColor whiteColor];
+    [imageV  addSubview:tuanDuiJiFendes];
+    
     
     
     UILabel * jiFenLB  = [[UILabel alloc] init];
@@ -109,7 +135,7 @@
     
     UIButton  * mingXiBt = [[UIButton alloc] init];
     mingXiBt.layer.borderColor = RGB(236, 104, 118).CGColor;
-    [mingXiBt setTitle:@"我的积分 >" forState:UIControlStateNormal];
+    [mingXiBt setTitle:@"我的小晞 >" forState:UIControlStateNormal];
     [mingXiBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBt.titleLabel.font = [UIFont systemFontOfSize:13];
     mingXiBt.tag = 100;
@@ -128,12 +154,17 @@
     
     UIButton  * mingXiBtTwo = [[UIButton alloc] init];
     mingXiBtTwo.layer.borderColor = RGB(236, 104, 118).CGColor;
-    [mingXiBtTwo setTitle:@"剩余待转积分 >" forState:UIControlStateNormal];
+    [mingXiBtTwo setTitle:@"剩余待转小晞 >" forState:UIControlStateNormal];
     [mingXiBtTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBtTwo.titleLabel.font = [UIFont systemFontOfSize:13];
     mingXiBtTwo.tag = 101;
     [imageV addSubview:mingXiBtTwo];
     [mingXiBtTwo addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView * lineVOne = [[UIView alloc] init];
+    lineVOne.backgroundColor = [UIColor whiteColor];
+    [imageV addSubview:lineVOne];
+    
     UIView * lineV = [[UIView alloc] init];
     lineV.backgroundColor = [UIColor whiteColor];
     [imageV addSubview:lineV];
@@ -141,7 +172,7 @@
     
     
     UIButton * tixianBt  =[[UIButton alloc] init];
-    [tixianBt setTitle:@"转出积分" forState:UIControlStateNormal];
+    [tixianBt setTitle:@"转出" forState:UIControlStateNormal];
     [tixianBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
     tixianBt.titleLabel.font = [UIFont systemFontOfSize:15];
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
@@ -184,7 +215,7 @@
         make.left.right.top.equalTo(self.view);
         //        make.height.equalTo(@270);
     }];
-
+    
     
     [numberLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.headViewOne).offset(15);
@@ -192,68 +223,74 @@
         make.height.equalTo(@20);
     }];
     [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@200);
+        make.height.equalTo(@260);
         make.width.equalTo(@(ScreenW - 10));
         make.centerX.equalTo(self.headViewOne);
         make.top.equalTo(numberLb.mas_bottom).offset(7);
     }];
+
+    [tuanDuiJiFen mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(imageV).offset(15);
+        make.width.equalTo(@(ScreenW - 30));
+        make.top.equalTo(imageV).offset(20);
+        make.height.equalTo(@35);
+    }];
     
-    if (0) {
-        lineV.hidden = YES;
-        [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(imageV);
-            make.top.equalTo(imageV).offset(35);
-            make.height.equalTo(@25);
-        }];
-        [mingXiBt mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(imageV);
-            make.height.equalTo(@20);
-            make.top.equalTo(jiFenLB.mas_bottom).offset(12);
-        }];
-        [tixianBt setTitle:@"转出积分" forState:UIControlStateNormal];
-    }else {
-        lineV.hidden = NO;
-        [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(imageV).offset(15);
-            make.width.equalTo(@((ScreenW - 31)/ 2));
-            make.top.equalTo(imageV).offset(35);
-            make.height.equalTo(@25);
-        }];
-        [mingXiBt mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(imageV);
-            make.width.equalTo(jiFenLB.mas_width);
-            make.height.equalTo(@20);
-            make.top.equalTo(jiFenLB.mas_bottom).offset(12);
-        }];
-        
-        [lineV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@50);
-            make.top.equalTo(imageV).offset(40);
-            make.width.equalTo(@1);
-            make.left.equalTo(jiFenLB.mas_right);
-        }];
-        
-        [jiFenLBTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(lineV);
-            make.top.equalTo(imageV).offset(35);
-            make.width.equalTo(@((ScreenW - 31)/ 2));
-            make.height.equalTo(@25);
-        }];
-        [mingXiBtTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(jiFenLBTwo.mas_left);
-            make.width.equalTo(jiFenLBTwo.mas_width);
-            make.height.equalTo(@20);
-            make.top.equalTo(jiFenLB.mas_bottom).offset(12);
-        }];
-        [tixianBt setTitle:@"提现" forState:UIControlStateNormal];
-    }
+    [tuanDuiJiFendes mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(imageV).offset(15);
+        make.width.equalTo(@(ScreenW - 30));
+        make.top.equalTo(tuanDuiJiFen.mas_bottom).offset(0);
+        make.height.equalTo(@17);
+    }];
+    
+    [lineVOne mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.left.equalTo(imageV).offset(15);
+       make.left.equalTo(imageV).offset(-15);
+       make.top.equalTo(tuanDuiJiFendes.mas_bottom).offset(15);
+        make.height.equalTo(@0.5);
+    }];
+    
+    [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(imageV).offset(15);
+        make.width.equalTo(@((ScreenW - 31)/ 2));
+        make.top.equalTo(lineVOne.mas_bottom).offset(15);
+        make.height.equalTo(@25);
+    }];
+    [mingXiBt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(jiFenLB);
+        make.width.equalTo(jiFenLB.mas_width);
+        make.height.equalTo(@20);
+        make.top.equalTo(jiFenLB.mas_bottom).offset(5);
+    }];
+    
+    [lineV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@50);
+        make.top.equalTo(jiFenLB);
+        make.width.equalTo(@0.5);
+        make.left.equalTo(jiFenLB.mas_right);
+    }];
+    
+    [jiFenLBTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(lineV);
+        make.top.equalTo(jiFenLB);
+        make.width.equalTo(@((ScreenW - 31)/ 2));
+        make.height.equalTo(@25);
+    }];
+    [mingXiBtTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(jiFenLBTwo.mas_left);
+        make.width.equalTo(jiFenLBTwo.mas_width);
+        make.height.equalTo(@20);
+        make.top.equalTo(mingXiBt);
+    }];
+    [tixianBt setTitle:@"提取" forState:UIControlStateNormal];
+    
     
     
     
     [tixianBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(imageV);
         make.width.equalTo(@180);
-        make.height.equalTo(@40);
+        make.height.equalTo(@35);
         make.bottom.equalTo(imageV).offset(-44);
     }];
     
@@ -270,7 +307,7 @@
         make.left.equalTo(self.btView);
         make.centerY.equalTo(self.btView);
     }];
-
+    
     [rightBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(ScreenW /2));
         make.height.equalTo(@40);
@@ -286,9 +323,14 @@
     }];
     
     [backVTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.height.equalTo(@(0.2));
-           make.bottom.right.left.equalTo(self.btView);
-       }];
+        make.height.equalTo(@(0.2));
+        make.bottom.right.left.equalTo(self.btView);
+    }];
+    
+    [self.subTVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.view);
+        make.top.equalTo(self.headViewOne.mas_bottom).offset(TableViewBottomSpace);
+    }];
     
     
 }
@@ -349,7 +391,7 @@
     
     UILabel * tuiJianJifen  = [[UILabel alloc] init];
     tuiJianJifen.font = [UIFont systemFontOfSize:15];
-    tuiJianJifen.text = @"直属推荐积分";
+    tuiJianJifen.text = @"直属推荐小晞";
     tuiJianJifen.textAlignment = NSTextAlignmentCenter;
     [self.headViewTwo  addSubview:tuiJianJifen];
     
@@ -430,22 +472,22 @@
 }
 
 - (void)clickAction:(UIButton *)button {
-   
+    
     if (button.tag == 100) {
         [UIView animateWithDuration:0.2 animations:^{
-              self.redV.mj_x = ScreenW  / 4 - 20;
-          }];
+            self.redV.mj_x = ScreenW  / 4 - 20;
+        }];
     }else {
         [UIView animateWithDuration:0.2 animations:^{
-              self.redV.mj_x = ScreenW * 3 / 4 - 20;
-          }];
+            self.redV.mj_x = ScreenW * 3 / 4 - 20;
+        }];
     }
     
-  
-
+    
+    
 }
 
-// 100 我的积分 101 剩余待转积分 102 提现(或者转出积分) 103 明细 104 申请提现
+// 100 我的小晞 101 剩余待转小晞 102 提现(或者转出小晞) 103 明细 104 申请提现
 - (void)jifenAction:(UIButton *)button {
     if (button.tag == 100) {
         
@@ -457,14 +499,14 @@
         LxmMineYeJiKaoTVC * vc =[[LxmMineYeJiKaoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
     }else if (button.tag == 102) {
-        if ([button.titleLabel.text isEqualToString:@"转出积分"]) {
+        if ([button.titleLabel.text isEqualToString:@"转出小晞"]) {
             LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
-           //提现
+            //提现
             LxmMineTeamJiFenMingXiTVC * vc =[[LxmMineTeamJiFenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];

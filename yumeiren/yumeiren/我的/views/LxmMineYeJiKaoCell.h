@@ -17,9 +17,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *rightBt;
 @property (weak, nonatomic) IBOutlet UILabel *leftOneLB;
 @property (weak, nonatomic) IBOutlet UILabel *leftTwoLB;
+@property (weak, nonatomic) IBOutlet UILabel *leftThreeLB;
 @property (weak, nonatomic) IBOutlet UILabel *rightOneLB;
 @property (weak, nonatomic) IBOutlet UILabel *rightTwoLB;
 @property (weak, nonatomic) IBOutlet UIView *yjView;
+@property (weak, nonatomic) IBOutlet UILabel *numberOneLB;
+@property (weak, nonatomic) IBOutlet UILabel *numberTwoLB;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *YConstrint;
+@property (weak, nonatomic) IBOutlet UILabel *leftFourLB;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *Hconstraint;
+
+@property(nonatomic,assign)NSInteger type; // 100 月 101 季
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -84,13 +84,13 @@
     BaseNavigationController *nav5 = [[BaseNavigationController alloc] initWithRootViewController:mineVC];
     
     
-    self.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
+//    self.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
     
-//    if ([LxmTool ShareTool].userModel.roleType.integerValue == -1) {
-//        self.viewControllers = @[nav1,nav2,nav4,nav5];
-//    } else {
-//        self.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
-//    }
+    if ([LxmTool ShareTool].userModel.roleType.integerValue == -1) {
+        self.viewControllers = @[nav1,nav2,nav4,nav5];
+    } else {
+        self.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
+    }
     
 }
 

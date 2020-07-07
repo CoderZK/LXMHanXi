@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"我的积分明细";
+    self.navigationItem.title = @"我的小晞明细";
     
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 45)];
     self.headView.backgroundColor = [UIColor groupTableViewBackgroundColor];

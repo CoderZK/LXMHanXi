@@ -19,13 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title  = @"转出积分";
+    self.navigationItem.title  = @"转出小晞";
     self.confirmBt.layer.cornerRadius = 5;
     self.confirmBt.clipsToBounds = YES;
 }
 - (IBAction)confirmBt:(id)sender {
     if (self.TF.text.length  ==0 ){
-        [SVProgressHUD showErrorWithStatus:@"请输入转出积分"];
+        [SVProgressHUD showErrorWithStatus:@"请输入转出小晞"];
         return;
     }
 }

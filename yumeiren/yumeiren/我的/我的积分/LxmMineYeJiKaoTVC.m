@@ -24,6 +24,7 @@
     self.navigationItem.title = @"业绩考核";
     [self.tableView registerNib:[UINib nibWithNibName:@"LxmMineYeJiKaoCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.estimatedRowHeight = 40;
     self.type = 1;
     [self addHeadV];
     
@@ -130,11 +131,13 @@
         self.yjView.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"yjleft"]];
         [self.leftBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.rightBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
+        [self.tableView reloadData];
     }else if (sender.tag == 101){
         self.type = sender.tag - 100;
         self.yjView.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"yjright"]];
         [self.rightBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.leftBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
+        [self.tableView reloadData];
     }else if (sender.tag  == 102) {
         //点击选择时间
         
@@ -157,17 +160,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LxmMineYeJiKaoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    cell.type = self.type + 100;
     return cell;
     
 }

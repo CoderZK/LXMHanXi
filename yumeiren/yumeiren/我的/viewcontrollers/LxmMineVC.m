@@ -77,6 +77,25 @@
         selfWeak.topView.infoModel = [LxmTool ShareTool].userModel;
         [selfWeak.tableView reloadData];
     }];
+    
+    [self getScoreData];
+    
+}
+
+//获取积分
+- (void)getScoreData {
+    
+    //获取个人信息
+       [LxmNetworking networkingPOST:my_inner_score parameters:@{@"token":TOKEN} returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+           if ([responseObject[@"key"] integerValue] == 1000) {
+              
+              
+           }
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+
+       }];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -150,6 +169,7 @@
     }
     cell.index = indexPath.row;
     cell.infoModel = [LxmTool ShareTool].userModel;
+    cell.clipsToBounds = YES;
     return cell;
 }
 
@@ -174,7 +194,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-            case 3: {//积分
+            case 3: {//小晞
                 
 //                LxmMineJifenMingXiTVC * vc =[[LxmMineJifenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
 //                vc.hidesBottomBarWhenPushed = YES;
@@ -243,6 +263,12 @@
                 return 0.01;
             }
             return 60;
+        }else if (indexPath.row == 3) {
+            if ([roleType isEqualToString:@"3"]) {
+                return 60;
+            }else {
+                return 0;
+            }
         } else if (indexPath.row == 5) {//门店查询
             if ([roleType isEqualToString:@"-1"] || [roleType isEqualToString:@"0"] || [roleType isEqualToString:@"1"] || [roleType isEqualToString:@"-0.3"] || [roleType isEqualToString:@"-0.4"] || [roleType isEqualToString:@"-0.5"] || [roleType isEqualToString:@"1.1"] || [roleType isEqualToString:@"2.1"] || [roleType isEqualToString:@"3.1"]) {
                 return 0.01;
