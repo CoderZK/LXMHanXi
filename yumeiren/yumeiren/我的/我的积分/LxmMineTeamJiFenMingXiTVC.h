@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmMineTeamJiFenMingXiTVC : BaseTableViewController
-
+@property(nonatomic,strong)NSString *userId;
+@property(nonatomic,assign)NSInteger scoreType;
+@property(nonatomic,strong)LxmMyTeamListModel  *jifenModel;
 @end
 
 NS_ASSUME_NONNULL_END

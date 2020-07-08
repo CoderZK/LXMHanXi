@@ -10,6 +10,16 @@
 
 @implementation LxmMineJiFenMingXiOneCell
 
+- (void)setModel:(LxmJiFenModel *)model  {
+    _model = model;
+    
+    NSInteger type = model.score_type.integerValue;
+    
+    
+}
+
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -25,6 +25,7 @@
 @property(nonatomic,strong)LxmMineJiFenXiaJiSubTVC *subTVC;
 
 
+
 @end
 
 @implementation LxmMineJiFenXiaJiTVC
@@ -76,9 +77,12 @@
     
     self.subTVC = [[LxmMineJiFenXiaJiSubTVC alloc] init];
     [self addChildViewController:self.subTVC];
+    self.subTVC.type = 1;
     [self.view addSubview:self.subTVC.view];
     
-   
+    
+    
+    
     
     
     self.headViewOne = [[UIView alloc] init];
@@ -94,7 +98,7 @@
     
     
     UILabel * numberLb = [[UILabel alloc] init];
-    numberLb.text = @"同级别业绩排名:55";
+    numberLb.text = [NSString stringWithFormat:@"同级别业绩排名:%@",self.jifenModel.rank];;
     numberLb.font = [UIFont systemFontOfSize:14];
     numberLb.textColor = CharacterDarkColor;
     [self.headViewOne addSubview:numberLb];
@@ -110,7 +114,7 @@
     
     UILabel * tuanDuiJiFen  = [[UILabel alloc] init];
     tuanDuiJiFen.font = [UIFont systemFontOfSize:30 weight:0.2];
-    tuanDuiJiFen.text = @"5000";
+    tuanDuiJiFen.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue + self.jifenModel.group_score.floatValue] getPriceStr];
     tuanDuiJiFen.textAlignment = NSTextAlignmentCenter;
     tuanDuiJiFen.textColor = [UIColor whiteColor];
     [imageV  addSubview:tuanDuiJiFen];
@@ -122,11 +126,12 @@
     tuanDuiJiFendes.textColor = [UIColor whiteColor];
     [imageV  addSubview:tuanDuiJiFendes];
     
+
     
     
     UILabel * jiFenLB  = [[UILabel alloc] init];
     jiFenLB.font = [UIFont systemFontOfSize:20 weight:0.2];
-    jiFenLB.text = @"2000";
+    jiFenLB.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue]  getPriceStr];
     jiFenLB.textAlignment = NSTextAlignmentCenter;
     jiFenLB.textColor = [UIColor whiteColor];
     [imageV  addSubview:jiFenLB];
@@ -145,7 +150,7 @@
     
     UILabel * jiFenLBTwo  = [[UILabel alloc] init];
     jiFenLBTwo.font = [UIFont systemFontOfSize:20 weight:0.2];
-    jiFenLBTwo.text = @"2000";
+    jiFenLBTwo.text = [[NSString stringWithFormat:@"%0.2f", self.jifenModel.group_score.floatValue] getPriceStr] ;
     jiFenLBTwo.textAlignment = NSTextAlignmentCenter;
     jiFenLBTwo.textColor = [UIColor whiteColor];
     [imageV  addSubview:jiFenLBTwo];
@@ -173,6 +178,9 @@
     
     UIButton * tixianBt  =[[UIButton alloc] init];
     [tixianBt setTitle:@"转出" forState:UIControlStateNormal];
+    if ([self.jifenModel.top_status isEqualToString:@"1"]) {
+        [tixianBt setTitle:@"提取" forState:UIControlStateNormal];
+    }
     [tixianBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
     tixianBt.titleLabel.font = [UIFont systemFontOfSize:15];
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
@@ -219,16 +227,27 @@
     
     [numberLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.headViewOne).offset(15);
-        make.top.equalTo(self.headViewOne).offset(5);
-        make.height.equalTo(@20);
+        
+        if  ([self.jifenModel.rank isEqualToString:@"-1"]) {
+            make.height.equalTo(@0);
+            make.top.equalTo(self.headViewOne).offset(0);
+        }else {
+            make.height.equalTo(@20);
+            make.top.equalTo(self.headViewOne).offset(5);
+        }
+        
+        
     }];
+    
+    
+    
     [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@260);
         make.width.equalTo(@(ScreenW - 10));
         make.centerX.equalTo(self.headViewOne);
         make.top.equalTo(numberLb.mas_bottom).offset(7);
     }];
-
+    
     [tuanDuiJiFen mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(imageV).offset(15);
         make.width.equalTo(@(ScreenW - 30));
@@ -242,11 +261,12 @@
         make.top.equalTo(tuanDuiJiFen.mas_bottom).offset(0);
         make.height.equalTo(@17);
     }];
+
     
     [lineVOne mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.left.equalTo(imageV).offset(15);
-       make.left.equalTo(imageV).offset(-15);
-       make.top.equalTo(tuanDuiJiFendes.mas_bottom).offset(15);
+        make.left.equalTo(imageV).offset(15);
+        make.left.equalTo(imageV).offset(-15);
+        make.top.equalTo(tuanDuiJiFendes.mas_bottom).offset(15);
         make.height.equalTo(@0.5);
     }];
     
@@ -329,7 +349,7 @@
     
     [self.subTVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.equalTo(self.view);
-        make.top.equalTo(self.headViewOne.mas_bottom).offset(TableViewBottomSpace);
+        make.top.equalTo(self.headViewOne.mas_bottom);
     }];
     
     
@@ -404,7 +424,7 @@
     
     UILabel * jiFenLB  = [[UILabel alloc] init];
     jiFenLB.font = [UIFont systemFontOfSize:20 weight:0.2];
-    jiFenLB.text = @"2000";
+    jiFenLB.text = [self.jifenModel.direct_score getPriceStr];
     jiFenLB.textAlignment = NSTextAlignmentCenter;
     jiFenLB.textColor = RGB(236, 104, 118);
     [self.headViewTwo  addSubview:jiFenLB];
@@ -438,7 +458,6 @@
 
 
 
-
 - (void)addNavTitleV {
     
     self.navTitleV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
@@ -462,11 +481,16 @@
         self.rightButton.selected = NO;
         self.headViewTwo.hidden = YES;
         self.headViewOne.hidden = NO;
+        self.subTVC.view.hidden = NO;
+        
     }else {
         self.leftButton.selected = NO;
         self.rightButton.selected = YES;
         self.headViewTwo.hidden = NO;
         self.headViewOne.hidden = YES;
+        self.subTVC.view.hidden = YES;
+        
+        
     }
     
 }
@@ -477,10 +501,16 @@
         [UIView animateWithDuration:0.2 animations:^{
             self.redV.mj_x = ScreenW  / 4 - 20;
         }];
-    }else {
+        self.subTVC.type = 1;
+        self.subTVC.page = 1;
+        [self.subTVC loadData];
+    }else if (button.tag == 101){
         [UIView animateWithDuration:0.2 animations:^{
             self.redV.mj_x = ScreenW * 3 / 4 - 20;
         }];
+        self.subTVC.type = 2;
+        self.subTVC.page = 1;
+        [self.subTVC loadData];
     }
     
     

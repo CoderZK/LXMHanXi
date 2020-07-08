@@ -520,7 +520,15 @@
  */
 #define my_inner_score  Base_URL"/app/user/my_inner_score"
 
+/**
+团队成员列表
+ */
+#define score_user_list  Base_URL"/app/user/score_user_list"
 
+/**
+团队成员列表
+ */
+#define score_record_list  Base_URL"/app/user/score_record_list"
 
 /**
  获取图片地址

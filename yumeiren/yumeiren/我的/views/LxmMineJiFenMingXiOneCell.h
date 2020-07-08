@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LxmJiFenModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmMineJiFenMingXiOneCell : UITableViewCell
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLB;
 @property (weak, nonatomic) IBOutlet UIButton *typeBt;
+@property(nonatomic,strong)LxmJiFenModel *model;
 
 @end
 

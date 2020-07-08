@@ -87,4 +87,6 @@
 
 + (BOOL)checkEmail:(NSString *)email;
 
+- (NSString *)getPriceStr;
+
 @end

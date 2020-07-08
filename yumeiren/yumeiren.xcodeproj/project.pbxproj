@@ -235,6 +235,7 @@
 		588D403C24AC6723004CB895 /* LxmMineJiFenMingXiOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588D403A24AC6723004CB895 /* LxmMineJiFenMingXiOneCell.xib */; };
 		588D403F24AC7168004CB895 /* LxmMineJiFenXiaJiTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 588D403E24AC7168004CB895 /* LxmMineJiFenXiaJiTVC.m */; };
 		588D404224AC7A98004CB895 /* LxmMineJiFenXiaJiSubTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 588D404124AC7A98004CB895 /* LxmMineJiFenXiaJiSubTVC.m */; };
+		588FEC0D24B5B30200BE0DEF /* LxmJiFenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588FEC0B24B5B30100BE0DEF /* LxmJiFenModel.m */; };
 		589142D624ADB637005DE41A /* LxmJiFenDeatilOneTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 589142D524ADB637005DE41A /* LxmJiFenDeatilOneTVC.m */; };
 		589142DA24ADB829005DE41A /* LxmJiFenDetailOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589142D824ADB829005DE41A /* LxmJiFenDetailOneCell.m */; };
 		589142DB24ADB829005DE41A /* LxmJiFenDetailOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589142D924ADB829005DE41A /* LxmJiFenDetailOneCell.xib */; };
@@ -692,6 +693,8 @@
 		588D403E24AC7168004CB895 /* LxmMineJiFenXiaJiTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmMineJiFenXiaJiTVC.m; sourceTree = "<group>"; };
 		588D404024AC7A98004CB895 /* LxmMineJiFenXiaJiSubTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmMineJiFenXiaJiSubTVC.h; sourceTree = "<group>"; };
 		588D404124AC7A98004CB895 /* LxmMineJiFenXiaJiSubTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmMineJiFenXiaJiSubTVC.m; sourceTree = "<group>"; };
+		588FEC0B24B5B30100BE0DEF /* LxmJiFenModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxmJiFenModel.m; sourceTree = "<group>"; };
+		588FEC0C24B5B30100BE0DEF /* LxmJiFenModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxmJiFenModel.h; sourceTree = "<group>"; };
 		589142D424ADB637005DE41A /* LxmJiFenDeatilOneTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmJiFenDeatilOneTVC.h; sourceTree = "<group>"; };
 		589142D524ADB637005DE41A /* LxmJiFenDeatilOneTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmJiFenDeatilOneTVC.m; sourceTree = "<group>"; };
 		589142D724ADB829005DE41A /* LxmJiFenDetailOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmJiFenDetailOneCell.h; sourceTree = "<group>"; };
@@ -1155,6 +1158,8 @@
 		4078928F22D4691E00716C1C /* model */ = {
 			isa = PBXGroup;
 			children = (
+				588FEC0C24B5B30100BE0DEF /* LxmJiFenModel.h */,
+				588FEC0B24B5B30100BE0DEF /* LxmJiFenModel.m */,
 				4078929122D4713E00716C1C /* LxmUserInfoModel.h */,
 				4078929222D4713E00716C1C /* LxmUserInfoModel.m */,
 				40DD820022FA7507001347A3 /* LxmMineModel.h */,
@@ -1978,6 +1983,7 @@
 				40FA4F6F2406025500F10B72 /* LxmJianFeiShengJiVC.m in Sources */,
 				40DD820222FA7507001347A3 /* LxmMineModel.m in Sources */,
 				40F7EE2D2315341000DF3E18 /* LxmSelectAreaVC.m in Sources */,
+				588FEC0D24B5B30200BE0DEF /* LxmJiFenModel.m in Sources */,
 				403C0C6A23069952004F9FB1 /* LxmWuLiuInfoVC.m in Sources */,
 				40DC052322E94C9800570241 /* LxmJiaoNaBaoZhengJinVC.m in Sources */,
 				40B4F23F22F27E290077823C /* LxmMoviePlayerView.m in Sources */,

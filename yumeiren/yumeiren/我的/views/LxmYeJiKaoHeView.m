@@ -85,12 +85,13 @@
         
         self.selectYear = years - 1;
         if (type == 0) {
-            if (self.currentMonth == 1) {
-               self.selectYear = years - 2;
-                self.selectMonth = 11 ;
-            }else {
-                self.selectMonth = self.currentMonth - 2;
-            }
+//            if (self.currentMonth == 1) {
+//               self.selectYear = years - 2;
+//               self.selectMonth = 11 ;
+//            }else {
+//                self.selectMonth = self.currentMonth - 2;
+//            }
+            self.selectMonth = self.currentMonth - 1;
         }else {
             if ((self.currentMonth -1) / 3 == 0) {
                 self.selectYear = years - 2;
@@ -131,12 +132,12 @@
     }else {
         if (self.type == 0) {
             //按月
-            if (self.selectYear == years - 1) {
-                return self.currentMonth - 1;
-            }else {
-                return 12;
-            }
-            
+//            if (self.selectYear == years - 1) {
+//                return self.currentMonth - 1;
+//            }else {
+//                return 12;
+//            }
+            return self.currentMonth;
         }else {
             //按季度
             if (self.selectYear == years - 1) {

@@ -390,4 +390,24 @@
     return [emailTest evaluateWithObject:email];
 }
 
+- (NSString *)getPriceStr {
+    
+    NSString * str =  [NSString stringWithFormat:@"%.2f",self.floatValue];;
+    
+    
+    if ([[str substringFromIndex:str.length-2] isEqualToString:@"00"]){
+        return [str substringToIndex:str.length-3];
+    }
+    
+    if ([[str substringFromIndex:str.length - 1] isEqualToString:@"0"]) {
+        str = [str substringToIndex:str.length-1];
+    }
+
+    
+    return str;
+    
+    
+    
+}
+
 @end

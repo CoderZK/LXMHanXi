@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmMineJiFenXiaJiSubTVC : BaseTableViewController
-
+@property(nonatomic,assign)NSInteger type;
+@property (nonatomic, assign) NSInteger page;
+- (void)loadData;
 @end
 
 NS_ASSUME_NONNULL_END

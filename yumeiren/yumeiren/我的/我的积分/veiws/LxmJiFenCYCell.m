@@ -54,7 +54,7 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.headerImgView.mas_trailing).offset(5);
-        make.bottom.equalTo(self.mas_centerY).offset(-2);
+        make.top.equalTo(self.headerImgView).offset(8);
     }];
     [self.rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.nameLabel.mas_trailing).offset(3);
@@ -68,10 +68,10 @@
         make.height.equalTo(@17);
     }];
     
-    [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.height.equalTo(self.codeLabel);
-        make.top.equalTo(self.codeLabel.mas_bottom).offset(5);
-    }];
+//    [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.trailing.height.equalTo(self.codeLabel);
+//        make.top.equalTo(self.codeLabel.mas_bottom).offset(5);
+//    }];
     
 //    [self.recordButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.bottom.equalTo(self.nameLabel);
@@ -90,8 +90,8 @@
 //    }];
     
     [self.memberNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self).offset(-15);
-        make.centerY.equalTo(self.codeLabel);
+        make.left.equalTo(self.codeLabel);
+        make.top.equalTo(self.codeLabel.mas_bottom).offset(5);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self);
@@ -239,6 +239,53 @@
         self.numLabel.text = @(index + 1).stringValue;
     }
 }
+
+- (void)setModel:(LxmMyTeamListModel *)model {
+    _model = model;
+    self.nameLabel.text = _model.username;
+    [self.headerImgView sd_setImageWithURL:[NSURL URLWithString:_model.user_head] placeholderImage:[UIImage imageNamed:@"moren"]];
+    if ([_model.role_type isEqualToString:@"-0.5"]){
+        self.rankLabel.text = @" 减肥单项-vip会员 ";
+    } else if ([_model.role_type isEqualToString:@"-0.4"]) {
+        self.rankLabel.text = @" 减肥单项-高级会员 ";
+    } else if ([_model.role_type isEqualToString:@"-0.3"]) {
+        self.rankLabel.text = @" 减肥单项-荣誉会员 ";
+    } else if ([_model.role_type isEqualToString:@"1.1"]) {
+        self.rankLabel.text = @" 减肥单项-总经理 ";
+    } else if ([_model.role_type isEqualToString:@"2.1"]) {
+        self.rankLabel.text = @" 减肥单项-董事 ";
+    } else if ([_model.role_type isEqualToString:@"3.1"]) {
+        self.rankLabel.text = @" 减肥单项-CEO ";
+    }  else {
+        switch (_model.role_type.intValue) {
+            case -1:
+                self.rankLabel.text = @" 无身份 ";
+                break;
+            case 0:
+                self.rankLabel.text = @" 无身份 ";
+                break;
+            case 1:
+                self.rankLabel.text = @" 经理 ";
+                break;
+            case 2:
+                self.rankLabel.text = @" 总经理 ";
+                break;
+            case 3:
+                self.rankLabel.text = @" 董事 ";
+                break;
+            case 4:
+                self.rankLabel.text = @" CEO ";
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    self.codeLabel.text = [NSString stringWithFormat:@"剩余积分: %@",[_model.group_score getPriceStr]];
+    self.memberNumLabel.text = [NSString stringWithFormat:@"本月业绩: ￥%@",_model.one_base_in_money];
+}
+
 
 
 @end
