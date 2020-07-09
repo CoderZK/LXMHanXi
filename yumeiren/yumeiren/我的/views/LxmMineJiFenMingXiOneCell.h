@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *typeBt;
 @property(nonatomic,strong)LxmJiFenModel *model;
 
+@property(nonatomic,assign)NSInteger type; // 0 团队积分明细 , 1 直属积分明细 
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface LxmUserInfoModel : NSObject<NSCoding>
-
+@property (nonatomic , strong) NSString *top_name;//上级的名字
 @property (nonatomic , strong) NSString *username;//姓名
 
 @property (nonatomic , strong) NSString *sex;//姓别

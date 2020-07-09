@@ -26,6 +26,7 @@
 @property(nonatomic,strong)UIImageView *imgV;
 @property(nonatomic,strong)UIButton *headBt;
 @property(nonatomic,assign)NSInteger type,year,month;
+@property(nonatomic,strong)NSString *montyStr;
 
 @end
 
@@ -72,7 +73,9 @@
 //              make.edges.equalTo(self.view);
 //          }];
 //       self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-       
+       NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+          [dateFormatter setDateFormat:@"yyyy-MM"];
+          self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
        self.dataArr = [NSMutableArray array];
        self.page = 1;
        [self loadData];
@@ -102,6 +105,7 @@
     self.timeLB.font = [UIFont systemFontOfSize:13];
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM"];
+    self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
     self.timeLB.text = [dateFormatter stringFromDate:[NSDate date]];
     [self.headView addSubview:self.timeLB];
     
@@ -137,7 +141,11 @@
             view.confirmBlock = ^(NSInteger year, NSInteger month, NSString * _Nonnull titleStr) {
                 selfWeak.year = year;
                 selfWeak.month = month;
+                selfWeak.montyStr  = [NSString stringWithFormat:@"%ld-%02ld",year,(long)month+1];
                 selfWeak.timeLB.text = titleStr;
+                
+                selfWeak.page = 1;
+                [selfWeak loadData];
             };
             [view show];
 }
@@ -303,8 +311,9 @@
         roleLB.text = @"  董事  ";
     }
     nameLB.text = self.jifenModel.username;
-    leftTwoLB.text = self.jifenModel.group_score;
+    leftTwoLB.text = self.jifenModel.direct_score;
     rightTwoLB.text = self.jifenModel.one_base_in_money;
+    rightFourLB.text = self.jifenModel.group_score;
     [headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:self.jifenModel.user_head] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"moren"] options:SDWebImageRetryFailed];
     
     
@@ -327,7 +336,8 @@
         dict[@"pageSize"] = @10;
         dict[@"scoreType"] = @(self.scoreType);
         dict[@"userId"] = self.jifenModel.id;
-        [LxmNetworking networkingPOST:group_count_list parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        dict[@"month"] = self.montyStr;
+        [LxmNetworking networkingPOST:score_record_list parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             [self endRefrish];
             if ([responseObject[@"key"] intValue] == 1000) {
                 if (self.page == 1) {
@@ -351,7 +361,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -361,7 +371,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LxmMineJiFenMingXiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
+    cell.model = self.dataArr[indexPath.row];
     return cell;
     
 }

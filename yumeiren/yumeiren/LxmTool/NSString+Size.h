@@ -61,6 +61,8 @@
 //YYYY/MM/dd
 - (NSString *)getIntervalToFXXTNoHHmmime;
 
+//MM月dd日 HH:mm
+- (NSString *)getIntervalToMMdd;
 
 
 - (BOOL)isValid;

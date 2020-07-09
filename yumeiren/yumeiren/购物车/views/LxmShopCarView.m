@@ -349,8 +349,11 @@
     NSInteger d = _carModel.proxy_price.integerValue;
     
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:d == f ? [NSString stringWithFormat:@"¥%ld ",(long)d] : [NSString stringWithFormat:@"¥%.2f ",f] attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],NSForegroundColorAttributeName:MainColor}];
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:d1 == f1 ? [NSString stringWithFormat:@"¥%ld ",(long)d1] : [NSString stringWithFormat:@"¥%.2f ",f1]  attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15], NSForegroundColorAttributeName:CharacterLightGrayColor,NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle | NSUnderlinePatternSolid)}];
-    [att appendAttributedString:str];
+    
+    if (!self.isHaoCao) {
+        NSAttributedString *str = [[NSAttributedString alloc] initWithString:d1 == f1 ? [NSString stringWithFormat:@"¥%ld ",(long)d1] : [NSString stringWithFormat:@"¥%.2f ",f1]  attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15], NSForegroundColorAttributeName:CharacterLightGrayColor,NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle | NSUnderlinePatternSolid)}];
+           [att appendAttributedString:str];
+    }
     self.moneyLabel.attributedText = att;
     _numView.numTF.text = _carModel.num;
 }

@@ -1,8 +1,8 @@
 //
-//  LxmMineJifenMingXiTVC.h
+//  LxmShengYuDaiZhuanJiFenListTVC.h
 //  yumeiren
 //
-//  Created by zk on 2020/7/1.
+//  Created by zk on 2020/7/9.
 //  Copyright © 2020 李晓满. All rights reserved.
 //
 
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LxmMineJifenMingXiTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger scoreType;
+@interface LxmShengYuDaiZhuanJiFenListTVC : BaseTableViewController
+
 @end
 
 NS_ASSUME_NONNULL_END

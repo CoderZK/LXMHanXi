@@ -159,6 +159,11 @@
             if (!cell) {
                 cell = [[LxmJieSuanPeiSongGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmJieSuanPeiSongGoodsCell"];
             }
+            if ([self.detailModel.map.no_vip isEqualToString:@"2"]) {
+                cell.isHaoCai = YES;
+            }else {
+                cell.isHaoCai = NO;
+            }
             cell.orderDetailGoodsModel = self.detailModel.map.sub[indexPath.row];
             return cell;
         }
@@ -166,6 +171,11 @@
         LxmJieSuanPeiSongGoodsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmJieSuanPeiSongGoodsCell"];
         if (!cell) {
             cell = [[LxmJieSuanPeiSongGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmJieSuanPeiSongGoodsCell"];
+        }
+        if ([self.detailModel.map.no_vip isEqualToString:@"2"]) {
+            cell.isHaoCai = YES;
+        }else {
+            cell.isHaoCai = NO;
         }
         cell.orderDetailGoodsModel = self.xiajiGoodsArr[indexPath.row];
         return cell;

@@ -13,6 +13,8 @@
 #import "LxmMineYeJiKaoTVC.h"
 #import "LxmMineTeamJiFenMingXiTVC.h"
 #import "LxmMineJiFenXiaJiSubTVC.h"
+#import "LxmTiXianVC.h"
+#import "LxmShengYuDaiZhuanJiFenListTVC.h"
 @interface LxmMineJiFenXiaJiTVC ()
 @property(nonatomic,strong)UIButton *leftButton,*rightButton;
 @property(nonatomic,strong)UIView *navTitleV;
@@ -71,6 +73,35 @@
     [self addHeadViewOne];
     [self addheadViewTwo];
     
+     WeakObj(self);
+    [LxmEventBus registerEvent:@"jifentiqu" block:^(NSDictionary  * data) {
+         StrongObj(self);
+        if ([data.allKeys containsObject:@"scoreType"]) {
+            if ([data.allKeys containsObject:@"money"]) {
+                
+                CGFloat money = [data[@"money"] floatValue];
+                
+                if ([data[@"scoreType"] intValue] == 2) {
+                    self.jifenModel.my_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue - money];
+                    
+                    self.LB1.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue + self.jifenModel.group_score.floatValue] getPriceStr];
+                    self.LB2.text = [self.jifenModel.my_score getPriceStr];
+                    
+                }else {
+                    self.jifenModel.direct_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.direct_score.floatValue - money];
+                    self.LB3.text =   [self.jifenModel.direct_score getPriceStr];
+                }
+            }
+            
+            
+            
+        }
+    
+        
+        
+    }];
+    
+    
 }
 
 - (void)addHeadViewOne {
@@ -115,6 +146,7 @@
     UILabel * tuanDuiJiFen  = [[UILabel alloc] init];
     tuanDuiJiFen.font = [UIFont systemFontOfSize:30 weight:0.2];
     tuanDuiJiFen.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue + self.jifenModel.group_score.floatValue] getPriceStr];
+    self.LB1 = tuanDuiJiFen;
     tuanDuiJiFen.textAlignment = NSTextAlignmentCenter;
     tuanDuiJiFen.textColor = [UIColor whiteColor];
     [imageV  addSubview:tuanDuiJiFen];
@@ -135,6 +167,7 @@
     jiFenLB.textAlignment = NSTextAlignmentCenter;
     jiFenLB.textColor = [UIColor whiteColor];
     [imageV  addSubview:jiFenLB];
+    self.LB2 = jiFenLB;
     
     
     
@@ -302,11 +335,7 @@
         make.height.equalTo(@20);
         make.top.equalTo(mingXiBt);
     }];
-    [tixianBt setTitle:@"提取" forState:UIControlStateNormal];
-    
-    
-    
-    
+
     [tixianBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(imageV);
         make.width.equalTo(@180);
@@ -426,6 +455,7 @@
     jiFenLB.font = [UIFont systemFontOfSize:20 weight:0.2];
     jiFenLB.text = [self.jifenModel.direct_score getPriceStr];
     jiFenLB.textAlignment = NSTextAlignmentCenter;
+    self.LB3 = jiFenLB;
     jiFenLB.textColor = RGB(236, 104, 118);
     [self.headViewTwo  addSubview:jiFenLB];
     
@@ -523,22 +553,27 @@
         
         LxmMineJifenMingXiTVC * vc =[[LxmMineJifenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.scoreType = 2;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (button.tag == 101) {
-        LxmMineYeJiKaoTVC * vc =[[LxmMineYeJiKaoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        LxmShengYuDaiZhuanJiFenListTVC * vc =[[LxmShengYuDaiZhuanJiFenListTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (button.tag == 102) {
-        if ([button.titleLabel.text isEqualToString:@"转出小晞"]) {
+        if ([button.titleLabel.text isEqualToString:@"转出"]) {
             LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.top_name = self.jifenModel.top_name;
+            vc.jifen = self.jifenModel.my_score.floatValue;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
             //提现
-            LxmMineTeamJiFenMingXiTVC * vc =[[LxmMineTeamJiFenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-            vc.hidesBottomBarWhenPushed = YES;
+            LxmTiXianVC *vc = [[LxmTiXianVC alloc] init];
+            vc.isJiFen = YES;
+            vc.scoreType = 2;
+            vc.score = self.jifenModel.my_score.floatValue;
             [self.navigationController pushViewController:vc animated:YES];
             
         }
@@ -546,13 +581,18 @@
         
         LxmMineJifenMingXiTVC * vc =[[LxmMineJifenMingXiTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.scoreType = 1;
         [self.navigationController pushViewController:vc animated:YES];
         
         
     }else if (button.tag == 104) {
-        LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
+        
+        LxmTiXianVC *vc = [[LxmTiXianVC alloc] init];
+        vc.isJiFen = YES;
+        vc.score = self.jifenModel.direct_score.floatValue;
+        vc.scoreType = 1;
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
     
     

@@ -286,6 +286,19 @@
     return timeStr;
 }
 
+//MM月dd日 HH:mm
+- (NSString *)getIntervalToMMdd {
+    //将对象类型的时间转换为NSDate类型
+    NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    //设置时间格式
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM月dd日 HH:mm"];
+    //将时间转换为字符串
+    NSString *timeStr = [formatter stringFromDate:myDate];
+    return timeStr;
+    
+}
+
 //判断是否含有非法字符 yes 有  no没有
 + (BOOL)JudgeTheillegalCharacter:(NSString *)content{
     //提示 标签不能输入特殊字符

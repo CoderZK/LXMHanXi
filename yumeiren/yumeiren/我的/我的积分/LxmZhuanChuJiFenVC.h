@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmZhuanChuJiFenVC : BaseViewController
-
+@property(nonatomic,strong)NSString *top_name;
+@property(nonatomic,assign)CGFloat jifen;
 @end
 
 NS_ASSUME_NONNULL_END

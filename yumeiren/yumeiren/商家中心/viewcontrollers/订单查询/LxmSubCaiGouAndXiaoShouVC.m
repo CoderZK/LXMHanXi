@@ -130,6 +130,7 @@
         if (!cell) {
             cell = [[LxmJieSuanPeiSongGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmJieSuanPeiSongGoodsCell"];
         }
+        cell.isHaoCai = self.isHaoCai;
         cell.orderModel = self.dataArr[indexPath.section].sub2[indexPath.row - 1];
         return cell;
     }

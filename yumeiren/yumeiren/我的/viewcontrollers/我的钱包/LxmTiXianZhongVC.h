@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmTiXianZhongVC : BaseTableViewController
-
+@property(nonatomic,assign)BOOL isJiFen;
+@property(nonatomic,strong)NSString *money;
 @end
 
 NS_ASSUME_NONNULL_END

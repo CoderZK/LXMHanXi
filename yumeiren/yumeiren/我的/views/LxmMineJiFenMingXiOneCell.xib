@@ -48,7 +48,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fcz-FJ-Ikp">
-                        <rect key="frame" x="464" y="45" width="46" height="20"/>
+                        <rect key="frame" x="456" y="45" width="46" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="5C0-TI-etk"/>
                             <constraint firstAttribute="height" constant="20" id="frP-dM-VYB"/>
@@ -61,8 +61,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="fos-BT-ZAq" secondAttribute="trailing" constant="15" id="EUf-MB-tns"/>
+                    <constraint firstItem="Fcz-FJ-Ikp" firstAttribute="trailing" secondItem="fos-BT-ZAq" secondAttribute="trailing" id="Qcx-rn-QCy"/>
                     <constraint firstItem="nNp-nH-8T1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="SuL-wi-aQA"/>
-                    <constraint firstItem="Fcz-FJ-Ikp" firstAttribute="leading" secondItem="fos-BT-ZAq" secondAttribute="leading" id="TRb-ci-XTc"/>
                     <constraint firstItem="4Jf-Cg-pIr" firstAttribute="leading" secondItem="nNp-nH-8T1" secondAttribute="leading" id="WBx-3I-GDJ"/>
                     <constraint firstItem="nNp-nH-8T1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bLU-Ba-PmZ"/>
                     <constraint firstItem="4Jf-Cg-pIr" firstAttribute="top" secondItem="nNp-nH-8T1" secondAttribute="bottom" constant="10" id="d54-oV-Rqy"/>
@@ -77,7 +77,7 @@
                 <outlet property="titleLB" destination="nNp-nH-8T1" id="4Du-Oq-ghs"/>
                 <outlet property="typeBt" destination="Fcz-FJ-Ikp" id="YHy-Yy-TzU"/>
             </connections>
-            <point key="canvasLocation" x="97.826086956521749" y="116.51785714285714"/>
+            <point key="canvasLocation" x="9" y="-1"/>
         </tableViewCell>
     </objects>
 </document>

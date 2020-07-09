@@ -31,6 +31,7 @@
 @property (nonatomic, copy) void(^selectClick)(LxmShopCarModel *carModel);
 
 @property (nonatomic, copy) void(^modifyCarSuccess)(LxmShopCarModel *model);
+@property(nonatomic,assign)BOOL isHaoCao;
 
 @end
 

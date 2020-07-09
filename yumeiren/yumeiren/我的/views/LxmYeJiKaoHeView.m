@@ -187,8 +187,8 @@
         [self.pickView reloadComponent:1];
         if (row == years - 1) {
             if (self.type == 0) {
-                if (self.selectMonth > self.currentMonth - 2) {
-                    self.selectMonth = self.currentMonth - 2;
+                if (self.selectMonth > self.currentMonth - 1) {
+                    self.selectMonth = self.currentMonth - 1;
                 }
             }else {
                 if (self.selectMonth > (self.currentMonth -1) / 3 - 1) {

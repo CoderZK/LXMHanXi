@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.navigationItem.title  = @"转出小晞";
     self.confirmBt.layer.cornerRadius = 5;
+    self.nameLB.text = [NSString stringWithFormat:@"转给: %@",self.top_name];
     self.confirmBt.clipsToBounds = YES;
 }
 - (IBAction)confirmBt:(id)sender {
@@ -28,16 +29,36 @@
         [SVProgressHUD showErrorWithStatus:@"请输入转出小晞"];
         return;
     }
+    
+    if (self.TF.text.floatValue > self.jifen) {
+        [SVProgressHUD showErrorWithStatus:@"小晞不足!"];
+        return;
+    }
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"infoType"] = @"2";
+    dict[@"score"] = self.TF.text;
+    dict[@"token"] =  SESSION_TOKEN;
+    
+    [LxmNetworking networkingPOST:give_score parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+           [SVProgressHUD dismiss];
+           if ([responseObject[@"key"] integerValue] == 1000) {
+               [LxmEventBus sendEvent:@"jifentiqu" data:@{@"scoreType":@(2),@"money":self.TF.text}];
+               [SVProgressHUD showSuccessWithStatus:@"申请转出小晞成功!"];
+               dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   [self.navigationController popViewControllerAnimated:YES];
+               });
+               
+               
+               
+           }  else {
+               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+           }
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           [SVProgressHUD dismiss];
+       }];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

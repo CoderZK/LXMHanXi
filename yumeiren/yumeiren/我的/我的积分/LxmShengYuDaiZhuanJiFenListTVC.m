@@ -1,22 +1,24 @@
 //
-//  LxmMineJiFenXiaJiSubTVC.m
+//  LxmShengYuDaiZhuanJiFenListTVC.m
 //  yumeiren
 //
-//  Created by zk on 2020/7/1.
+//  Created by zk on 2020/7/9.
 //  Copyright © 2020 李晓满. All rights reserved.
 //
 
-#import "LxmMineJiFenXiaJiSubTVC.h"
+#import "LxmShengYuDaiZhuanJiFenListTVC.h"
 #import "LxmJiFenCYCell.h"
 #import "LxmMineTeamJiFenMingXiTVC.h"
-@interface LxmMineJiFenXiaJiSubTVC ()
+@interface LxmShengYuDaiZhuanJiFenListTVC ()
 
 @property (nonatomic, strong) NSMutableArray <LxmMyTeamListModel *>*dataArr;
 @property (nonatomic, strong) LxmEmptyView *emptyView;//空界面
+@property(nonatomic,assign)NSInteger type;
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
-@implementation LxmMineJiFenXiaJiSubTVC
+@implementation LxmShengYuDaiZhuanJiFenListTVC
 
 - (LxmEmptyView *)emptyView {
     if (!_emptyView) {
@@ -31,7 +33,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"待转消息明细";
     [self.view addSubview:self.emptyView];
        [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
            make.edges.equalTo(self.view);
@@ -59,17 +61,12 @@
 }
 
 - (void)loadData  {
-    
-    
-    
-    if (self.dataArr.count <= 0) {
-        [SVProgressHUD show];
-    }
+
+    [SVProgressHUD show];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = SESSION_TOKEN;
     dict[@"pageNum"] =  @(self.page);
     dict[@"pageSize"] = @10;
-    dict[@"userType"] = @(self.type);
     [LxmNetworking networkingPOST:score_user_list parameters:dict returnClass:LxmMyTeamListRootModel.class success:^(NSURLSessionDataTask *task, LxmMyTeamListRootModel *responseObject) {
         [self endRefrish];
         if (responseObject.key.intValue == 1000) {
@@ -80,7 +77,7 @@
                 [self.dataArr addObjectsFromArray:responseObject.result.list];
             }
             self.page ++;
-            self.emptyView.textLabel.text = self.type == 1 ? @"您当前的等级没有直属成员噢~" : @"您当前的等级没有非直属成员噢~";
+            self.emptyView.textLabel.text =  @"您当前没有待转积分";
             self.emptyView.hidden = self.dataArr.count > 0;
             [self.tableView reloadData];
         } else {
@@ -127,3 +124,4 @@
 }
 
 @end
+

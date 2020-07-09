@@ -72,6 +72,14 @@
         _bottomView.layer.shadowOffset = CGSizeMake(0, 0);
         [_bottomView.allSelectButton addTarget:self action:@selector(allSelectClick:) forControlEvents:UIControlEventTouchUpInside];
         _bottomView.hidden = YES;
+        if (self.isHaoCai) {
+            [_bottomView.vipPrice mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(_bottomView.jiesuanButton.mas_left).offset(-10);
+                make.centerY.equalTo(_bottomView);
+                make.height.equalTo(@20);
+            }];
+            _bottomView.yuanPrice.hidden = YES;
+        }
         WeakObj(self);
         _bottomView.jiesuanBlock = ^{
             [selfWeak bottomViewAction];
@@ -171,6 +179,7 @@
     if (!cell) {
         cell = [[LxmShopCarCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmShopCarCell"];
     }
+    cell.isHaoCao = self.isHaoCai;
     if (self.dataArr.count > indexPath.row) {
       cell.carModel = self.dataArr[indexPath.row];
     }
@@ -222,6 +231,9 @@
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"代理总价: " attributes:@{NSForegroundColorAttributeName:CharacterDarkColor}];
         NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f", self.proxyPrice] attributes:@{NSForegroundColorAttributeName:MainColor}];
         [att appendAttributedString:str];
+        
+      
+        
         
         self.bottomView.yuanPrice.attributedText = att;
         self.bottomView.vipPrice.text = [NSString stringWithFormat:@"零售总价: ¥%.2f",self.allPrice];

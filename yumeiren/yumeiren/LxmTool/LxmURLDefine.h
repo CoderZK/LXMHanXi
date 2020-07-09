@@ -530,6 +530,16 @@
  */
 #define score_record_list  Base_URL"/app/user/score_record_list"
 
+
+/**
+  积分提现
+ */
+#define apply_cash_out  Base_URL"/app/user/apply_cash_out"
+/**
+  积分转出
+ */
+#define give_score  Base_URL"/app/user/give_score"
+
 /**
  获取图片地址
  */

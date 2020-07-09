@@ -252,6 +252,8 @@
 @property (nonatomic, copy) void(^addImgClikBlock)(NSInteger index);
 
 @property (nonatomic, strong) LxmMyBankModel *bankModel;
+@property(nonatomic,assign)BOOL isJiFen;
+
 
 @end
 
@@ -287,7 +289,7 @@
     [self addSubview:self.addImgView];
     [self.addImgView addSubview:self.bankCardNo];
     [self addSubview:self.zhifubaoView];
-
+    
     [self addSubview:self.textLabel2];
     [self addSubview:self.codeTF];
     [self addSubview:self.shuomingLabel];
@@ -320,16 +322,34 @@
         make.top.equalTo(self.moneyTF.mas_bottom);
         make.height.equalTo(@1);
     }];
-    [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lineView.mas_bottom).offset(10);
-        make.leading.equalTo(self).offset(15);
-        make.trailing.equalTo(self).offset(-15);
-    }];
-    [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.allLabel.mas_bottom).offset(20);
-        make.leading.trailing.equalTo(self);
-        make.height.equalTo(@50);
-    }];
+    
+    self.allLabel.hidden = NO;
+    if (self.isJiFen) {
+        self.allLabel.hidden = YES;
+        //        [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        //               make.top.equalTo(self.lineView.mas_bottom).offset(10);
+        //               make.leading.equalTo(self).offset(15);
+        //               make.trailing.equalTo(self).offset(-15);
+        //           }];
+        [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lineView.mas_bottom).offset(20);
+            make.leading.trailing.equalTo(self);
+            make.height.equalTo(@50);
+        }];
+    }else {
+        [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lineView.mas_bottom).offset(10);
+            make.leading.equalTo(self).offset(15);
+            make.trailing.equalTo(self).offset(-15);
+        }];
+        [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.allLabel.mas_bottom).offset(20);
+            make.leading.trailing.equalTo(self);
+            make.height.equalTo(@50);
+        }];
+    }
+    
+    
     [self.textLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.selectButton).offset(15);
         make.centerY.equalTo(self.selectButton);
@@ -397,6 +417,26 @@
         make.leading.equalTo(self).offset(15);
         make.trailing.equalTo(self).offset(-15);
     }];
+}
+
+- (void)setIsJiFen:(BOOL)isJiFen {
+    _isJiFen = isJiFen;
+    self.allLabel.hidden = YES;
+    [self.allLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.lineView.mas_bottom).offset(10);
+        make.leading.equalTo(self).offset(15);
+        make.trailing.equalTo(self).offset(-15);
+    }];
+    [self.selectButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.lineView.mas_bottom).offset(20);
+        make.leading.trailing.equalTo(self);
+        make.height.equalTo(@50);
+    }];
+    self.textLabel.text = @"提取小晞";
+    self.moneyTF.placeholder = [NSString stringWithFormat:@"单笔小晞提现最低%@",LxmTool.ShareTool.userModel.cashMoney];;
+    self.shuomingLabel.text = @"提取说明：提现后将于T+2确认到账结果。其中T日指提取日当天（下午5点以前，下午5点以后为下一交易日），T+2日指T日的第二天，例如T日为周一则T+2为周三，遇周末或法定节假日顺延。";
+    self.yuanlabel.text = @"";
+    
 }
 
 - (UILabel *)textLabel {
@@ -744,6 +784,8 @@
     self.navigationItem.title = @"提现";
     
     self.tableView.tableHeaderView = self.headerView;
+    self.headerView.isJiFen = self.isJiFen;
+    
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -783,11 +825,11 @@
  */
 - (void)sendCodeButtonClick {
     NSDictionary *dict = @{
-                           @"type" : @40,
-                           @"token":SESSION_TOKEN,
-                           @"telephone" : [LxmTool ShareTool].userModel.telephone,
-                           @"chat" : @2
-                           };
+        @"type" : @40,
+        @"token":SESSION_TOKEN,
+        @"telephone" : [LxmTool ShareTool].userModel.telephone,
+        @"chat" : @2
+    };
     [SVProgressHUD show];
     [LxmNetworking networkingPOST:app_identify parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
@@ -842,17 +884,36 @@
     [self.headerView endEditing:YES];
     NSString *code  = self.headerView.codeTF.text;
     if (self.headerView.moneyTF.text.doubleValue <= 0) {
-        [SVProgressHUD showErrorWithStatus:@"请输入提现金额!"];
+        if (self.isJiFen) {
+            [SVProgressHUD showErrorWithStatus:@"请输入提取积分!"];
+        }else {
+           [SVProgressHUD showErrorWithStatus:@"请输入提现金额!"];
+        }
+        
         return;
     }
-    if (self.headerView.moneyTF.text.doubleValue > [LxmTool ShareTool].userModel.balance.doubleValue) {
-        [SVProgressHUD showErrorWithStatus:@"余额不足!"];
-        return;
+    
+    if  (self.isJiFen) {
+        if (self.headerView.moneyTF.text.doubleValue > self.score) {
+            [SVProgressHUD showErrorWithStatus:@"积分不足"];
+            return;
+        }
+        if (self.headerView.moneyTF.text.doubleValue < LxmTool.ShareTool.userModel.cashMoney.doubleValue) {
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"提取最低为%@",LxmTool.ShareTool.userModel.cashMoney]];
+            return;
+        }
+    }else {
+        if (self.headerView.moneyTF.text.doubleValue > [LxmTool ShareTool].userModel.balance.doubleValue) {
+            [SVProgressHUD showErrorWithStatus:@"余额不足!"];
+            return;
+        }
+        if (self.headerView.moneyTF.text.doubleValue < LxmTool.ShareTool.userModel.cashMoney.doubleValue) {
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"提现最低金额为%@元",LxmTool.ShareTool.userModel.cashMoney]];
+            return;
+        }
     }
-    if (self.headerView.moneyTF.text.doubleValue < LxmTool.ShareTool.userModel.cashMoney.doubleValue) {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"提现最低金额为%@元",LxmTool.ShareTool.userModel.cashMoney]];
-        return;
-    }
+    
+    
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (self.selectIndex == 111) {//支付宝方式
@@ -884,20 +945,33 @@
     dic[@"info_type"] = (self.selectIndex == 111 ? @2 : @1);
     dic[@"token"] = SESSION_TOKEN;
     dic[@"payMoney"] = self.headerView.moneyTF.text;
+    dic[@"score"] =self.headerView.moneyTF.text;
     dic[@"code"] = code;
     if (![code isValid]) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机验证码"];
         return;
     }
+    dic[@"scoreType"] = @(self.scoreType);
     self.tixainButton.userInteractionEnabled = NO;
+    
+    NSString * urlstr = up_cash_out;
+    if (self.isJiFen) {
+        urlstr = apply_cash_out;
+    }
     [SVProgressHUD show];
     WeakObj(self);
-    [LxmNetworking networkingPOST:up_cash_out parameters:dic returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [LxmNetworking networkingPOST:urlstr parameters:dic returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         selfWeak.tixainButton.userInteractionEnabled = YES;
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] integerValue] == 1000) {
-            [LxmEventBus sendEvent:@"tixianSuccess" data:nil];
+            if (self.isJiFen) {
+              [LxmEventBus sendEvent:@"jifentiqu" data:@{@"scoreType":@(self.scoreType),@"money":self.headerView.moneyTF.text}];
+            }else {
+              [LxmEventBus sendEvent:@"tixianSuccess" data:nil];
+            }
             LxmTiXianZhongVC *vc = [[LxmTiXianZhongVC alloc] init];
+            vc.money = self.headerView.moneyTF.text;
+            vc.isJiFen = self.isJiFen;
             [selfWeak.navigationController pushViewController:vc animated:YES];
         } else {
             [UIAlertController showAlertWithmessage:responseObject[@"message"]];

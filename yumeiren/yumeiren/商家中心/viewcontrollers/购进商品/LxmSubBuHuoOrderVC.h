@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong) NSString *shifujineMoney;//订单查询 详情
 
+
+
 @end
 
 @interface LxmSubBuHuoOrderButtonCell : UITableViewCell
