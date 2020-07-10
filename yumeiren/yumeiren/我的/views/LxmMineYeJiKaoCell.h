@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *leftFourLB;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *Hconstraint;
 
+
+
 @property(nonatomic,assign)NSInteger type; // 100 月 101 季
 
 @end

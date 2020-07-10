@@ -28,6 +28,7 @@
 #import "LxmRenZhengProtocolVC.h"
 
 #import "LxmNianDuKaoHeVC.h"
+#import "LxmMineYeJiKaoTVC.h"
 
 @interface LxmShopCenterVC ()
 
@@ -135,6 +136,17 @@
         return 80*ceil(6/3.0) + 60;
     }
     return 80*ceil(7/3.0) + 60;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+        LxmMineYeJiKaoTVC * vc =[[LxmMineYeJiKaoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 /**

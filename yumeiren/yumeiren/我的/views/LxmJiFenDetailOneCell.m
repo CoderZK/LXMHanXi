@@ -12,7 +12,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.detailBt.layer.cornerRadius = 12;
+    self.detailBt.clipsToBounds = YES;
+    [self.detailBt setTitleColor:MainColor forState:UIControlStateNormal];
+    self.detailBt.layer.borderColor = MainColor.CGColor;
+    self.detailBt.layer.borderWidth = 0.5;
+    self.detailBt.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

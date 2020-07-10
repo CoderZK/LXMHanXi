@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="0.5" id="jE0-my-DL5"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当即完成(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crq-8Y-Cvk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当季完成(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crq-8Y-Cvk">
                                 <rect key="frame" x="10" y="25" width="236" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ysh-3Q-Nt7"/>

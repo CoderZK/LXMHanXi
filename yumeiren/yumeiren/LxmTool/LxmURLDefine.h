@@ -331,7 +331,7 @@
 /**
  查看他人信息
  */
-#define other_info  Base_URL"/app/user/other_info"
+#define other_infoNew  Base_URL"/app/user/other_info"
 /**
  我的仓库-汇总
  */
@@ -530,6 +530,11 @@
  */
 #define score_record_list  Base_URL"/app/user/score_record_list"
 
+/**
+ 积分明细
+ */
+#define score_record_detail  Base_URL"/app/user/score_record_detail"
+
 
 /**
   积分提现
@@ -539,6 +544,12 @@
   积分转出
  */
 #define give_score  Base_URL"/app/user/give_score"
+
+
+/**
+  业绩考核
+ */
+#define check_detail  Base_URL"/app/user/check_detail"
 
 /**
  获取图片地址

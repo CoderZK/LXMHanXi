@@ -245,6 +245,8 @@
 		589142E524ADBF1F005DE41A /* LxmMineYeJiKaoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589142E324ADBF1F005DE41A /* LxmMineYeJiKaoCell.xib */; };
 		589142E824ADBFF2005DE41A /* LxmMineYeJiKaoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 589142E724ADBFF2005DE41A /* LxmMineYeJiKaoTVC.m */; };
 		589142EB24ADCC6D005DE41A /* LxmYeJiKaoHeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589142EA24ADCC6D005DE41A /* LxmYeJiKaoHeView.m */; };
+		58A5273824B80B8F00FA737B /* LxmJiFenDetailTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5273624B80B8F00FA737B /* LxmJiFenDetailTwoCell.m */; };
+		58A5273924B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A5273724B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib */; };
 		58A8016124B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8016024B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.m */; };
 		58CED80724AB2BB400CC7AF4 /* LxmShopCenterTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CED80524AB2BB400CC7AF4 /* LxmShopCenterTwoCell.m */; };
 		58CED80824AB2BB400CC7AF4 /* LxmShopCenterTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CED80624AB2BB400CC7AF4 /* LxmShopCenterTwoCell.xib */; };
@@ -712,6 +714,9 @@
 		589142E924ADCC6D005DE41A /* LxmYeJiKaoHeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmYeJiKaoHeView.h; sourceTree = "<group>"; };
 		589142EA24ADCC6D005DE41A /* LxmYeJiKaoHeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmYeJiKaoHeView.m; sourceTree = "<group>"; };
 		589848F524A9EED1004059FC /* 涵曦测试Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "涵曦测试Debug.entitlements"; sourceTree = "<group>"; };
+		58A5273524B80B8F00FA737B /* LxmJiFenDetailTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmJiFenDetailTwoCell.h; sourceTree = "<group>"; };
+		58A5273624B80B8F00FA737B /* LxmJiFenDetailTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmJiFenDetailTwoCell.m; sourceTree = "<group>"; };
+		58A5273724B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LxmJiFenDetailTwoCell.xib; sourceTree = "<group>"; };
 		58A8015F24B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmShengYuDaiZhuanJiFenListTVC.h; sourceTree = "<group>"; };
 		58A8016024B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmShengYuDaiZhuanJiFenListTVC.m; sourceTree = "<group>"; };
 		58CED80424AB2BB400CC7AF4 /* LxmShopCenterTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmShopCenterTwoCell.h; sourceTree = "<group>"; };
@@ -1178,6 +1183,9 @@
 				589142D724ADB829005DE41A /* LxmJiFenDetailOneCell.h */,
 				589142D824ADB829005DE41A /* LxmJiFenDetailOneCell.m */,
 				589142D924ADB829005DE41A /* LxmJiFenDetailOneCell.xib */,
+				58A5273524B80B8F00FA737B /* LxmJiFenDetailTwoCell.h */,
+				58A5273624B80B8F00FA737B /* LxmJiFenDetailTwoCell.m */,
+				58A5273724B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib */,
 				407892BE22D47DDF00716C1C /* LxmMineView.h */,
 				407892BF22D47DDF00716C1C /* LxmMineView.m */,
 				4061A82F22E33ED3004D127C /* LxmMyKefuAlertView.h */,
@@ -1805,6 +1813,7 @@
 				4078924A22D4441000716C1C /* Assets.xcassets in Resources */,
 				40E484B8230A7F64007793DB /* AlipaySDK.bundle in Resources */,
 				40B4F23E22F27E290077823C /* icon_fullscreen.png in Resources */,
+				58A5273924B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib in Resources */,
 				589142E024ADB966005DE41A /* LxmZhuanChuJiFenVC.xib in Resources */,
 				58CED80824AB2BB400CC7AF4 /* LxmShopCenterTwoCell.xib in Resources */,
 				4078924822D4440C00716C1C /* Main.storyboard in Resources */,
@@ -2031,6 +2040,7 @@
 				4010ADFC2320E13C005F63CA /* LxmDetailAddressVC.m in Sources */,
 				40F1AF2E22E56AFA00D78186 /* LxmGouJinShangPinVC.m in Sources */,
 				4015E99B22E5DD4900B91764 /* LxmPublishTypeVC.m in Sources */,
+				58A5273824B80B8F00FA737B /* LxmJiFenDetailTwoCell.m in Sources */,
 				40C3A24B22EAED5300F3E510 /* LxmYiRenZhengVC.m in Sources */,
 				4061A82822E2FD05004D127C /* LxmJiedanMyPublishVC.m in Sources */,
 				40B56D2222ED4F15000EB3BB /* LxmRegisterNextVC.m in Sources */,

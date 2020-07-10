@@ -37,20 +37,34 @@
                         <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRW-Nj-9jJ">
+                        <rect key="frame" x="356" y="33" width="80" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Jvw-L7-IYF"/>
+                            <constraint firstAttribute="width" constant="80" id="k2L-EB-l4k"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="查看详情">
+                            <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="dSi-Oc-Vsy" secondAttribute="trailing" constant="15" id="4Rc-vP-4bK"/>
+                    <constraint firstItem="jRW-Nj-9jJ" firstAttribute="centerY" secondItem="dSi-Oc-Vsy" secondAttribute="centerY" id="ABI-cs-XLn"/>
                     <constraint firstItem="SO2-iI-jgC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="B9q-7v-LBb"/>
                     <constraint firstItem="dSi-Oc-Vsy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UBE-wG-dgX"/>
                     <constraint firstItem="SO2-iI-jgC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pi7-Zu-XB8"/>
+                    <constraint firstItem="dSi-Oc-Vsy" firstAttribute="leading" secondItem="jRW-Nj-9jJ" secondAttribute="trailing" constant="10" id="su9-2n-15e"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="detailBt" destination="jRW-Nj-9jJ" id="akS-2T-enE"/>
                 <outlet property="leftLB" destination="SO2-iI-jgC" id="h0L-G3-vCR"/>
                 <outlet property="rightLB" destination="dSi-Oc-Vsy" id="YWS-F7-xll"/>
             </connections>
-            <point key="canvasLocation" x="214" y="110"/>
+            <point key="canvasLocation" x="24" y="40"/>
         </tableViewCell>
     </objects>
 </document>

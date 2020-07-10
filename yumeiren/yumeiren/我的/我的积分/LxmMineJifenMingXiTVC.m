@@ -9,6 +9,7 @@
 #import "LxmMineJifenMingXiTVC.h"
 #import "LxmMineJiFenMingXiOneCell.h"
 #import "LxmYeJiKaoHeView.h"
+#import "LxmJiFenDeatilOneTVC.h"
 @interface LxmMineJifenMingXiTVC ()
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UILabel *timeLB;
@@ -164,11 +165,22 @@
     
     LxmMineJiFenMingXiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataArr[indexPath.row];
+    if([cell.typeBt.titleLabel.text isEqualToString:@"确定"]) {
+        cell.typeBt.userInteractionEnabled = YES;
+    }else {
+         cell.typeBt.userInteractionEnabled = NO;
+    }
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    LxmJiFenDeatilOneTVC * vc =[[LxmJiFenDeatilOneTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.ID = self.dataArr[indexPath.row].ID;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

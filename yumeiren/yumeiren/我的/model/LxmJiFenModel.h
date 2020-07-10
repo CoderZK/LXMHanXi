@@ -27,7 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) NSString *sale_rate;//销售业绩公式 里面的：比例  或者 直属返单的比例
 @property (nonatomic , strong) NSString *other_money;//销售业绩公式里面的：其他成员收益   或者是直属返利的订单金额
 @property (nonatomic , strong) NSString *order_code;//直属返单类型的：订单流水号
+@property(nonatomic,strong)NSString *bank_id;
+@property(nonatomic,strong)NSString *userHead;
+@property(nonatomic,strong)NSString *money;
+@property(nonatomic,strong)NSString *username;
+@property(nonatomic,strong)NSString *bank_username;
+@property(nonatomic,strong)NSString *bank_code;
 
+@property(nonatomic,assign)NSInteger inviteToBox;
+@property(nonatomic,assign)NSInteger finishMoney;
+@property(nonatomic,assign)NSInteger targetMoney;
+
+@property(nonatomic,strong)NSString * other_info;
+@property(nonatomic,strong)NSMutableArray<LxmJiFenModel *> *otherInfoList;
+
+
+@property(nonatomic,strong)NSString *ID;
 
 @end
 

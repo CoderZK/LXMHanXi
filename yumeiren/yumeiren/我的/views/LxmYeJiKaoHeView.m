@@ -93,12 +93,13 @@
 //            }
             self.selectMonth = self.currentMonth - 1;
         }else {
-            if ((self.currentMonth -1) / 3 == 0) {
-                self.selectYear = years - 2;
-                self.selectMonth = 3;
-            }else {
-                self.selectMonth = (self.currentMonth -1) / 3 - 1;
-            }
+            self.selectMonth = self.currentMonth / 3 + (self.currentMonth%3>0?1:0) - 1;
+//            if ((self.currentMonth -1) / 3 == 0) {
+//                self.selectYear = years - 2;
+//                self.selectMonth = 3;
+//            }else {
+//                self.selectMonth = (self.currentMonth -1) / 3 - 1;
+//            }
         }
         [self.pickView selectRow:self.selectYear inComponent:0 animated:YES];
         [self.pickView selectRow:self.selectMonth inComponent:1 animated:YES];
@@ -125,9 +126,9 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     if (component == 0) {
-        if ((self.type ==0 && self.currentMonth == 1) || (self.type == 1 && (self.currentMonth -1) / 3 == 0)) {
-            return years - 1;
-        }
+//        if ((self.type ==0 && self.currentMonth == 1) || (self.type == 1 && (self.currentMonth -1) / 3 == 0)) {
+//            return years - 1;
+//        }
         return years;
     }else {
         if (self.type == 0) {
@@ -137,14 +138,15 @@
 //            }else {
 //                return 12;
 //            }
-            return self.currentMonth;
+            return 12;
         }else {
             //按季度
-            if (self.selectYear == years - 1) {
-                return (self.currentMonth -1) / 3;
-            }else {
-                return 4;
-            }
+            return 4;
+//            if (self.selectYear == years - 1) {
+//                return (self.currentMonth -1) / 3;
+//            }else {
+//                return 4;
+//            }
             
         }
     }
@@ -185,17 +187,17 @@
     if (component == 0) {
         self.selectYear = row;
         [self.pickView reloadComponent:1];
-        if (row == years - 1) {
-            if (self.type == 0) {
-                if (self.selectMonth > self.currentMonth - 1) {
-                    self.selectMonth = self.currentMonth - 1;
-                }
-            }else {
-                if (self.selectMonth > (self.currentMonth -1) / 3 - 1) {
-                    self.selectMonth = (self.currentMonth -1) / 3 - 1;
-                }
-            }
-        }
+//        if (row == years - 1) {
+//            if (self.type == 0) {
+//                if (self.selectMonth > self.currentMonth - 1) {
+//                    self.selectMonth = self.currentMonth - 1;
+//                }
+//            }else {
+//                if (self.selectMonth > (self.currentMonth -1) / 3 - 1) {
+//                    self.selectMonth = (self.currentMonth -1) / 3 - 1;
+//                }
+//            }
+//        }
     }else {
         self.selectMonth = row;
     }
@@ -241,8 +243,12 @@
         str = [NSString stringWithFormat:@"%ld年%@",year,@[@"第一季度(1-3月)",@"第二季度(4-6月)",@"第三季度(7-9月)",@"第四季度(10-12月)"][self.selectMonth]];
     }
     if (self.confirmBlock != nil) {
+        if (self.type == 1) {
+           self.confirmBlock(year, month * 3 + 1, str);
+        }else {
+           self.confirmBlock(year, month, str);
+        }
         
-        self.confirmBlock(year, month, str);
         
     }
     

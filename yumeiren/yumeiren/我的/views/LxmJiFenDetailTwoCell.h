@@ -1,8 +1,8 @@
 //
-//  LxmJiFenDetailOneCell.h
+//  SWTJiFenDetailTwoCell.h
 //  yumeiren
 //
-//  Created by zk on 2020/7/2.
+//  Created by zk on 2020/7/10.
 //  Copyright © 2020 李晓满. All rights reserved.
 //
 
@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LxmJiFenDetailOneCell : UITableViewCell
+@interface LxmJiFenDetailTwoCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imgV;
 @property (weak, nonatomic) IBOutlet UILabel *leftLB;
 @property (weak, nonatomic) IBOutlet UILabel *rightLB;
-@property (weak, nonatomic) IBOutlet UIButton *detailBt;
 
 @end
 

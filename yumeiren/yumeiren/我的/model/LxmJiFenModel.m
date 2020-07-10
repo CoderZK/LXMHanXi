@@ -10,4 +10,16 @@
 
 @implementation LxmJiFenModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"ID":@"id"};
+}
+
+
+- (void)setOther_info:(NSString *)other_info {
+    
+    NSArray * arr = [other_info mj_JSONObject];
+    self.otherInfoList = [LxmJiFenModel mj_objectArrayWithKeyValuesArray:arr];
+    
+}
+
 @end
