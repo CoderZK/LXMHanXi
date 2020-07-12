@@ -57,7 +57,7 @@
 - (void)getData {
     
     NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"infoType"]= @(3-self.type);
+    dict[@"infoType"]= @(self.type+1);
     dict[@"year"] = @(self.year);
     dict[@"token"] = SESSION_TOKEN;
     if (self.type == 1) {

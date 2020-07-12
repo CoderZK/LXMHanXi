@@ -439,6 +439,7 @@
                            @"payMoney" : self.headerView.moneyTF.text,
                            @"type" : @(3),
                            @"info_type":@(2-self.currentIndex),
+                           @"offType":@(1+self.currentIndex),
                            
     }.mutableCopy;
     dict[@"payImg"] = [self.imgs componentsJoinedByString:@","];

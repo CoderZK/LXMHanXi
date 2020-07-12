@@ -411,6 +411,7 @@
           //是耗材
             //直接下单
             [selfWeak settleCarOrder:[ids componentsJoinedByString:@","] goods:tempArr];
+            _bottomView.jiesuanButton.userInteractionEnabled = YES;
             return;
         }else {
             CGFloat money = LxmTool.ShareTool.userModel.upPayMoney.doubleValue;
@@ -526,12 +527,12 @@
     //购物需求
     void(^manZuLowMoneyBlock)(void) = ^(){
         
+        _bottomView.jiesuanButton.userInteractionEnabled = YES;
         if (selfWeak.isHaoCai) {
             jiesuanBlock();
             return;
         };
-        
-        _bottomView.jiesuanButton.userInteractionEnabled = YES;
+
         CGFloat f = LxmTool.ShareTool.userModel.lowMoney.doubleValue;
         NSInteger d = LxmTool.ShareTool.userModel.lowMoney.integerValue;
         NSString *tempStr = f == d ? [NSString stringWithFormat:@"您还没达到购物最低满足价格%ld元,请继续购物!",(long)d] : [NSString stringWithFormat:@"您还没达到购物最低满足价格%.2f元,请继续购物!",f];

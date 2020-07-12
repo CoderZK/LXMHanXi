@@ -77,10 +77,16 @@
     WeakObj(self);
     [self loadMyUserInfoWithOkBlock:^{
         selfWeak.topView.infoModel = [LxmTool ShareTool].userModel;
-        [selfWeak.tableView reloadData];
+
+        if ([[LxmTool ShareTool].userModel.roleType isEqualToString:@"3"]) {
+                    [self getScoreData];
+               }else {
+                  [selfWeak.tableView reloadData];
+               }
+        
     }];
     
-    [self getScoreData];
+   
     
 }
 
@@ -91,8 +97,10 @@
     [LxmNetworking networkingPOST:my_inner_score parameters:@{@"token":TOKEN} returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] integerValue] == 1000) {
             
-            self.jiFenModel  = [LxmUserInfoModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
-            [self.tableView reloadData];
+            if (responseObject[@"result"] != nil && [[responseObject[@"result"] allKeys] containsObject:@"map"]) {
+                self.jiFenModel  = [LxmUserInfoModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
+                [self.tableView reloadData];
+            }
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
