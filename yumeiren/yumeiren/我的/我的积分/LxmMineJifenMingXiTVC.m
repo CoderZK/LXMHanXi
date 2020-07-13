@@ -32,6 +32,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的小晞明细";
+    if (self.scoreType == 1) {
+        self.navigationItem.title = @"我的直属小晞";
+    }
     
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 45)];
     self.headView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -146,6 +149,30 @@
     
 }
 
+- (void)confirmScoreWithModel:(LxmJiFenModel *)model {
+    
+       [SVProgressHUD show];
+       NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+       dict[@"token"] = SESSION_TOKEN;
+       dict[@"infoType"] = @(self.scoreType);
+       dict[@"id"] = model.ID;
+       [LxmNetworking networkingPOST:confirm_score parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+           [self endRefrish];
+           if ([responseObject[@"key"] intValue] == 1000) {
+               
+               model.status = @"2";
+               [self.tableView reloadData];
+               
+           } else {
+               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+           }
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           [self endRefrish];
+       }];
+    
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -164,15 +191,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LxmMineJiFenMingXiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.type = 1;
     cell.model = self.dataArr[indexPath.row];
-    if([cell.typeBt.titleLabel.text isEqualToString:@"确定"]) {
+    
+    if([cell.typeBt.titleLabel.text isEqualToString:@"确认"]) {
         cell.typeBt.userInteractionEnabled = YES;
+        cell.typeBt.tag = indexPath.row;
+        [cell.typeBt addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
     }else {
          cell.typeBt.userInteractionEnabled = NO;
+        
     }
     return cell;
     
 }
+
+- (void)confirmAction:(UIButton *)button {
+    
+    [self confirmScoreWithModel:self.dataArr[button.tag]];
+    
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

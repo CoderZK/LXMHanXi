@@ -59,7 +59,7 @@
         [deleteBt setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         deleteBt.tag = 200+i;
 //        deleteBt.backgroundColor = RGB(250, 250, 250);
-        [deleteBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+//        [deleteBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
         [deleteBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [button addSubview:deleteBt];
         self.scrollview.contentSize = CGSizeMake(15 + (15 + (ScreenW - 60)/3) * picsArr.count, (ScreenW - 60)/3);

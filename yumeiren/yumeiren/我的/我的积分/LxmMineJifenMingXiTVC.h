@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmMineJifenMingXiTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger scoreType;
+@property(nonatomic,assign)NSInteger scoreType;// 1 直属 2 团队
 @end
 
 NS_ASSUME_NONNULL_END

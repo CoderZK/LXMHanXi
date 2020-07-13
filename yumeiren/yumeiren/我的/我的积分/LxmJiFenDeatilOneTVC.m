@@ -10,6 +10,7 @@
 #import "LxmJiFenDetailOneCell.h"
 #import "LxmJiFenModel.h"
 #import "LxmJiFenDetailTwoCell.h"
+#import "LxmOrderDetailVC.h"
 @interface LxmJiFenDeatilOneTVC ()
 @property(nonatomic,strong)UILabel *typeLB,*moneyLB;
 @property(nonatomic,strong)LxmJiFenModel *dataModel;
@@ -19,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     self.navigationItem.title = @"明细详情";
     
     
@@ -34,26 +35,26 @@
 }
 
 - (void)loadData {
-  
-     
-        [SVProgressHUD show];
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"token"] = SESSION_TOKEN;
-        dict[@"id"] = self.ID;
-        [LxmNetworking networkingPOST:score_record_detail parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            [self endRefrish];
-            if ([responseObject[@"key"] intValue] == 1000) {
-               
-                self.dataModel = [LxmJiFenModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
-                [self.tableView reloadData];
-                
-            } else {
-                [UIAlertController showAlertWithmessage:responseObject[@"message"]];
-            }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            [self endRefrish];
-        }];
-
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = SESSION_TOKEN;
+    dict[@"id"] = self.ID;
+    [LxmNetworking networkingPOST:score_record_detail parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self endRefrish];
+        if ([responseObject[@"key"] intValue] == 1000) {
+            
+            self.dataModel = [LxmJiFenModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
+            [self.tableView reloadData];
+            
+        } else {
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self endRefrish];
+    }];
+    
 }
 
 
@@ -126,7 +127,7 @@
     lb.font = [UIFont systemFontOfSize:14];
     lb.textColor = CharacterGrayColor;
     [view addSubview:lb];
-
+    
     return view;
 }
 
@@ -135,9 +136,8 @@
     if (indexPath.section == 0) {
         LxmJiFenDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         NSInteger secondTyep = self.dataModel.second_type.intValue;
-
+        [cell.detailBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self settitelWith:cell withType:secondTyep withRow:indexPath.row];
-        
         return cell;
     }else {
         
@@ -151,8 +151,14 @@
     
 }
 
+- (void)clickAction:(UIButton *)button {
+    LxmOrderDetailVC *orderVC = [[LxmOrderDetailVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+    orderVC.orderID = self.dataModel.order_id;
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
 - (void)settitelWith:(LxmJiFenDetailOneCell *)cell withType:(NSInteger)secondTyep  withRow:(NSInteger)row{
-   
+    
     
     if (secondTyep == 1) {
         cell.detailBt.hidden = YES;
@@ -197,25 +203,25 @@
             cell.leftLB.text = @"小晞比例";
             cell.rightLB.text = [NSString stringWithFormat:@"%0.2f%%",self.dataModel.sale_rate.floatValue * 100 ];
         }else if (row == 2) {
-           cell.leftLB.text = @"收入时间";
+            cell.leftLB.text = @"收入时间";
             cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];;
         }
     }else if (secondTyep == 6) {
         if (row == 0) {
-                   cell.leftLB.text = @"来自";
-                   cell.rightLB.text = self.dataModel.by_name;
-               }else if (row == 1) {
-                   cell.leftLB.text = @"转入时间";
-                   cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];
-               }
+            cell.leftLB.text = @"来自";
+            cell.rightLB.text = self.dataModel.by_name;
+        }else if (row == 1) {
+            cell.leftLB.text = @"转入时间";
+            cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];
+        }
     }else if (secondTyep == 7) {
-         if (row == 0) {
-                   cell.leftLB.text = @"转出";
-                   cell.rightLB.text = self.dataModel.by_name;
-               }else if (row == 1) {
-                   cell.leftLB.text = @"转出时间";
-                   cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];
-               }
+        if (row == 0) {
+            cell.leftLB.text = @"转出";
+            cell.rightLB.text = self.dataModel.by_name;
+        }else if (row == 1) {
+            cell.leftLB.text = @"转出时间";
+            cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];
+        }
     }else if (secondTyep == 8 || secondTyep == 4) {
         cell.rightLB.textColor = CharacterDarkColor;
         
@@ -228,22 +234,22 @@
         }else if (row == 2) {
             cell.leftLB.text = @"提取状态";
             
-
+            
             if (self.dataModel.status.intValue == 1) {
                 cell.rightLB.textColor = RGB(244, 150, 86);
                 cell.rightLB.text = @"审核中";
-              }else if (self.dataModel.status.intValue == 2) {
+            }else if (self.dataModel.status.intValue == 2) {
                 cell.rightLB.textColor = CharacterDarkColor;
                 cell.rightLB.text = @"提取成功";
-              }else {
+            }else {
                 cell.rightLB.textColor = CharacterDarkColor;
                 cell.rightLB.text = @"失败";
-              }
+            }
         }else if (row == 3) {
             cell.leftLB.text = @"提取方式";
             if (self.dataModel.info_type.intValue == 1) {
                 cell.rightLB.text = @"银行卡";
-         
+                
             }else {
                 cell.rightLB.text = @"支付宝";
             }
@@ -252,11 +258,11 @@
             cell.leftLB.text = @"姓名";
             
             if (self.dataModel.info_type.intValue == 1) {
-                   cell.rightLB.text = self.dataModel.bank_username;
-               }else {
-                   cell.rightLB.text = self.dataModel.zhi_name;
-               }
-                   
+                cell.rightLB.text = self.dataModel.bank_username;
+            }else {
+                cell.rightLB.text = self.dataModel.zhi_name;
+            }
+            
             
         }
         else if (row == 5) {
@@ -264,10 +270,10 @@
             
             
             if (self.dataModel.info_type.intValue == 1) {
-                   cell.rightLB.text = self.dataModel.bank_code;
-               }else {
-                  cell.rightLB.text = self.dataModel.zhi_account;
-               }
+                cell.rightLB.text = self.dataModel.bank_code;
+            }else {
+                cell.rightLB.text = self.dataModel.zhi_account;
+            }
             
             
         }
@@ -304,24 +310,24 @@
     backV.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headV addSubview:backV];
     
-
+    
     if (self.dataModel.second_type.intValue == 1) {
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 2) {
-               self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 3) {
-               self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 4) {
-               self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 5) {
-               self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 6) {
-               self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 7) {
-               self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
-           }else if (self.dataModel.second_type.intValue == 8) {
-             self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
-           }
+    }else if (self.dataModel.second_type.intValue == 2) {
+        self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 3) {
+        self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 4) {
+        self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 5) {
+        self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 6) {
+        self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 7) {
+        self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+    }else if (self.dataModel.second_type.intValue == 8) {
+        self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+    }
     
     
     

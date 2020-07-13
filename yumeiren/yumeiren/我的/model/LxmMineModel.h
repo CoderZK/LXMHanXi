@@ -141,6 +141,8 @@
 
 @property (nonatomic, strong) NSString *info_type;/* 1-批发采购，2-批发销售，3-充值，4-转账，5-红包，6-接单收入，7-接单退回，8-公司返款，9-保证金，10-后台充值，11-提现,12-后台扣款 */
 
+
+@property (nonatomic, strong) NSString *off_type;
 @property (nonatomic, strong) NSString *changeMoney;/* 金额 */
 
 @property (nonatomic, strong) NSString *createTime;/* 金额 */
@@ -342,6 +344,8 @@
 @property (nonatomic, strong) NSString *bank_code;/** 银行卡号 */
 
 @property(nonatomic,strong)NSString *pay_img;//充值图片
+
+@property(nonatomic,strong)NSString *off_type;//代表线下转账方式，1-支付宝，2-银行卡
 
 @end
 

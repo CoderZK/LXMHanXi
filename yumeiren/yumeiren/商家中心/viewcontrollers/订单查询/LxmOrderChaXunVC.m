@@ -181,7 +181,9 @@
     
     if (self.isHaoCai) {
         self.navigationItem.title = @"我的订单";
-        self.titleArray = @[@"全部",@"待支付",@"已完成"];
+        _tabBar.layout.cellWidth = floor((ScreenW -  60)/4.0);
+        _tabBar.layout.cellSpacing = 20;
+        self.titleArray = @[@"全部",@"待支付",@"已完成",@"已取消"];
         self.titleIndex = 3;
         self.selectedView.currentIndex = 2;
     }else {
@@ -256,10 +258,12 @@
     }
     LxmSubCaiGouAndXiaoShouVC *vc = [[LxmSubCaiGouAndXiaoShouVC alloc] init];
     vc.type = @(self.titleIndex);
+    vc.status = @(index);
     if (index == 2) {
         vc.status = @4;
+    }else if (index == 3) {
+        vc.status = @5;
     }
-    vc.status = @(index);
     vc.isHaoCai = self.isHaoCai;
     return vc;
 }

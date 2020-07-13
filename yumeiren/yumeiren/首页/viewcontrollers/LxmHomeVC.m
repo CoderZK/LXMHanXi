@@ -256,17 +256,23 @@
             }
         }
             break;
-        case 3: {//接单平台
-            if ([LxmTool ShareTool].userModel.roleType.integerValue >= 2) {
-                LxmJieDanPlatTabbarController *vc = [LxmJieDanPlatTabbarController new];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            } else {//培训课堂
-                
-                LxmInfoClassVC *vc = [LxmInfoClassVC new];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+        case 3: {
+            
+            //培训课堂
+            LxmInfoClassVC *vc = [LxmInfoClassVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+//            //接单平台
+//            if ([LxmTool ShareTool].userModel.roleType.integerValue >= 2) {
+//                LxmJieDanPlatTabbarController *vc = [LxmJieDanPlatTabbarController new];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            } else {//培训课堂
+//                
+//                LxmInfoClassVC *vc = [LxmInfoClassVC new];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
         }
             break;
         case 4: {//培训课堂

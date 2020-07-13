@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *YConstrint;
 @property (weak, nonatomic) IBOutlet UILabel *leftFourLB;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *Hconstraint;
+@property (weak, nonatomic) IBOutlet UILabel *desLB;
 
 
 

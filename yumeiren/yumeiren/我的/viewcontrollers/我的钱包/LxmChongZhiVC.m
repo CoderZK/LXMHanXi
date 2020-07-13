@@ -450,10 +450,7 @@
          self.chongzhiButton.userInteractionEnabled = YES;
         if ([responseObject[@"key"] integerValue] == 1000) {
             [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
-            
-            
-            
-            
+
         }else {
            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
         }

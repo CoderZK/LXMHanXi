@@ -58,7 +58,7 @@
 
 - (void)setPics:(NSString *)pics {
     _pics = pics;
-    if (pics == 0) {
+    if (pics.length == 0) {
         [self setImgViews:@[]];
     }else {
        [self setImgViews:[pics componentsSeparatedByString:@","]];
@@ -68,14 +68,11 @@
 - (void)setImgViews:(NSArray *)arr {
 //        arr = @[@"http://p0.qhimgs4.com/t01d406e56973481579.jpg",@"http://5b0988e595225.cdn.sohucs.com/images/20190508/a3df05de51954e2891f829380af31754.jpeg",@"http://5b0988e595225.cdn.sohucs.com/images/20190507/2e2a6a6e43304433bd7a558292fcb487.jpeg"];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (NSInteger i = arr.count; i < 9; i++) {
-            UIImageView * imgV = [self.picsView viewWithTag:100+i];
-            
-            imgV.hidden = YES;
-        }
-    });
     
+    for (NSInteger i = arr.count; i < 9; i++) {
+        UIImageView * imgV = [self.picsView viewWithTag:100+i];
+        imgV.hidden = YES;
+    }
     if (arr.count == 0 ) {
         self.picsView.mj_h = 0;
         return;
@@ -87,7 +84,7 @@
     for (int i = 0 ; i < arr.count; i++) {
         UIImageView * imgV = [self.picsView viewWithTag:100+i];
         imgV.hidden = NO;
-        [imgV sd_setImageWithURL:[NSURL URLWithString:arr[i]] placeholderImage:[UIImage imageNamed:@"369"]];
+//        [imgV sd_setImageWithURL:[NSURL URLWithString:arr[i]] placeholderImage:[UIImage imageNamed:@"tupian"] options:SDWebImageRetryFailed];
 //        if (arr.count == 1) {
 //            //一张图片的布局
 //            imgV.mj_size = CGSizeMake(ww, ww);
@@ -114,7 +111,7 @@
         imgV.mj_y = (ww + space) * (i / 3);
         hh = CGRectGetMaxY(imgV.frame);
         
-        [imgV sd_setImageWithURL:[NSURL URLWithString:arr[i]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+        [imgV sd_setImageWithURL:[NSURL URLWithString:arr[i]] placeholderImage:[UIImage imageNamed:@"tupian"] options:SDWebImageRetryFailed];
     }
     self.picsView.mj_h = hh;
     

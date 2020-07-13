@@ -33,10 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *username;
 @property(nonatomic,strong)NSString *bank_username;
 @property(nonatomic,strong)NSString *bank_code;
+@property(nonatomic,strong)NSString *order_id;
 
 @property(nonatomic,assign)NSInteger inviteToBox;
 @property(nonatomic,assign)NSInteger finishMoney;
 @property(nonatomic,assign)NSInteger targetMoney;
+@property(nonatomic,assign)NSInteger inviteUserNum;
+
 
 @property(nonatomic,strong)NSString * other_info;
 @property(nonatomic,strong)NSMutableArray<LxmJiFenModel *> *otherInfoList;

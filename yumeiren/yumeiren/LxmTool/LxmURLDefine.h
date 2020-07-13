@@ -552,6 +552,12 @@
 #define check_detail  Base_URL"/app/user/check_detail"
 
 /**
+ 确认收到积分接口
+ */
+#define confirm_score  Base_URL"/app/user/confirm_score"
+
+
+/**
  获取图片地址
  */
 +(NSString *)getPicImgWthPicStr:(NSString *)pic;

@@ -250,10 +250,12 @@
     LxmMineYeJiKaoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.type = self.type + 100;
     
-    cell.leftTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.finishMoney + self.dataModel.inviteToBox * 15];
+    cell.leftTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.finishMoney + self.dataModel.inviteToBox * self.dataModel.inviteUserNum];
     cell.rightTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.targetMoney];
     cell.numberOneLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.finishMoney];
-    cell.numberTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.inviteToBox];
+    cell.numberTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.inviteUserNum];
+    cell.desLB.text = [NSString stringWithFormat:@"总完成箱数 = 完成箱数+新增统计直属 (1个同级直属 = %ld箱)",(long)self.dataModel.inviteToBox];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
 }

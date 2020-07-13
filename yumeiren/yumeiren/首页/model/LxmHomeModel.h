@@ -478,6 +478,8 @@
 
 @property (nonatomic, strong) NSString *videoPath;
 
+@property (nonatomic, strong) NSString *off_type;
+
 @property (nonatomic, assign) CGFloat titleH;//标题高度
 
 @property (nonatomic, assign) CGFloat contentH;//内容高度

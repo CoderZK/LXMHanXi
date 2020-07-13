@@ -66,31 +66,31 @@
         make.top.equalTo(self.headV.mas_bottom);
     }];
     
-     [self.tableView registerNib:[UINib nibWithNibName:@"LxmMineJiFenMingXiOneCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LxmMineJiFenMingXiOneCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
-//    [self.view addSubview:self.emptyView];
-//          [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-//              make.edges.equalTo(self.view);
-//          }];
-//       self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-       NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-          [dateFormatter setDateFormat:@"yyyy-MM"];
-          self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
-       self.dataArr = [NSMutableArray array];
-       self.page = 1;
-       [self loadData];
-       WeakObj(self);
-       self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-           StrongObj(self);
-           self.page = 1;
-           [self loadData];
-       }];
-       
-       self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-           StrongObj(self);
-           [self loadData];
-       }];
-       
+    //    [self.view addSubview:self.emptyView];
+    //          [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //              make.edges.equalTo(self.view);
+    //          }];
+    //       self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM"];
+    self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
+    self.dataArr = [NSMutableArray array];
+    self.page = 1;
+    [self loadData];
+    WeakObj(self);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        StrongObj(self);
+        self.page = 1;
+        [self loadData];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        StrongObj(self);
+        [self loadData];
+    }];
+    
     [self setHeadSubViews];
     
     
@@ -125,7 +125,7 @@
         make.height.equalTo(@6);
         make.width.equalTo(@(10.5));
     }];
- 
+    
     self.headBt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, ScreenW / 2, 45)];
     [self.headBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.headView addSubview:self.headBt];
@@ -135,19 +135,19 @@
 }
 
 - (void)clickAction:(UIButton *)button {
-            LxmYeJiKaoHeView * view  =[[LxmYeJiKaoHeView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) withType:0];
+    LxmYeJiKaoHeView * view  =[[LxmYeJiKaoHeView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) withType:0];
     //        view.type = self.type;
-            WeakObj(self);
-            view.confirmBlock = ^(NSInteger year, NSInteger month, NSString * _Nonnull titleStr) {
-                selfWeak.year = year;
-                selfWeak.month = month;
-                selfWeak.montyStr  = [NSString stringWithFormat:@"%ld-%02ld",year,(long)month+1];
-                selfWeak.timeLB.text = titleStr;
-                
-                selfWeak.page = 1;
-                [selfWeak loadData];
-            };
-            [view show];
+    WeakObj(self);
+    view.confirmBlock = ^(NSInteger year, NSInteger month, NSString * _Nonnull titleStr) {
+        selfWeak.year = year;
+        selfWeak.month = month;
+        selfWeak.montyStr  = [NSString stringWithFormat:@"%ld-%02ld",year,(long)month+1];
+        selfWeak.timeLB.text = titleStr;
+        
+        selfWeak.page = 1;
+        [selfWeak loadData];
+    };
+    [view show];
 }
 
 - (void)setNave {
@@ -160,7 +160,7 @@
     [self.headV addSubview:imageV];
     imageV.image = [UIImage imageNamed:@"bg_jianbian11"];
     imageV.backgroundColor = [UIColor redColor];
-
+    
     UILabel * lb  = [[UILabel alloc] initWithFrame:CGRectMake(50, StateBarH, ScreenW - 100, 44)];
     lb.text = @"团队小晞明细";
     lb.textAlignment = NSTextAlignmentCenter;
@@ -226,10 +226,10 @@
     UILabel * rightThreeLB = [[UILabel alloc] init];
     rightThreeLB.textColor = CharacterLightGrayColor;
     rightThreeLB.font = [UIFont systemFontOfSize:14];
-       
+    
     rightThreeLB.text = @"团队业绩￥";
     [whiteV addSubview:rightThreeLB];
-       
+    
     UILabel * rightFourLB = [[UILabel alloc] init];
     rightFourLB.textColor = MainColor;
     rightFourLB.font = [UIFont systemFontOfSize:14 weight:0.2];
@@ -265,35 +265,35 @@
     
     [leftTwoLB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.bottom.equalTo(leftOneLB);
-           make.left.equalTo(leftOneLB.mas_right).offset(5);
-          
-       }];
+        make.left.equalTo(leftOneLB.mas_right).offset(5);
+        
+    }];
     
-     [rightTwoLB mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.height.equalTo(leftOneLB);
-           make.right.equalTo(whiteV).offset(-20);
-           make.top.equalTo(leftOneLB.mas_bottom);
-             
-          }];
+    [rightTwoLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(leftOneLB);
+        make.right.equalTo(whiteV).offset(-20);
+        make.top.equalTo(leftOneLB.mas_bottom);
+        
+    }];
     
-     [rightOneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.height.bottom.equalTo(rightTwoLB);
-         make.right.equalTo(rightTwoLB.mas_left).offset(-5);
-             
-          }];
+    [rightOneLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.bottom.equalTo(rightTwoLB);
+        make.right.equalTo(rightTwoLB.mas_left).offset(-5);
+        
+    }];
     
-     [rightFourLB mas_makeConstraints:^(MASConstraintMaker *make) {
-              make.height.equalTo(leftOneLB);
-              make.right.equalTo(whiteV).offset(-20);
-              make.bottom.equalTo(leftOneLB.mas_top);
-                
-             }];
-       
-        [rightThreeLB mas_makeConstraints:^(MASConstraintMaker *make) {
-              make.height.bottom.equalTo(rightFourLB);
-            make.right.equalTo(rightTwoLB.mas_left).offset(-5);
-                
-             }];
+    [rightFourLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(leftOneLB);
+        make.right.equalTo(whiteV).offset(-20);
+        make.bottom.equalTo(leftOneLB.mas_top);
+        
+    }];
+    
+    [rightThreeLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.bottom.equalTo(rightFourLB);
+        make.right.equalTo(rightFourLB.mas_left).offset(-5);
+        
+    }];
     
     [self.headBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteV).offset(20);
@@ -327,32 +327,32 @@
 }
 
 - (void)loadData {
-  
-     
-        [SVProgressHUD show];
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"token"] = SESSION_TOKEN;
-        dict[@"pageNum"] =  @(self.page);
-        dict[@"pageSize"] = @10;
-        dict[@"scoreType"] = @(self.scoreType);
-        dict[@"userId"] = self.jifenModel.id;
-        dict[@"month"] = self.montyStr;
-        [LxmNetworking networkingPOST:score_record_list parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            [self endRefrish];
-            if ([responseObject[@"key"] intValue] == 1000) {
-                if (self.page == 1) {
-                    [self.dataArr removeAllObjects];
-                }
-                [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
-                self.page ++;
-                [self.tableView reloadData];
-            } else {
-                [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = SESSION_TOKEN;
+    dict[@"pageNum"] =  @(self.page);
+    dict[@"pageSize"] = @10;
+    dict[@"scoreType"] = @(self.scoreType);
+    dict[@"userId"] = self.jifenModel.id;
+    dict[@"month"] = self.montyStr;
+    [LxmNetworking networkingPOST:score_record_list parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self endRefrish];
+        if ([responseObject[@"key"] intValue] == 1000) {
+            if (self.page == 1) {
+                [self.dataArr removeAllObjects];
             }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            [self endRefrish];
-        }];
-
+            [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
+            self.page ++;
+            [self.tableView reloadData];
+        } else {
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self endRefrish];
+    }];
+    
 }
 
 

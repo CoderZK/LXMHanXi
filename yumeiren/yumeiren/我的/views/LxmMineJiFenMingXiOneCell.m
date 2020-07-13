@@ -49,6 +49,8 @@
         
         self.titleLB.text = [NSString stringWithFormat:@"转出%@",@""];
         self.moneyLB.text = [NSString stringWithFormat:@"-%@",model.score];
+     
+        
         
     }else if (type == 3) {
         self.titleLB.text = [NSString stringWithFormat:@"转入-来自%@",model.by_name];
@@ -81,8 +83,11 @@
             self.typeBt.layer.cornerRadius = 3;
             self.typeBt.clipsToBounds = YES;
             [self.typeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }else if (status == 2){
+            [self.typeBt setTitle:@"已确认" forState:UIControlStateNormal];
+            [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
         }else {
-            [self.typeBt setTitle:@"待确认" forState:UIControlStateNormal];
+            [self.typeBt setTitle:@"失败" forState:UIControlStateNormal];
         }
     }else if (type == 7) {
         self.titleLB.text = [NSString stringWithFormat:@"转出%@",@""];

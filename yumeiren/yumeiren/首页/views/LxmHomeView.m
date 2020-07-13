@@ -159,45 +159,63 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if ([LxmTool ShareTool].userModel.roleType.integerValue >= 2 ) {
-        return 5;
-    }
     return 4;
+//    if ([LxmTool ShareTool].userModel.roleType.integerValue >= 2 ) {
+//        return 5;
+//    }
+//    return 4;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LxmHomeButtonItem *buttonItem = [collectionView dequeueReusableCellWithReuseIdentifier:@"LxmHomeButtonItem" forIndexPath:indexPath];
-    if (self.currentRole >= 2 ) {
-        if (indexPath.item == 0) {
-            buttonItem.itemLabel.text = @"关于我们";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
-        } else if (indexPath.item == 1) {
-            buttonItem.itemLabel.text = @"素材中心";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"sczx"];
-        } else if (indexPath.item == 2) {
-            buttonItem.itemLabel.text = @"投诉中心";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"tszx"];
-        } else if (indexPath.item == 3) {
-            buttonItem.itemLabel.text = @"接单平台";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
-        } else {
-            buttonItem.itemLabel.text = @"培训课堂";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"pxkt"];
-        }
+    
+    //新需求只要四个
+    if (indexPath.item == 0) {
+        buttonItem.itemLabel.text = @"关于我们";
+        buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
+    } else if (indexPath.item == 1) {
+        buttonItem.itemLabel.text = @"素材中心";
+        buttonItem.itemImgView.image = [UIImage imageNamed:@"sczx"];
+    } else if (indexPath.item == 2) {
+        buttonItem.itemLabel.text = @"投诉中心";
+        buttonItem.itemImgView.image = [UIImage imageNamed:@"tszx"];
     } else {
-        if (indexPath.item == 0) {
-            buttonItem.itemLabel.text = @"关于我们";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
-        } else if (indexPath.item == 1) {
-            buttonItem.itemLabel.text = @"素材中心";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"sczx"];
-        } else if (indexPath.item == 2) {
-            buttonItem.itemLabel.text = @"投诉中心";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"tszx"];
-        } else {
-            buttonItem.itemLabel.text = @"培训课堂";
-            buttonItem.itemImgView.image = [UIImage imageNamed:@"pxkt"];
-        }
+        buttonItem.itemLabel.text = @"培训课堂";
+        buttonItem.itemImgView.image = [UIImage imageNamed:@"pxkt"];
     }
+    
+    
+//    if (self.currentRole >= 2 ) {
+//        if (indexPath.item == 0) {
+//            buttonItem.itemLabel.text = @"关于我们";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
+//        } else if (indexPath.item == 1) {
+//            buttonItem.itemLabel.text = @"素材中心";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"sczx"];
+//        } else if (indexPath.item == 2) {
+//            buttonItem.itemLabel.text = @"投诉中心";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"tszx"];
+//        } else if (indexPath.item == 3) {
+//            buttonItem.itemLabel.text = @"接单平台";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
+//        } else {
+//            buttonItem.itemLabel.text = @"培训课堂";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"pxkt"];
+//        }
+//    } else {
+//        if (indexPath.item == 0) {
+//            buttonItem.itemLabel.text = @"关于我们";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"gywm"];
+//        } else if (indexPath.item == 1) {
+//            buttonItem.itemLabel.text = @"素材中心";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"sczx"];
+//        } else if (indexPath.item == 2) {
+//            buttonItem.itemLabel.text = @"投诉中心";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"tszx"];
+//        } else {
+//            buttonItem.itemLabel.text = @"培训课堂";
+//            buttonItem.itemImgView.image = [UIImage imageNamed:@"pxkt"];
+//        }
+//    }
     
     return buttonItem;
 }
@@ -211,12 +229,15 @@
 
 - (void)setCurrentRole:(NSInteger)currentRole {
     _currentRole = currentRole;
-    if (_currentRole >= 2 ) {
-        self.layout.itemSize = CGSizeMake(floor(ScreenW*0.2), 100);
-    } else {
-        self.layout.itemSize = CGSizeMake(floor(ScreenW*0.25), 100);
-    }
-    [self.collectionView reloadData];
+    
+    self.layout.itemSize = CGSizeMake(floor(ScreenW*0.25), 100);
+    
+//    if (_currentRole >= 2 ) {
+//        self.layout.itemSize = CGSizeMake(floor(ScreenW*0.2), 100);
+//    } else {
+//        self.layout.itemSize = CGSizeMake(floor(ScreenW*0.25), 100);
+//    }
+//    [self.collectionView reloadData];
 }
 
 @end

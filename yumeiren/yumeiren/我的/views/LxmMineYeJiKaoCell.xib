@@ -184,6 +184,7 @@
                 <outlet property="Hconstraint" destination="Gyd-Ei-zhg" id="qrx-Y7-J5i"/>
                 <outlet property="YConstrint" destination="vT4-AV-MiB" id="dXM-Qx-sRW"/>
                 <outlet property="backV" destination="zbo-S0-8Ei" id="oai-Jd-5T1"/>
+                <outlet property="desLB" destination="52m-Gm-qhe" id="106-ux-aEB"/>
                 <outlet property="leftFourLB" destination="BPo-bR-tLX" id="D49-Mv-FlN"/>
                 <outlet property="leftOneLB" destination="Crq-8Y-Cvk" id="0h1-rL-B7s"/>
                 <outlet property="leftThreeLB" destination="FLX-25-zre" id="ZOZ-rn-Y5g"/>

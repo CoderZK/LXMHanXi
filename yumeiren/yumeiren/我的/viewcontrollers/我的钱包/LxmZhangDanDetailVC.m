@@ -292,7 +292,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
+        return 4;
     }
     return 2;
 }
@@ -304,6 +304,7 @@
         if (!cell) {
             cell = [[LxmZhangDanDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmZhangDanDetailCell"];
         }
+        cell.detailLabel.textColor = CharacterDarkColor;
         if (indexPath.row == 0) {
             cell.titleLabel.text = @"创建时间";
             NSString *time = @"";
@@ -324,7 +325,12 @@
         } else if (indexPath.row == 1) {
             if (self.type == LxmZhangDanDetailVC_type_chongzhi) {
                 cell.titleLabel.text = @"支付方式";
-                cell.detailLabel.text = self.detailModel.pay_type.intValue == 1 ? @"支付宝" : @"微信";
+                
+                if (self.detailModel.pay_type.intValue == 3) {
+                    cell.detailLabel.text = self.detailModel.off_type.intValue == 1 ? @"支付宝转账" : @"银行卡转账";
+                }else {
+                  cell.detailLabel.text = self.detailModel.pay_type.intValue == 1 ? @"支付宝" : @"微信";
+                }
             } else if (self.type == LxmZhangDanDetailVC_type_tixian) {
                 cell.titleLabel.text = @"状态";
                 cell.detailLabel.text = self.detailModel.status.intValue == 1 ? @"审核中" : self.detailModel.status.intValue == 2 ? @"审核成功" : @"审核失败";
@@ -338,10 +344,23 @@
                     cell.detailLabel.text = self.detailModel.fromName;
                 }
             }
-        } else {
+        } else  if (indexPath.row == 2){
             cell.titleLabel.text = @"第三方订单号";
             cell.detailLabel.text = self.detailModel.third_code;
+        }else {
+            cell.titleLabel.text = @"充值状态";
+            NSString * str = @"";
+            if (self.detailModel.status.intValue == 1) {
+                str = @"审核中";
+            }else if (self.detailModel.status.intValue == 2) {
+                str = @"审核成功";
+            }else if (self.detailModel.status.intValue == 3) {
+                str = @"失败";
+            }
+            cell.detailLabel.textColor = RGB(244, 150, 86);
+            cell.detailLabel.text = str;
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else {
@@ -359,6 +378,7 @@
                 cell = [[LxmChongZhiOderDetailPicsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmChongZhiOderDetailPicsCell"];
             }
             cell.pics = self.detailModel.pay_img;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
@@ -415,6 +435,7 @@
         url = give_money_detail;
         dict[@"trialId"] = self.model.id;
     }
+    dict[@"off_type"] = self.model.off_type;
     [SVProgressHUD show];
     WeakObj(self);
     [LxmNetworking networkingPOST:url parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {

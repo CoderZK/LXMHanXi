@@ -418,7 +418,7 @@
             if (money == 0) {
                 if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"0"] ||[LxmTool.ShareTool.userModel.roleType isEqualToString:@"1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"2"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"4"]) {//正常角色
                     CGFloat roletype = LxmTool.ShareTool.userModel.roleType.floatValue;
-                    if (roletype == 4) {//ceo直接下单
+                    if (roletype == 3 || roletype == 4) {//ceo直接下单
                        [selfWeak settleCarOrder:[ids componentsJoinedByString:@","] goods:tempArr];
                     }  else {//其他取正常上级的升级金额
                         static CGFloat shengjiMoney = 0;
