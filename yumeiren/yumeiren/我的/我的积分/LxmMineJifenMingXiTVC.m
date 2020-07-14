@@ -20,9 +20,23 @@
 @property (nonatomic, assign) NSInteger page;
 
 @property (nonatomic, strong) NSMutableArray <LxmJiFenModel *>*dataArr;
+@property (nonatomic, strong) LxmEmptyView *emptyView;//空界面
+
+
+
 @end
 
 @implementation LxmMineJifenMingXiTVC
+
+- (LxmEmptyView *)emptyView {
+    if (!_emptyView) {
+        _emptyView = [[LxmEmptyView alloc] init];
+        _emptyView.textLabel.text = @"您当前的等级没有直属成员噢~";
+        _emptyView.imgView.image = [UIImage imageNamed:@"weikong"];
+        _emptyView.hidden = YES;
+    }
+    return _emptyView;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -35,6 +49,11 @@
     if (self.scoreType == 1) {
         self.navigationItem.title = @"我的直属小晞";
     }
+    
+    [self.view addSubview:self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     
     self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 45)];
     self.headView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -137,8 +156,11 @@
             if (self.page == 1) {
                 [self.dataArr removeAllObjects];
             }
+            
             [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
             self.page ++;
+            self.emptyView.textLabel.text = @"暂无数据";
+            self.emptyView.hidden = self.dataArr.count > 0;
             [self.tableView reloadData];
         } else {
             [UIAlertController showAlertWithmessage:responseObject[@"message"]];

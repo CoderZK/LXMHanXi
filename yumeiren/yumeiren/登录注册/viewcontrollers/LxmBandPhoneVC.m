@@ -75,7 +75,7 @@
     if (!_sendCodeButton) {
         _sendCodeButton = [[UIButton alloc] init];
         [_sendCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [_sendCodeButton setTitleColor:[UIColor colorWithRed:231/255.0 green:93/255.0 blue:108/255.0 alpha:1] forState:UIControlStateNormal];
+        [_sendCodeButton setTitleColor:MainColor forState:UIControlStateNormal];
         _sendCodeButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _sendCodeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_sendCodeButton addTarget:self action:@selector(sendCodeButtonClick) forControlEvents:UIControlEventTouchUpInside];

@@ -91,7 +91,7 @@
         layout.selectedTextColor = UIColor.blackColor;
         layout.progressHeight = 4;
         layout.progressRadius = 2;
-        layout.progressColor = CharacterLightGrayColor;
+        layout.progressColor = MainColor;
         layout.cellEdging = 0;
         layout.cellSpacing = 0;
         layout.barStyle = TYPagerBarStyleProgressView;

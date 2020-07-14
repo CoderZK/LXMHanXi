@@ -32,6 +32,16 @@
 
 @implementation LxmMineTeamJiFenMingXiTVC
 
+- (LxmEmptyView *)emptyView {
+    if (!_emptyView) {
+        _emptyView = [[LxmEmptyView alloc] init];
+        _emptyView.textLabel.text = @"您当前的等级没有直属成员噢~";
+        _emptyView.imgView.image = [UIImage imageNamed:@"weikong"];
+        _emptyView.hidden = YES;
+    }
+    return _emptyView;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -44,15 +54,7 @@
     
 }
 
-//- (LxmEmptyView *)emptyView {
-//    if (!_emptyView) {
-//        _emptyView = [[LxmEmptyView alloc] init];
-//        _emptyView.textLabel.text = @"您当前的等级没有直属成员噢~";
-//        _emptyView.imgView.image = [UIImage imageNamed:@"weikong"];
-//        _emptyView.hidden = YES;
-//    }
-//    return _emptyView;
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,11 +70,11 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"LxmMineJiFenMingXiOneCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
-    //    [self.view addSubview:self.emptyView];
-    //          [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //              make.edges.equalTo(self.view);
-    //          }];
-    //       self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.emptyView];
+        [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM"];
     self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
@@ -343,6 +345,8 @@
             if (self.page == 1) {
                 [self.dataArr removeAllObjects];
             }
+            self.emptyView.textLabel.text = @"暂无数据";
+            self.emptyView.hidden = self.dataArr.count > 0;
             [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
             self.page ++;
             [self.tableView reloadData];

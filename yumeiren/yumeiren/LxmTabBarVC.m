@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIColor *color = [UIColor colorWithRed:255/255.0 green:211/255.0 blue:206/255.0 alpha:1];
+    UIColor *color = MainColor;
     UIColor *color_n = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
     
     self.tabBar.backgroundImage = [UIImage imageNamed:@"tabbarwhite"];

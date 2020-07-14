@@ -1,55 +1,55 @@
 {
   "images" : [
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneNotification_20pt@2x.png",
+      "filename" : "1024iPhoneNotification_20pt@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneNotification_20pt@3x.png",
+      "filename" : "1024iPhoneNotification_20pt@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneSpootlight5_29pt@2x.png",
+      "filename" : "1024iPhoneSpootlight5_29pt@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneSpootlight5_29pt@3x.png",
+      "filename" : "1024iPhoneSpootlight5_29pt@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneSpootlight7_40pt@2x.png",
+      "filename" : "1024iPhoneSpootlight7_40pt@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneSpootlight7_40pt@3x.png",
+      "filename" : "1024iPhoneSpootlight7_40pt@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneApp_60pt@2x.png",
+      "filename" : "1024iPhoneApp_60pt@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0iPhoneApp_60pt@3x.png",
+      "filename" : "1024iPhoneApp_60pt@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
     },
     {
-      "filename" : "66096BD1-8932-4E29-AC30-6D48C05979D0store_1024pt.png",
+      "filename" : "1024store_1024pt.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

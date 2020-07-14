@@ -609,7 +609,7 @@
 - (UIImageView *)topView {
     if (!_topView) {
         _topView = [UIImageView new];
-        _topView.image = [UIImage imageNamed:@"bg_jianbian11"];
+        _topView.image = [UIImage imageNamed:@"iii"];
     }
     return _topView;
 }

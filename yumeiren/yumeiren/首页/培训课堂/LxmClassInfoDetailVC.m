@@ -300,7 +300,7 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [UIView new];
-        _bgView.backgroundColor = [UIColor colorWithRed:253/255.0 green:213/255.0 blue:207/255.0 alpha:1];
+        _bgView.backgroundColor = MainLightColor;
         _bgView.layer.cornerRadius = 5;
         _bgView.layer.masksToBounds = YES;
     }

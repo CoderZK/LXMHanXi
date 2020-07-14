@@ -172,13 +172,17 @@
     
     
     UIButton  * mingXiBt = [[UIButton alloc] init];
-    mingXiBt.layer.borderColor = RGB(236, 104, 118).CGColor;
     [mingXiBt setTitle:@"我的小晞 >" forState:UIControlStateNormal];
     [mingXiBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBt.titleLabel.font = [UIFont systemFontOfSize:13];
-    mingXiBt.tag = 100;
-    [mingXiBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
+    mingXiBt.userInteractionEnabled = NO;
     [imageV addSubview:mingXiBt];
+    
+    UIButton  * mingXiBtOO = [[UIButton alloc] init];
+    mingXiBtOO.titleLabel.font = [UIFont systemFontOfSize:13];
+    mingXiBtOO.tag = 100;
+    [imageV addSubview:mingXiBtOO];
+    [mingXiBtOO addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
     UILabel * jiFenLBTwo  = [[UILabel alloc] init];
@@ -191,13 +195,22 @@
     
     
     UIButton  * mingXiBtTwo = [[UIButton alloc] init];
-    mingXiBtTwo.layer.borderColor = RGB(236, 104, 118).CGColor;
     [mingXiBtTwo setTitle:@"剩余待转小晞 >" forState:UIControlStateNormal];
     [mingXiBtTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     mingXiBtTwo.titleLabel.font = [UIFont systemFontOfSize:13];
-    mingXiBtTwo.tag = 101;
     [imageV addSubview:mingXiBtTwo];
-    [mingXiBtTwo addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
+    mingXiBtTwo.userInteractionEnabled = NO;
+
+    
+    UIButton  * mingXiBtTTT = [[UIButton alloc] init];
+    mingXiBtTTT.titleLabel.font = [UIFont systemFontOfSize:13];
+    mingXiBtTTT.tag = 101;
+    [imageV addSubview:mingXiBtTTT];
+
+    [mingXiBtTTT addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+//    mingXiBtTTT.backgroundColor = mingXiBtOO.backgroundColor = [UIColor redColor];
+    
     
     UIView * lineVOne = [[UIView alloc] init];
     lineVOne.backgroundColor = [UIColor whiteColor];
@@ -249,7 +262,7 @@
     [self.btView addSubview:rightBt];
     
     self.redV = [[UIView alloc] init];
-    self.redV.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"deepPink"]];
+    self.redV.backgroundColor = MainColor;
     [self.btView addSubview:self.redV];
     
     [self.headViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -316,6 +329,12 @@
         make.top.equalTo(jiFenLB.mas_bottom).offset(5);
     }];
     
+    [mingXiBtOO mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(jiFenLB);
+        make.bottom.equalTo(mingXiBt);
+    }];
+    
+    
     [lineV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@50);
         make.top.equalTo(jiFenLB);
@@ -334,6 +353,11 @@
         make.width.equalTo(jiFenLBTwo.mas_width);
         make.height.equalTo(@20);
         make.top.equalTo(mingXiBt);
+    }];
+    
+    [mingXiBtTTT mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.top.left.equalTo(jiFenLBTwo);
+        make.bottom.equalTo(mingXiBtTwo);
     }];
 
     [tixianBt mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -467,7 +491,7 @@
     self.JifenLB = jiFenLB;
     
     UIButton * tixianBt  =[[UIButton alloc] init];
-    [tixianBt setTitle:@"申请提现" forState:UIControlStateNormal];
+    [tixianBt setTitle:@"申请提取" forState:UIControlStateNormal];
     [tixianBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     tixianBt.titleLabel.font = [UIFont systemFontOfSize:15];
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
@@ -493,7 +517,7 @@
     self.navTitleV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
     self.navTitleV.layer.cornerRadius = 15;
     self.navTitleV.clipsToBounds  = YES;
-    self.navTitleV.layer.borderColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pink"]].CGColor;
+    self.navTitleV.layer.borderColor = MainLightColor.CGColor;
     self.navTitleV.layer.borderWidth = 0.5;
     [self.navTitleV addSubview:self.leftButton];
     self.leftButton.frame = CGRectMake(0, 0, 100, 30);

@@ -53,7 +53,7 @@
     self.tabBar.layer.shadowOpacity = 0.5;
     self.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
     
-    UIColor *color = [UIColor colorWithRed:255/255.0 green:211/255.0 blue:206/255.0 alpha:1];
+    UIColor *color = MainLightColor;
     UIColor *color_n = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
     if (@available(iOS 13.0, *)) {
         UITabBarAppearance *tabBarAppearance = [[UITabBarAppearance alloc] init];

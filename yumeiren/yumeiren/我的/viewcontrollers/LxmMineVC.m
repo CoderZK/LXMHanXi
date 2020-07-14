@@ -285,6 +285,7 @@
                 return 0;
             }
         } else if (indexPath.row == 5) {//门店查询
+            return 0;
             if ([roleType isEqualToString:@"-1"] || [roleType isEqualToString:@"0"] || [roleType isEqualToString:@"1"] || [roleType isEqualToString:@"-0.3"] || [roleType isEqualToString:@"-0.4"] || [roleType isEqualToString:@"-0.5"] || [roleType isEqualToString:@"1.1"] || [roleType isEqualToString:@"2.1"] || [roleType isEqualToString:@"3.1"]) {
                 return 0.01;
             }

@@ -27,8 +27,8 @@
         _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, (frame.size.height-1.5)*0.5, frame.size.width, 1.5)];
         _progressView.progress = 0;
         _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin;
-        _progressView.progressTintColor = [UIColor colorWithRed:255/255.0 green:184/255.0 blue:182/255.0 alpha:1];
-        _progressView.trackTintColor = [UIColor colorWithRed:251/255.0 green:62/255.0 blue:7/255.0 alpha:1];
+        _progressView.progressTintColor = MainLightColor;
+        _progressView.trackTintColor = MainColor;
         [self addSubview:_progressView];
         
     }

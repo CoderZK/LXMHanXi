@@ -170,6 +170,9 @@
         buttonItem.itemLabel.text = @"已自提";
     }
     return buttonItem;
+    
+
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -420,7 +423,7 @@
             case 3: {
                 self.iconImgView.image = [UIImage imageNamed:@"jifen935"];
                 self.detaillabel.hidden = YES;
-                self.titleLabel.text = @"小晞";
+                self.titleLabel.text = @"我的小晞";
                 self.detaillabel.text = @"500";
             }
                 break;

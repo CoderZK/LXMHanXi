@@ -249,11 +249,11 @@
 - (LxmAddAddressSelectCell *)shengCell {
     if (!_shengCell) {
         _shengCell = [[LxmAddAddressSelectCell alloc] init];
-        _shengCell.titleLabel.text = @"选择省";
+//        _shengCell.titleLabel.text = @"选择省";
         if (LxmTool.ShareTool.userModel.province.isValid) {
             _shengCell.detailLabel.text = LxmTool.ShareTool.userModel.province;
         } else {
-            _shengCell.detailLabel.text = @"请选择";
+//            _shengCell.detailLabel.text = @"请选择";
             [_shengCell addTarget:self action:@selector(addressClick) forControlEvents:UIControlEventTouchUpInside];
         }
     }
@@ -263,11 +263,11 @@
 - (LxmAddAddressSelectCell *)shiCell {
     if (!_shiCell) {
         _shiCell = [[LxmAddAddressSelectCell alloc] init];
-        _shiCell.titleLabel.text = @"选择市";
+//        _shiCell.titleLabel.text = @"选择市";
         if (LxmTool.ShareTool.userModel.city.isValid) {
             _shiCell.detailLabel.text = LxmTool.ShareTool.userModel.city;
         } else {
-            _shiCell.detailLabel.text = @"请选择";
+//            _shiCell.detailLabel.text = @"请选择";
             [_shiCell addTarget:self action:@selector(addressClick) forControlEvents:UIControlEventTouchUpInside];
         }
     }
@@ -277,13 +277,13 @@
 - (LxmAddAddressSelectCell *)quCell {
     if (!_quCell) {
         _quCell = [[LxmAddAddressSelectCell alloc] init];
-        _quCell.titleLabel.text = @"选择区";
+//        _quCell.titleLabel.text = @"选择区";
         if (LxmTool.ShareTool.userModel.province.isValid) {
             _quCell.detailLabel.tag = 1111;
             _quCell.detailLabel.text = LxmTool.ShareTool.userModel.district;
         } else {
             _quCell.detailLabel.tag = 1110;
-            _quCell.detailLabel.text = @"请选择";
+//            _quCell.detailLabel.text = @"请选择";
             [_quCell addTarget:self action:@selector(addressClick) forControlEvents:UIControlEventTouchUpInside];
         }
         
@@ -351,9 +351,9 @@
         dict[@"showName"] = self.shopNameCell.textField.text;
         dict[@"telephone"] = self.phoneCell.textField.text;
         dict[@"token"] = SESSION_TOKEN;
-        dict[@"province"] = self.shengCell.detailLabel.text;
-        dict[@"city"] = self.shiCell.detailLabel.text;
-        dict[@"district"] = self.quCell.detailLabel.text;
+//        dict[@"province"] = self.shengCell.detailLabel.text;
+//        dict[@"city"] = self.shiCell.detailLabel.text;
+//        dict[@"district"] = self.quCell.detailLabel.text;
         dict[@"roleType"] = self.model.roleType;
         if (self.recommend_code.isValid) {
             dict[@"recommend_code"] = self.recommend_code;
@@ -377,7 +377,7 @@
         //判断附近1.5公里有没有地址，有的话不可以提交，
         panduanDict[@"longitude"] = @(self.poi.location.longitude);
         panduanDict[@"latitude"] = @(self.poi.location.latitude);
-        panduanDict[@"address_detail"] = self.detailCell.detailLabel.text;
+        panduanDict[@"address_detail"] = self.addressCell.textField.text;
         [SVProgressHUD show];
         WeakObj(self);
         [LxmNetworking networkingPOST:select_store parameters:panduanDict returnClass:LxmMenDianChaXunRootModel.class success:^(NSURLSessionDataTask *task, LxmMenDianChaXunRootModel *responseObject) {
@@ -397,13 +397,13 @@
                            dict[@"showName"] = self.shopNameCell.textField.text;
                            dict[@"telephone"] = self.phoneCell.textField.text;
                            dict[@"token"] = SESSION_TOKEN;
-                           dict[@"province"] = self.shengCell.detailLabel.text;
-                           dict[@"city"] = self.shiCell.detailLabel.text;
-                           dict[@"district"] = self.quCell.detailLabel.text;
+//                           dict[@"province"] = self.shengCell.detailLabel.text;
+//                           dict[@"city"] = self.shiCell.detailLabel.text;
+//                           dict[@"district"] = self.quCell.detailLabel.text;
                            dict[@"roleType"] = self.model.roleType;
                            dict[@"longitude"] = @(self.poi.location.longitude);
                            dict[@"latitude"] = @(self.poi.location.latitude);
-                           dict[@"addressDetail"] = self.detailCell.detailLabel.text;
+                           dict[@"addressDetail"] = self.addressCell.textField.text;
                            if (self.recommend_code.isValid) {
                                dict[@"recommend_code"] = self.recommend_code;
                            }
@@ -430,13 +430,13 @@
                    dict[@"showName"] = self.shopNameCell.textField.text;
                    dict[@"telephone"] = self.phoneCell.textField.text;
                    dict[@"token"] = SESSION_TOKEN;
-                   dict[@"province"] = self.shengCell.detailLabel.text;
-                   dict[@"city"] = self.shiCell.detailLabel.text;
-                   dict[@"district"] = self.quCell.detailLabel.text;
+//                   dict[@"province"] = self.shengCell.detailLabel.text;
+//                   dict[@"city"] = self.shiCell.detailLabel.text;
+//                   dict[@"district"] = self.quCell.detailLabel.text;
                    dict[@"roleType"] = self.model.roleType;
                    dict[@"longitude"] = @(self.poi.location.longitude);
                    dict[@"latitude"] = @(self.poi.location.latitude);
-                   dict[@"addressDetail"] = self.detailCell.detailLabel.text;
+                   dict[@"addressDetail"] = self.addressCell.textField.text;
                    if (self.recommend_code.isValid) {
                        dict[@"recommend_code"] = self.recommend_code;
                    }
@@ -537,7 +537,7 @@
     panduanDict[@"longitude"] = @(self.poi.location.longitude);
     panduanDict[@"latitude"] = @(self.poi.location.latitude);
     panduanDict[@"shop_name"] = self.shopNameCell.textField.text;
-    panduanDict[@"address_detail"] = self.detailCell.detailLabel.text;
+    panduanDict[@"address_detail"] = self.addressCell.textField.text;
     [SVProgressHUD show];
     WeakObj(self);
     [LxmNetworking networkingPOST:select_store parameters:panduanDict returnClass:LxmMenDianChaXunRootModel.class success:^(NSURLSessionDataTask *task, LxmMenDianChaXunRootModel *responseObject) {
@@ -557,13 +557,13 @@
                         dict[@"showName"] = self.shopNameCell.textField.text;
                         dict[@"telephone"] = self.phoneCell.textField.text;
                         dict[@"token"] = SESSION_TOKEN;
-                        dict[@"province"] = self.shengCell.detailLabel.text;
-                        dict[@"city"] = self.shiCell.detailLabel.text;
-                        dict[@"district"] = self.quCell.detailLabel.text;
+//                        dict[@"province"] = self.shengCell.detailLabel.text;
+//                        dict[@"city"] = self.shiCell.detailLabel.text;
+//                        dict[@"district"] = self.quCell.detailLabel.text;
                         dict[@"roleType"] = self.model.roleType;
                         dict[@"longitude"] = @(self.poi.location.longitude);
                         dict[@"latitude"] = @(self.poi.location.latitude);
-                        dict[@"addressDetail"] = self.detailCell.detailLabel.text;
+                        dict[@"addressDetail"] = self.addressCell.textField.text;
                         if (self.recommend_code.isValid) {
                             dict[@"recommend_code"] = self.recommend_code;
                         }

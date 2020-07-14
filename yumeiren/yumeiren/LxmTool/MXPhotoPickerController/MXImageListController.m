@@ -88,7 +88,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:250/255.0 alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];
         
         self.previewButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.previewButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

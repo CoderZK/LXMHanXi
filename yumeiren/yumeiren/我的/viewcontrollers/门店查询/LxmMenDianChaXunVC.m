@@ -355,7 +355,7 @@
         AMapPOI *poi = self.locations[indexPath.row];
         NSString *str = [NSString stringWithFormat:@"%@%@%@%@",poi.province,poi.city,poi.district,poi.address];
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-        [att setColor:[UIColor colorWithRed:255/255.0 green:211/255.0 blue:206/255.0 alpha:1] forSubText:self.request.keywords];
+        [att setColor:MainLightColor forSubText:self.request.keywords];
         cell.textLabel.attributedText = att;
         return cell;
     }

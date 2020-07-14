@@ -426,7 +426,7 @@
 - (lxmYuYinView *)yuyinView {
     if (!_yuyinView) {
         _yuyinView = [lxmYuYinView new];
-        _yuyinView.backgroundColor = [UIColor colorWithRed:254/255.0 green:185/255.0  blue:182/255.0  alpha:1];
+        _yuyinView.backgroundColor = MainLightColor;
         _yuyinView.layer.cornerRadius = 13;
         _yuyinView.layer.masksToBounds = YES;
     }

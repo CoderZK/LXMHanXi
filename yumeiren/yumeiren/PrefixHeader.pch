@@ -68,12 +68,21 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
  */
 #define BGGrayColor [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1]
 
-#define  PinkColor [UIColor colorWithRed:238/255.0 green:192/255.0 blue:189/255.0 alpha:1]
-
+#define  PinkColor [UIColor colorWithRed:69/255.0 green:133/255.0 blue:173/255.0 alpha:1]
 /**
- 主色调
+ 主色红色
+ #define MainColor [UIColor colorWithRed:253/255.0 green:58/255.0 blue:88/255.0 alpha:1]
  */
-#define MainColor [UIColor colorWithRed:253/255.0 green:58/255.0 blue:88/255.0 alpha:1]
+#define MainColor [UIColor colorWithRed:78/255.0 green:138/255.0 blue:176/255.0 alpha:1]
+
+// 主色浅色
+#define MainLightColor [UIColor colorWithRed:185/255.0 green:203/255.0 blue:231/255.0 alpha:1]
+/**
+ 主色调蓝
+ */
+#define MainBlueColor [UIColor colorWithRed:78/255.0 green:138/255.0 blue:176/255.0 alpha:1]
+
+
 
 #define WeakObj(_obj)    __weak typeof(_obj) _obj##Weak = _obj;
 #define StrongObj(_obj)  typeof(_obj##Weak) _obj = _obj##Weak;

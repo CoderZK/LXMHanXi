@@ -37,7 +37,7 @@
         self.layer.masksToBounds = YES;
         self.clipsToBounds = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor colorWithRed:241/255.0 green:182/255.0 blue:191/255.0 alpha:1];
+        self.backgroundColor = MainColor;
         [self initSubViews];
         [self setConstrains];
     }

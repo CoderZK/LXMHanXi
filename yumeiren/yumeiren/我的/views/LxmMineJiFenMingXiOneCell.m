@@ -29,7 +29,7 @@
         [self.typeBt setTitle:@"审核中" forState:UIControlStateNormal];
     }else if (status == 2) {
         [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
-        [self.typeBt setTitle:@"提取成功" forState:UIControlStateNormal];
+        [self.typeBt setTitle:@"成功" forState:UIControlStateNormal];
     }else {
         [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
         [self.typeBt setTitle:@"失败" forState:UIControlStateNormal];
@@ -37,31 +37,37 @@
     
     
     if (type == 1) {
-        self.titleLB.text = [NSString stringWithFormat:@" 来自-直属推荐奖励%@",@""];
+        self.titleLB.text = [NSString stringWithFormat:@" 来自-%@直属业绩小晞%@",model.by_name,@""];
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",model.score];
          [self.typeBt setTitleColor:MainColor forState:UIControlStateNormal];
         [self.typeBt setImage:[UIImage imageNamed:@"kk940"] forState:UIControlStateNormal];
         self.typeBt.titleLabel.font = [UIFont systemFontOfSize:10];
-        [self.typeBt setTitle:[NSString stringWithFormat:@"直属升级奖励%0.1f%%",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];
+        [self.typeBt setTitle:[NSString stringWithFormat:@"直属购进奖励%0.1f%%",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];
         
         
     }else if (type == 2) {
         
-        self.titleLB.text = [NSString stringWithFormat:@"转出%@",@""];
+        self.titleLB.text = [NSString stringWithFormat:@"转出-转给%@",model.by_name];
         self.moneyLB.text = [NSString stringWithFormat:@"-%@",model.score];
-     
         
+        if (status == 1) {
+                  [self.typeBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
+                  [self.typeBt setTitle:@"确认" forState:UIControlStateNormal];
+                  self.typeBt.layer.cornerRadius = 3;
+                  self.typeBt.clipsToBounds = YES;
+                  [self.typeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+              }else if (status == 2){
+                  [self.typeBt setTitle:@"已确认" forState:UIControlStateNormal];
+                  [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
+              }else {
+                  [self.typeBt setTitle:@"失败" forState:UIControlStateNormal];
+              }
+
         
     }else if (type == 3) {
         self.titleLB.text = [NSString stringWithFormat:@"转入-来自%@",model.by_name];
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",model.score];
-        if (self.type == 1 && status == 1) {
-            [self.typeBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
-            [self.typeBt setTitle:@"确认" forState:UIControlStateNormal];
-            self.typeBt.layer.cornerRadius = 3;
-            self.typeBt.clipsToBounds = YES;
-            [self.typeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        }
+      
     }else if (type == 4) {
         self.titleLB.text = [NSString stringWithFormat:@"提取%@",@""];
         self.moneyLB.text = [NSString stringWithFormat:@"-%@",model.score];
@@ -77,26 +83,34 @@
     }else if (type == 6) {
         self.titleLB.text = [NSString stringWithFormat:@"转入-来自%@",model.by_name];
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",model.score];
-        if (self.type == 1 && status == 1) {
-            [self.typeBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
-            [self.typeBt setTitle:@"确认" forState:UIControlStateNormal];
-            self.typeBt.layer.cornerRadius = 3;
-            self.typeBt.clipsToBounds = YES;
-            [self.typeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        }else if (status == 2){
-            [self.typeBt setTitle:@"已确认" forState:UIControlStateNormal];
-            [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
-        }else {
-            [self.typeBt setTitle:@"失败" forState:UIControlStateNormal];
-        }
-    }else if (type == 7) {
-        self.titleLB.text = [NSString stringWithFormat:@"转出%@",@""];
+      
+    }else if (type == 7 ) {
+        self.titleLB.text = [NSString stringWithFormat:@"转出-转给%@",model.by_name];
         self.moneyLB.text = [NSString stringWithFormat:@"-%@",model.score];
+        
+        if (status == 1) {
+                  [self.typeBt setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
+                  [self.typeBt setTitle:@"确认" forState:UIControlStateNormal];
+                  self.typeBt.layer.cornerRadius = 3;
+                  self.typeBt.clipsToBounds = YES;
+                  [self.typeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+              }else if (status == 2){
+                  [self.typeBt setTitle:@"已确认" forState:UIControlStateNormal];
+                  [self.typeBt setTitleColor:CharacterGrayColor forState:UIControlStateNormal];
+              }else {
+                  [self.typeBt setTitle:@"失败" forState:UIControlStateNormal];
+              }
+        
     }else if (type == 8) {
         self.titleLB.text = [NSString stringWithFormat:@"提取%@",@""];
         self.moneyLB.text = [NSString stringWithFormat:@"-%@",model.score];
     }
-    self.timeLB.text = [model.create_time getIntervalToMMdd];
+    
+    if (model.create_time.length > 3) {
+        self.timeLB.text = [[model.create_time substringToIndex:model.create_time.length - 3] getIntervalToMMdd];
+    }
+    
+    
     
     
    

@@ -1045,7 +1045,7 @@
 - (UILabel *)moneyLabel {
     if (!_moneyLabel) {
         _moneyLabel = [UILabel new];
-        _moneyLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:25/255.0 blue:81/255.0 alpha:1];
+        _moneyLabel.backgroundColor = MainColor;
         _moneyLabel.textColor = UIColor.whiteColor;
         _moneyLabel.font = [UIFont systemFontOfSize:13];
         _moneyLabel.layer.cornerRadius = 3;

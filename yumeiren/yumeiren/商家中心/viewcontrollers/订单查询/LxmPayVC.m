@@ -286,7 +286,7 @@
                 headerView = [[LxmDaoJishiView alloc] initWithReuseIdentifier:@"LxmDaoJishiView"];
             }
             self.daojishiView = headerView;
-            headerView.contentView.backgroundColor = [UIColor colorWithRed:241/255.0 green:182/255.0 blue:191/255.0 alpha:1];
+            headerView.contentView.backgroundColor = MainColor;
             if (self.type == LxmPayVC_type_shengjigouwu || self.type == LxmPayVC_type_yjbh) {
                 NSString *time = self.creatTime;
                 if (time.length > 10) {

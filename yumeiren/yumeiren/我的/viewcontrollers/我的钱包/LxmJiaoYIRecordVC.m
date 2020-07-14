@@ -379,7 +379,7 @@
             break;
         case 2: {
             self.titleLabel.text = @"批发销售";
-            self.iconImgView.image = [UIImage imageNamed:@"pfxs_1"];
+            self.iconImgView.image = [UIImage imageNamed:@"pfcg_1"];
             [self setMoney:YES];
             self.stateLabel.text = @"已完成";
             self.stateLabel.textColor = CharacterGrayColor;

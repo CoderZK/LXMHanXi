@@ -140,7 +140,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.timeCell = cell;
-        cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:182/255.0 blue:191/255.0 alpha:1];
+        cell.backgroundColor = MainColor;
         cell.textLabel.textColor = CharacterDarkColor;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont systemFontOfSize:14];

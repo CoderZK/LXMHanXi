@@ -242,6 +242,9 @@
 - (NSString *)getIntervalToFXXTime {
     //将对象类型的时间转换为NSDate类型
     NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    if (self.length > 10) {
+        myDate = [NSDate dateWithTimeIntervalSince1970:[[self substringToIndex:10] doubleValue]];
+    }
     //设置时间格式
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"YYYY/MM/dd HH:mm"];
@@ -254,6 +257,9 @@
 - (NSString *)getIntervalToFXXTNoHHmmime {
     //将对象类型的时间转换为NSDate类型
     NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    if (self.length > 10) {
+        myDate = [NSDate dateWithTimeIntervalSince1970:[[self substringToIndex:10] doubleValue]];
+    }
     //设置时间格式
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"YYYY/MM/dd"];
@@ -266,6 +272,9 @@
 - (NSString *)getIntervalToZHXTime {
     //将对象类型的时间转换为NSDate类型
     NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    if (self.length > 10) {
+        myDate = [NSDate dateWithTimeIntervalSince1970:[[self substringToIndex:10] doubleValue]];
+    }
     //设置时间格式
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
@@ -276,8 +285,14 @@
 
 //YYYY-MM-dd HH:mm:ss
 - (NSString *)getIntervalToZHXLongTime {
+    
+    
+    
     //将对象类型的时间转换为NSDate类型
     NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    if (self.length > 10) {
+        myDate = [NSDate dateWithTimeIntervalSince1970:[[self substringToIndex:10] doubleValue]];
+    }
     //设置时间格式
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
@@ -290,6 +305,9 @@
 - (NSString *)getIntervalToMMdd {
     //将对象类型的时间转换为NSDate类型
     NSDate * myDate = [NSDate dateWithTimeIntervalSince1970:self.doubleValue];
+    if (self.length > 10) {
+        myDate = [NSDate dateWithTimeIntervalSince1970:[[self substringToIndex:10] doubleValue]];
+    }
     //设置时间格式
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"MM月dd日 HH:mm"];
