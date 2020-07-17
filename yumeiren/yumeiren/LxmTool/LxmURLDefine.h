@@ -558,6 +558,12 @@
 
 
 /**
+ 确认收到积分接口
+ */
+#define my_group_total_sale  Base_URL"/app/user/my_group_total_sale"
+
+
+/**
  获取图片地址
  */
 +(NSString *)getPicImgWthPicStr:(NSString *)pic;

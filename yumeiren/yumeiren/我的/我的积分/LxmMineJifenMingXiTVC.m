@@ -230,7 +230,23 @@
 
 - (void)confirmAction:(UIButton *)button {
     
-    [self confirmScoreWithModel:self.dataArr[button.tag]];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"是否要确认" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+         [self confirmScoreWithModel:self.dataArr[button.tag]];
+        
+    }];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }];
+    [ac addAction:action1];
+    [ac addAction:action2];
+    [self.navigationController presentViewController:ac animated:YES completion:nil];
+    
+   
     
     
 }

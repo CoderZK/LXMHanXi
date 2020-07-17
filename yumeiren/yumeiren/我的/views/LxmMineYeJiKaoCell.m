@@ -44,4 +44,14 @@
     // Configure the view for the selected state
 }
 
+- (void)setIsJingLi:(BOOL)isJingLi {
+    _isJingLi = isJingLi;
+    if (isJingLi) {
+        
+    self.leftTwoCon.constant = self.leftBottomCon.constant = self.desCon.constant = 0;
+    self.bottomV.hidden = YES;
+        
+    }
+}
+
 @end

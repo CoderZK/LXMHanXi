@@ -691,18 +691,18 @@
         for (LxmShopCenterUserListModel *model in _dataArr) {
             if (model.infoType.intValue == 1) {//月度
                 _leftButton.textLabel.text = @"当月完成(箱)";
-                _leftButton.numLabel.text = model.finishMoney;
+                _leftButton.numLabel.text = [model.finishMoney getPriceStr];
                 _rightButton.textLabel.text = @"当月目标(箱)";
-                _rightButton.numLabel.text = model.targetMoney;
+                _rightButton.numLabel.text = [model.targetMoney getPriceStr];
             }
         }
     } else {//季
         for (LxmShopCenterUserListModel *model in _dataArr) {
             if (model.infoType.intValue == 2) {//季度
                 _leftButton.textLabel.text = @"当季完成(箱)";
-                _leftButton.numLabel.text = model.finishMoney;
+                _leftButton.numLabel.text = [model.finishMoney getPriceStr];;
                 _rightButton.textLabel.text = @"当季目标(箱)";
-                _rightButton.numLabel.text = model.targetMoney;
+                _rightButton.numLabel.text = [model.targetMoney getPriceStr];
             }
         }
     }

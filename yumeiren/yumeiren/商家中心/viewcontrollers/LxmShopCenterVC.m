@@ -144,6 +144,9 @@
     if (indexPath.section == 0) {
         LxmMineYeJiKaoTVC * vc =[[LxmMineYeJiKaoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
+        if (self.shopInfoModel.roleType.intValue == 2) {
+            vc.isJingLi = YES;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
     

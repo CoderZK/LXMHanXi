@@ -227,7 +227,7 @@
     if ([self.jifenModel.top_status isEqualToString:@"1"]) {
         [tixianBt setTitle:@"提取" forState:UIControlStateNormal];
     }
-    [tixianBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
+    [tixianBt setTitleColor:MainColor forState:UIControlStateNormal];
     tixianBt.titleLabel.font = [UIFont systemFontOfSize:15];
     [tixianBt setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateNormal];
     [imageV addSubview:tixianBt];
@@ -289,9 +289,9 @@
     
     [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@260);
-        make.width.equalTo(@(ScreenW - 10));
+        make.width.equalTo(@(ScreenW - 30));
         make.centerX.equalTo(self.headViewOne);
-        make.top.equalTo(numberLb.mas_bottom).offset(7);
+        make.top.equalTo(numberLb.mas_bottom).offset(15);
     }];
     
     [tuanDuiJiFen mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -318,7 +318,7 @@
     
     [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(imageV).offset(15);
-        make.width.equalTo(@((ScreenW - 31)/ 2));
+        make.width.equalTo(@((ScreenW - 51)/ 2));
         make.top.equalTo(lineVOne.mas_bottom).offset(15);
         make.height.equalTo(@25);
     }];
@@ -345,7 +345,7 @@
     [jiFenLBTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lineV);
         make.top.equalTo(jiFenLB);
-        make.width.equalTo(@((ScreenW - 31)/ 2));
+        make.width.equalTo(@((ScreenW - 51)/ 2));
         make.height.equalTo(@25);
     }];
     [mingXiBtTwo mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -437,9 +437,9 @@
     mingXiBt.layer.cornerRadius = 12;
     mingXiBt.clipsToBounds = YES;
     mingXiBt.layer.borderWidth = 0.5;
-    mingXiBt.layer.borderColor = RGB(236, 104, 118).CGColor;
+    mingXiBt.layer.borderColor = MainColor.CGColor;
     [mingXiBt setTitle:@"明细 >   " forState:UIControlStateNormal];
-    [mingXiBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
+    [mingXiBt setTitleColor:MainColor forState:UIControlStateNormal];
     mingXiBt.titleLabel.font = [UIFont systemFontOfSize:12];
     mingXiBt.tag = 103;
     [mingXiBt addTarget:self action:@selector(jifenAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -480,7 +480,7 @@
     jiFenLB.text = [self.jifenModel.direct_score getPriceStr];
     jiFenLB.textAlignment = NSTextAlignmentCenter;
     self.LB3 = jiFenLB;
-    jiFenLB.textColor = RGB(236, 104, 118);
+    jiFenLB.textColor = MainColor;
     [self.headViewTwo  addSubview:jiFenLB];
     
     [jiFenLB mas_makeConstraints:^(MASConstraintMaker *make) {

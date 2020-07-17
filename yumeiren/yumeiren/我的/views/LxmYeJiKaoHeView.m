@@ -48,7 +48,7 @@
 
         UIButton * confirmBt  = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 80, 0, 80, 40)];
         [confirmBt setTitle:@"确定" forState:UIControlStateNormal];
-        [confirmBt setTitleColor:RGB(236, 104, 118) forState:UIControlStateNormal];
+        [confirmBt setTitleColor:MainColor forState:UIControlStateNormal];
         confirmBt.tag = 100;
         confirmBt.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.whiteV addSubview:confirmBt];

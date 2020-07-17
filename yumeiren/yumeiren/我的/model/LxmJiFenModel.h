@@ -35,10 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *bank_code;
 @property(nonatomic,strong)NSString *order_id;
 
-@property(nonatomic,assign)NSInteger inviteToBox;
-@property(nonatomic,assign)NSInteger finishMoney;
-@property(nonatomic,assign)NSInteger targetMoney;
-@property(nonatomic,assign)NSInteger inviteUserNum;
+@property(nonatomic,assign)CGFloat inviteToBox;
+@property(nonatomic,assign)CGFloat finishMoney;
+@property(nonatomic,assign)CGFloat targetMoney;
+@property(nonatomic,assign)CGFloat inviteUserNum;
 
 
 @property(nonatomic,strong)NSString * other_info;

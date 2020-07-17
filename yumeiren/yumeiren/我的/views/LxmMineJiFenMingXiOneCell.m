@@ -39,7 +39,7 @@
     if (type == 1) {
         self.titleLB.text = [NSString stringWithFormat:@" 来自-%@直属业绩小晞%@",model.by_name,@""];
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",model.score];
-         [self.typeBt setTitleColor:MainColor forState:UIControlStateNormal];
+         [self.typeBt setTitleColor:RGB(255, 134, 62) forState:UIControlStateNormal];
         [self.typeBt setImage:[UIImage imageNamed:@"kk940"] forState:UIControlStateNormal];
         self.typeBt.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.typeBt setTitle:[NSString stringWithFormat:@"直属购进奖励%0.1f%%",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
         
         self.titleLB.text = [NSString stringWithFormat:@"收入-团队销售业绩%@",model.sale_money];
         self.moneyLB.text = [NSString stringWithFormat:@"+%@",model.score];
-         [self.typeBt setTitleColor:MainColor forState:UIControlStateNormal];
+         [self.typeBt setTitleColor:RGB(255, 134, 62) forState:UIControlStateNormal];
         [self.typeBt setImage:[UIImage imageNamed:@"kk940"] forState:UIControlStateNormal];
         self.typeBt.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.typeBt setTitle:[NSString stringWithFormat:@" 收入小晞 = 销售业绩 x %0.1f%% - 下级分配",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];

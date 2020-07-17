@@ -274,6 +274,11 @@
         if (responseObject.key.integerValue == 1000 && index == selfWeak.currentIndex) {
             selfWeak.yejiModel = responseObject.result.map;
             selfWeak.rankLabel.text = [NSString stringWithFormat: @"同级别业绩排行: %@名", selfWeak.yejiModel.rank];
+            if ([selfWeak.yejiModel.rank isEqualToString:@"-1"]) {
+                selfWeak.rankLabel.hidden = YES;
+            }else {
+                selfWeak.rankLabel.hidden = NO;
+            }
                        selfWeak.yejiView.model = selfWeak.yejiModel;
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:selfWeak.currentIndex == 1 ? @"本月团队业绩总计： " : @"本月推荐业绩总计： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
             NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",selfWeak.yejiModel.groupTotal.doubleValue] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];

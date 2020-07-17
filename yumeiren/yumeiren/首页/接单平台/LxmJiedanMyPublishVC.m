@@ -520,42 +520,42 @@
             //1：待支付，2：待接单，3：待完成，4：申请退单中，5：已完成待评价，6：已评价，7：已退单，8：已失效
         case 1: {
             _stateLabel.text = @"待支付";
-            _stateLabel.textColor = MainColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 2: {
             _stateLabel.text = @"待接单";
-            _stateLabel.textColor = MainColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 3: {
             _stateLabel.text = @"待完成";
-            _stateLabel.textColor = MainColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 4:  {
             _stateLabel.text = @"待退单";
-            _stateLabel.textColor = MainColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 5:  {
             _stateLabel.text = @"待打分";
-            _stateLabel.textColor = MainColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 6: {
              _stateLabel.text = @"已完成";
-            _stateLabel.textColor = CharacterGrayColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 7: {
             _stateLabel.text = @"已退单";
-            _stateLabel.textColor = CharacterGrayColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
         case 8: {
             _stateLabel.text = @"已失效";
-            _stateLabel.textColor = CharacterGrayColor;
+            _stateLabel.textColor = [UIColor whiteColor];
         }
             break;
             

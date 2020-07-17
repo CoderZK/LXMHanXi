@@ -475,6 +475,7 @@
 @property (nonatomic, strong) NSString *one_base_in_money;
 @property (nonatomic, strong) NSString *group_score;
 @property (nonatomic, strong) NSString *telephone;
+@property (nonatomic, strong) NSString *sex;
 
 
 @end

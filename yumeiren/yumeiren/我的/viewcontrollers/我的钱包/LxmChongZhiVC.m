@@ -13,7 +13,7 @@
 #import "WXApiManager.h"
 #import "WechatAuthSDK.h"
 #import "LxmChongZhiPiceCell.h"
-
+#import "LxmTiXianZhongVC.h"
 @interface LxmChongZhiHeaderView : UIView
 
 @property (nonatomic, strong) UILabel *textLabel;//充值金额
@@ -450,7 +450,14 @@
          self.chongzhiButton.userInteractionEnabled = YES;
         if ([responseObject[@"key"] integerValue] == 1000) {
             [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
-
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                LxmTiXianZhongVC *vc = [[LxmTiXianZhongVC alloc] init];
+                vc.money = self.headerView.moneyTF.text;
+                vc.isChongZhi = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            });
+            
         }else {
            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
         }

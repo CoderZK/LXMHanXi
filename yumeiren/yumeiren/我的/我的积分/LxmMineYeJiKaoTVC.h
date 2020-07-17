@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LxmMineYeJiKaoTVC : BaseTableViewController
-
+@property(nonatomic,assign)BOOL isJingLi;
 @end
 
 NS_ASSUME_NONNULL_END

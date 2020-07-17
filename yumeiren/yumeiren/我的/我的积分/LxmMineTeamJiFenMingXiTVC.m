@@ -22,7 +22,7 @@
 @property(nonatomic,strong)UIView *headV;
 
 @property(nonatomic,strong)UIView *headView;
-@property(nonatomic,strong)UILabel *timeLB;
+@property(nonatomic,strong)UILabel *timeLB,*tuanDuiYeJiLB;
 @property(nonatomic,strong)UIImageView *imgV;
 @property(nonatomic,strong)UIButton *headBt;
 @property(nonatomic,assign)NSInteger type,year,month;
@@ -92,7 +92,7 @@
         StrongObj(self);
         [self loadData];
     }];
-    
+    [self loadGroupData];
     [self setHeadSubViews];
     
     
@@ -135,6 +135,8 @@
     
     
 }
+
+
 
 - (void)clickAction:(UIButton *)button {
     LxmYeJiKaoHeView * view  =[[LxmYeJiKaoHeView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) withType:0];
@@ -236,17 +238,23 @@
     rightFourLB.textColor = MainColor;
     rightFourLB.font = [UIFont systemFontOfSize:14 weight:0.2];
     [whiteV addSubview:rightFourLB];
+    self.tuanDuiYeJiLB = rightFourLB;
     
     
     UIButton * headBt  = [[UIButton alloc] init];
     headBt.layer.cornerRadius = 30;
     headBt.clipsToBounds = YES;
     [whiteV addSubview:headBt];
-    headBt.backgroundColor = [UIColor redColor];
+    headBt.clipsToBounds = YES;
+    headBt.layer.cornerRadius = 30;
+   
     
     UIImageView * sexImgV  =[[UIImageView alloc] init];
     sexImgV.image  = [UIImage imageNamed:@"nv"];
     [whiteV addSubview:sexImgV];
+    if (self.jifenModel.sex.intValue == 2) {
+        sexImgV.image = [UIImage imageNamed:@"nan"];
+    }
     
     [nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(whiteV).offset(20);
@@ -269,6 +277,18 @@
         make.height.bottom.equalTo(leftOneLB);
         make.left.equalTo(leftOneLB.mas_right).offset(5);
         
+    }];
+    
+    [headBt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(whiteV).offset(-15);
+        make.top.equalTo(whiteV).offset(15);
+        make.width.height.equalTo(@60);
+    }];
+    
+    [sexImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(headBt);
+        make.centerY.equalTo(headBt.mas_centerY).offset(12);
+        make.height.width.equalTo(@12);
     }];
     
     [rightTwoLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -313,9 +333,8 @@
         roleLB.text = @"  董事  ";
     }
     nameLB.text = self.jifenModel.username;
-    leftTwoLB.text = self.jifenModel.direct_score;
-    rightTwoLB.text = self.jifenModel.one_base_in_money;
-    rightFourLB.text = self.jifenModel.group_score;
+    leftTwoLB.text = [self.jifenModel.group_score getPriceStr];
+    rightTwoLB.text = [self.jifenModel.one_base_in_money getPriceStr];
     [headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:self.jifenModel.user_head] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"moren"] options:SDWebImageRetryFailed];
     
     
@@ -327,6 +346,52 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+- (void)loadGroupData {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = SESSION_TOKEN;
+    dict[@"id"] =  self.jifenModel.id;
+  
+    [LxmNetworking networkingPOST:my_group_total_sale parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self endRefrish];
+        if ([responseObject[@"key"] intValue] == 1000) {
+            self.tuanDuiYeJiLB.text = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"group_sale"]] getPriceStr];
+        } else {
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self endRefrish];
+    }];
+    
+}
+
+- (void)confirmScoreWithModel:(LxmJiFenModel *)model {
+    
+       [SVProgressHUD show];
+       NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+       dict[@"token"] = SESSION_TOKEN;
+       dict[@"infoType"] = @(self.scoreType);
+       dict[@"id"] = model.ID;
+       [LxmNetworking networkingPOST:confirm_score parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+           [self endRefrish];
+           if ([responseObject[@"key"] intValue] == 1000) {
+               
+               model.status = @"2";
+               [self.tableView reloadData];
+               
+           } else {
+               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+           }
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           [self endRefrish];
+       }];
+    
+    
+}
+
 
 - (void)loadData {
     
@@ -345,9 +410,9 @@
             if (self.page == 1) {
                 [self.dataArr removeAllObjects];
             }
+            [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
             self.emptyView.textLabel.text = @"暂无数据";
             self.emptyView.hidden = self.dataArr.count > 0;
-            [self.dataArr addObjectsFromArray:[LxmJiFenModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]]];
             self.page ++;
             [self.tableView reloadData];
         } else {

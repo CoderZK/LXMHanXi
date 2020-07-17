@@ -79,6 +79,10 @@
         self.navigationItem.title = @"提取";
         self.tixianButton.textLabel.text = @"提取中";
     }
+    if (self.isChongZhi) {
+        self.navigationItem.title = @"充值";
+        self.tixianButton.textLabel.text = @"充值中";
+    }
 }
 /**
  添加子视图
@@ -103,18 +107,25 @@
  完成
  */
 - (void)finishButtonClick {
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[LxmQianBaoVC class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
-        }
-        if ([vc isKindOfClass:[LxmMineJiFenXiaJiTVC class]]) {
-                
-            [self.navigationController popToViewController:vc animated:YES];
-        
-            break;
+    
+    if (self.isChongZhi) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else {
+        for (UIViewController *vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[LxmQianBaoVC class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+            if ([vc isKindOfClass:[LxmMineJiFenXiaJiTVC class]]) {
+                    
+                [self.navigationController popToViewController:vc animated:YES];
+            
+                break;
+            }
         }
     }
+    
+    
 }
 
 @end

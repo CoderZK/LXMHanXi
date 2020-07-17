@@ -135,7 +135,7 @@
         self.detailLabel.text = @"物流信息:暂无物流信息";
     }
     if ([_model.title isEqualToString:@"已签收"]) {
-        _iconImgView.image = [UIImage imageNamed:@"ico_yishouhuo"];
+        _iconImgView.image = [UIImage imageNamed:@"fahuocar"];
     } else {
         _iconImgView.image = [UIImage imageNamed:@"fahuocar"];
     }
@@ -168,7 +168,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:241/255.0 green:182/255.0 blue:191/255.0 alpha:1]];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

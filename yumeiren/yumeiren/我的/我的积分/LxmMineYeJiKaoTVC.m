@@ -105,7 +105,7 @@
 
     
     self.titelLB = LB2;
-    LB2.textColor = RGB(236, 104, 118);
+    LB2.textColor = MainColor;
     
     UIImageView * imageV  =[[UIImageView alloc] init];
     imageV.image = [UIImage imageNamed:@"kkxia"];
@@ -130,6 +130,15 @@
     [self.rightBt setTitle:@"季" forState:UIControlStateNormal];
     [self.yjView addSubview:self.rightBt];
     
+    UILabel * yueLB  =[[UILabel alloc] init];
+    yueLB.backgroundColor = MainLightColor;
+    yueLB.textColor = [UIColor whiteColor];
+    yueLB.font = [UIFont systemFontOfSize:12];
+    yueLB.textAlignment = NSTextAlignmentCenter;
+    yueLB.layer.cornerRadius = 10;
+    yueLB.clipsToBounds = YES;
+    yueLB.text = @"月";
+    [headV addSubview:yueLB];
     
     
     self.yjView.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:@"yjleft"]];
@@ -173,6 +182,14 @@
         make.centerY.equalTo(headV);
     }];
     
+    [yueLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(headV).offset(-15);
+        make.width.equalTo(@50);
+        make.height.equalTo(@20);
+        make.centerY.equalTo(headV);
+    }];
+    
+    
     [self.leftBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self.yjView);
         make.width.equalTo(@25);
@@ -182,6 +199,13 @@
         make.width.equalTo(@25);
     }];
     
+    if (self.isJingLi) {
+        self.yjView.hidden = YES;
+        yueLB.hidden = NO;
+    }else {
+        self.yjView.hidden = NO;
+        yueLB.hidden = YES;
+    }
     
     self.tableView.tableHeaderView = headV;
 }
@@ -250,12 +274,13 @@
     LxmMineYeJiKaoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.type = self.type + 100;
     
-    cell.leftTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.finishMoney + self.dataModel.inviteToBox * self.dataModel.inviteUserNum];
-    cell.rightTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.targetMoney];
-    cell.numberOneLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.finishMoney];
-    cell.numberTwoLB.text = [NSString stringWithFormat:@"%ld",self.dataModel.inviteUserNum];
+    cell.leftTwoLB.text = [[NSString stringWithFormat:@"%0.2f",self.dataModel.finishMoney + self.dataModel.inviteToBox * self.dataModel.inviteUserNum] getPriceStr];
+    cell.rightTwoLB.text = [[NSString stringWithFormat:@"%0.2f",self.dataModel.targetMoney] getPriceStr];
+    cell.numberOneLB.text = [[NSString stringWithFormat:@"%0.2f",self.dataModel.finishMoney] getPriceStr];
+    cell.numberTwoLB.text = [[NSString stringWithFormat:@"%0.2f",self.dataModel.inviteUserNum] getPriceStr];
     cell.desLB.text = [NSString stringWithFormat:@"总完成箱数 = 完成箱数+新增统计直属 (1个同级直属 = %ld箱)",(long)self.dataModel.inviteToBox];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.isJingLi = self.isJingLi;
     return cell;
     
 }

@@ -381,9 +381,9 @@
 
 -(void)onTimer1 {
     NSString *timeStr = [NSString durationTimeStringWithDuration:_time--];
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"请在" attributes:@{NSForegroundColorAttributeName:CharacterGrayColor}];
-    NSAttributedString *str1 = [[NSAttributedString alloc] initWithString:timeStr attributes:@{NSForegroundColorAttributeName:MainColor}];
-    NSAttributedString *str2 = [[NSAttributedString alloc] initWithString:@"内完成付款,否则订单会被系统取消" attributes:@{NSForegroundColorAttributeName:CharacterGrayColor}];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"请在" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *str1 = [[NSAttributedString alloc] initWithString:timeStr attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *str2 = [[NSAttributedString alloc] initWithString:@"内完成付款,否则订单会被系统取消" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [att appendAttributedString:str1];
     [att appendAttributedString:str2];
     self.timeCell.textLabel.attributedText = att;
