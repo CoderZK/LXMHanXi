@@ -516,7 +516,7 @@
 #define year_group_list  Base_URL"/app/user/year_group_list"
 
 /**
-   我的积分
+   我的小晞
  */
 #define my_inner_score  Base_URL"/app/user/my_inner_score"
 
@@ -531,17 +531,17 @@
 #define score_record_list  Base_URL"/app/user/score_record_list"
 
 /**
- 积分明细
+ 小晞明细
  */
 #define score_record_detail  Base_URL"/app/user/score_record_detail"
 
 
 /**
-  积分提现
+  小晞提现
  */
 #define apply_cash_out  Base_URL"/app/user/apply_cash_out"
 /**
-  积分转出
+  小晞转出
  */
 #define give_score  Base_URL"/app/user/give_score"
 
@@ -552,13 +552,13 @@
 #define check_detail  Base_URL"/app/user/check_detail"
 
 /**
- 确认收到积分接口
+ 确认收到小晞接口
  */
 #define confirm_score  Base_URL"/app/user/confirm_score"
 
 
 /**
- 确认收到积分接口
+ 确认收到小晞接口
  */
 #define my_group_total_sale  Base_URL"/app/user/my_group_total_sale"
 

@@ -135,6 +135,7 @@
     self = [super initWithTableViewStyle:style];
     if (self) {
         self.type = type;
+        
     }
     return self;
 }

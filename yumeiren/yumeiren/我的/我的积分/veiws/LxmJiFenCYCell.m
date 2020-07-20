@@ -282,7 +282,7 @@
         }
     }
     
-    self.codeLabel.text = [NSString stringWithFormat:@"剩余积分: %@",[_model.group_score getPriceStr]];
+    self.codeLabel.text = [NSString stringWithFormat:@"剩余小晞: %@",[_model.group_score getPriceStr]];
     self.memberNumLabel.text = [NSString stringWithFormat:@"本月业绩: ￥%@",_model.one_base_in_money];
 }
 

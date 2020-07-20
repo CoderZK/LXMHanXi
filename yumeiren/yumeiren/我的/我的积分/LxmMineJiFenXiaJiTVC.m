@@ -65,13 +65,19 @@
 
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self addNavTitleV];
-    [self addHeadViewOne];
-    [self addheadViewTwo];
+    
+    if  (self.jifenModel != nil) {
+           [self addNavTitleV];
+           [self addHeadViewOne];
+           [self addheadViewTwo];
+    }else {
+        [self getScoreData];
+    }
+    
+   
     
      WeakObj(self);
     [LxmEventBus registerEvent:@"jifentiqu" block:^(NSDictionary  * data) {
@@ -98,6 +104,30 @@
         }
     
         
+        
+    }];
+    
+    
+}
+
+
+//获取小晞
+- (void)getScoreData {
+    
+    //获取个人信息
+    [LxmNetworking networkingPOST:my_inner_score parameters:@{@"token":TOKEN} returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([responseObject[@"key"] integerValue] == 1000) {
+            
+            if (responseObject[@"result"] != nil && [[responseObject[@"result"] allKeys] containsObject:@"map"]) {
+                self.jifenModel  = [LxmUserInfoModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
+              
+                [self addNavTitleV];
+                [self addHeadViewOne];
+                [self addheadViewTwo];
+                
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
     
@@ -296,14 +326,14 @@
     
     [tuanDuiJiFen mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(imageV).offset(15);
-        make.width.equalTo(@(ScreenW - 30));
+        make.width.equalTo(@(ScreenW - 60));
         make.top.equalTo(imageV).offset(20);
         make.height.equalTo(@35);
     }];
     
     [tuanDuiJiFendes mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(imageV).offset(15);
-        make.width.equalTo(@(ScreenW - 30));
+        make.width.equalTo(@(ScreenW - 60));
         make.top.equalTo(tuanDuiJiFen.mas_bottom).offset(0);
         make.height.equalTo(@17);
     }];
@@ -339,7 +369,7 @@
         make.height.equalTo(@50);
         make.top.equalTo(jiFenLB);
         make.width.equalTo(@0.5);
-        make.left.equalTo(jiFenLB.mas_right);
+        make.centerX.equalTo(imageV);
     }];
     
     [jiFenLBTwo mas_makeConstraints:^(MASConstraintMaker *make) {

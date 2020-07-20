@@ -49,7 +49,7 @@
  添加视图
  */
 - (void)initSubViews {
-    [self addSubview:self.textLabel11];
+//    [self addSubview:self.textLabel11];
     [self addSubview:self.yuanlabel];
     [self addSubview:self.moneyTF];
     [self addSubview:self.lineView];
@@ -82,12 +82,12 @@
         make.top.equalTo(self.moneyTF.mas_bottom);
         make.height.equalTo(@1);
     }];
-    [self.textLabel11 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lineView.mas_bottom).offset(10);
-        make.leading.equalTo(self).offset(15);
-    }];
+//    [self.textLabel11 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.lineView.mas_bottom).offset(10);
+//        make.leading.equalTo(self).offset(15);
+//    }];
     [self.textLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.textLabel11.mas_bottom).offset(30);
+        make.top.equalTo(self.moneyTF.mas_bottom).offset(30);
         make.leading.equalTo(self).offset(15);
     }];
 }
@@ -130,15 +130,15 @@
     return _moneyTF;
 }
 
-- (UILabel *)textLabel11 {
-    if (!_textLabel11) {
-        _textLabel11 = [UILabel new];
-        _textLabel11.font = [UIFont systemFontOfSize:14];
-        _textLabel11.textColor = CharacterLightGrayColor;
-        _textLabel11.text = @"单笔充值不能超过¥50000";
-    }
-    return _textLabel11;
-}
+//- (UILabel *)textLabel11 {
+//    if (!_textLabel11) {
+//        _textLabel11 = [UILabel new];
+//        _textLabel11.font = [UIFont systemFontOfSize:14];
+//        _textLabel11.textColor = CharacterLightGrayColor;
+//        _textLabel11.text = @"单笔充值不能超过¥50000";
+//    }
+//    return _textLabel11;
+//}
 
 - (UILabel *)textLabel1 {
     if (!_textLabel1) {
@@ -361,10 +361,10 @@
         [SVProgressHUD showErrorWithStatus:@"请输入充值金额!"];
         return;
     }
-    if (self.headerView.moneyTF.text.doubleValue > 50000) {
-        [SVProgressHUD showErrorWithStatus:@"单笔充值金额不能超过5万!"];
-        return;
-    }
+//    if (self.headerView.moneyTF.text.doubleValue > 50000) {
+//        [SVProgressHUD showErrorWithStatus:@"单笔充值金额不能超过5万!"];
+//        return;
+//    }
     
     [self updateFile];
     
@@ -449,7 +449,7 @@
         [SVProgressHUD dismiss];
          self.chongzhiButton.userInteractionEnabled = YES;
         if ([responseObject[@"key"] integerValue] == 1000) {
-            [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
+//            [SVProgressHUD showSuccessWithStatus:@"已提交充值申请!"];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 LxmTiXianZhongVC *vc = [[LxmTiXianZhongVC alloc] init];

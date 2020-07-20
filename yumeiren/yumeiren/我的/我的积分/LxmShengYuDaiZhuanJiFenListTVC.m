@@ -77,7 +77,7 @@
                 [self.dataArr addObjectsFromArray:responseObject.result.list];
             }
             self.page ++;
-            self.emptyView.textLabel.text =  @"您当前没有待转积分";
+            self.emptyView.textLabel.text =  @"您当前没有待转小晞";
             self.emptyView.hidden = self.dataArr.count > 0;
             [self.tableView reloadData];
         } else {

@@ -94,15 +94,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) NSString *idCode;//身份证号
 
 
-@property (nonatomic , strong) NSString *direct_score;//直属积分
+@property (nonatomic , strong) NSString *direct_score;//直属小晞
 
-@property (nonatomic , strong) NSString *group_score;//团队待转积分
+@property (nonatomic , strong) NSString *group_score;//团队待转小晞
 
 @property (nonatomic , strong) NSString *top_status;//1-顶头的，2-不是顶头的
 
 @property (nonatomic , strong) NSString *rank;//排名 如果返回-1，就不显示同级别排名
 
-@property (nonatomic , strong) NSString *my_score;//团队积分
+@property (nonatomic , strong) NSString *my_score;//团队小晞
 
 
 

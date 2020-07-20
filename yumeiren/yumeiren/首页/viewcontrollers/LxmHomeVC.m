@@ -37,6 +37,8 @@
 
 @implementation LxmHomeVC
 
+
+
 - (UIButton *)rightButton {
     if (!_rightButton) {
         _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40,40)];

@@ -389,7 +389,14 @@
             self.titleLabel.text = @"充值";
             self.iconImgView.image = [UIImage imageNamed:@"cz_1"];
             [self setMoney:YES];
-            self.stateLabel.text = @"已完成";
+            if (model.status.intValue == 31) {
+                self.stateLabel.text = @"审核中";
+            }else  if (model.status.intValue == 31) {
+                self.stateLabel.text = @"失败";
+            }else {
+                self.stateLabel.text = @"已完成";
+            }
+            
             self.stateLabel.textColor = CharacterGrayColor;
         }
             break;

@@ -207,7 +207,7 @@
     UILabel * leftOneLB = [[UILabel alloc] init];
     leftOneLB.textColor = CharacterLightGrayColor;
     leftOneLB.font = [UIFont systemFontOfSize:14];
-    leftOneLB.text = @"剩余积分 ";
+    leftOneLB.text = @"剩余小晞 ";
     [whiteV addSubview:leftOneLB];
     
     UILabel * leftTwoLB = [[UILabel alloc] init];

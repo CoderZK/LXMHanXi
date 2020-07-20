@@ -125,6 +125,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     if (self.readBlock) {
         self.readBlock();
     }

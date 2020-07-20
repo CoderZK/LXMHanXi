@@ -444,7 +444,8 @@
 }
 
 - (void)buttonClick: (UIButton *)btn {
-    btn.selected = !btn.selected;
+
+    btn.selected = YES;
     if (btn == _leftButton) {
         _rightButton.selected = !btn.selected;
         if (btn.selected) {

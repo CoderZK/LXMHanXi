@@ -730,7 +730,10 @@
 - (UIButton *)tixainButton {
     if (!_tixainButton) {
         _tixainButton = [[UIButton alloc] init];
-        [_tixainButton setTitle:@"提现" forState:UIControlStateNormal];
+        [_tixainButton setTitle:@"小晞" forState:UIControlStateNormal];
+        if(self.isJiFen) {
+            [_tixainButton setTitle:@"提取" forState:UIControlStateNormal];
+        }
         [_tixainButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_tixainButton setBackgroundImage:[UIImage imageNamed:@"deepPink"] forState:UIControlStateNormal];
         _tixainButton.layer.cornerRadius = 5;
@@ -782,7 +785,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"提现";
-    
+    if (self.isJiFen) {
+        self.navigationItem.title = @"提取";
+    }
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.isJiFen = self.isJiFen;
     
@@ -885,7 +890,7 @@
     NSString *code  = self.headerView.codeTF.text;
     if (self.headerView.moneyTF.text.doubleValue <= 0) {
         if (self.isJiFen) {
-            [SVProgressHUD showErrorWithStatus:@"请输入提取积分!"];
+            [SVProgressHUD showErrorWithStatus:@"请输入提取小晞!"];
         }else {
            [SVProgressHUD showErrorWithStatus:@"请输入提现金额!"];
         }
@@ -895,7 +900,7 @@
     
     if  (self.isJiFen) {
         if (self.headerView.moneyTF.text.doubleValue > self.score) {
-            [SVProgressHUD showErrorWithStatus:@"积分不足"];
+            [SVProgressHUD showErrorWithStatus:@"小晞不足"];
             return;
         }
         if (self.headerView.moneyTF.text.doubleValue < LxmTool.ShareTool.userModel.cashMoney.doubleValue) {

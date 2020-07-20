@@ -16,7 +16,7 @@
 #import "LxmPayVC.h"
 #import "WXApi.h"
 #import "LxmYiJianBuHuoVC1.h"
-
+#import "LxmShengjiGouWuVC.h"
 #import "LxmShengjiGouWuVC.h"
 
 #import "LxmRenZhengProtocolVC.h"
@@ -387,9 +387,21 @@
             if (self.isAddLocolGoods) {
                 if (self.roleType.isValid) {
                     LxmShengjiGouWuVC *vc = [LxmShengjiGouWuVC  new];
+                    vc.roleType = self.roleType;
+                    vc.isDeep = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {
                     WeakObj(self);
+                    
+                    if (selfWeak.navigationController.viewControllers.count >= 3) {
+                        if ([selfWeak.navigationController.viewControllers[selfWeak.navigationController.viewControllers.count-3] isKindOfClass:[LxmShengjiGouWuVC class]]) {
+                            [selfWeak.navigationController popToViewController:selfWeak.navigationController.viewControllers[selfWeak.navigationController.viewControllers.count-3] animated:YES];
+//                            [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
+                            
+                            return;
+                        }
+                    }
+                    
                     for (UIViewController *vc in selfWeak.navigationController.viewControllers) {
                         if ([vc isKindOfClass:[LxmYiJianBuHuoVC1 class]]) {
                             [selfWeak.navigationController popToViewController:vc animated:YES];
@@ -475,7 +487,7 @@
                 [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
                 return;
             } else {
-                mm.num = [NSString stringWithFormat:@"%d",mm.num.integerValue + 1];
+                mm.num = [NSString stringWithFormat:@"%ld",mm.num.integerValue + 1];
                 [SVProgressHUD showSuccessWithStatus:@"添加成功"];
                 [[LxmTool ShareTool] saveShengJiSubGoods:mm];
                 [LxmEventBus sendEvent:@"localListUpdate1" data:nil];
@@ -495,7 +507,7 @@
             if (!iscunzai) {
                 goodModel.num = @"1";
             } else {
-                goodModel.num = [NSString stringWithFormat:@"%d",goodModel.num.integerValue + 1];
+                goodModel.num = [NSString stringWithFormat:@"%ld",goodModel.num.integerValue + 1];
             }
             [[LxmTool ShareTool] saveSubGoods:goodModel];
             [SVProgressHUD showSuccessWithStatus:@"添加成功"];

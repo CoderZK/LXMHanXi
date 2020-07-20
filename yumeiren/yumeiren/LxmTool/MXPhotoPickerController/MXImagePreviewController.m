@@ -194,7 +194,10 @@ static NSString *const CellIdentifier = @"MXImagePreviewCell";
     [self.bottomBar.finishButton addTarget:self action:@selector(finishButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.bottomBar];
 }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
