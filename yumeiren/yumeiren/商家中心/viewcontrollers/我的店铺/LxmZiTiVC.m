@@ -173,7 +173,7 @@
         return;
     }
     
-    if (LxmTool.ShareTool.userModel.postMoney.floatValue == 0) {
+    if (LxmTool.ShareTool.userModel.postMoney.doubleValue == 0) {
         LxmZiTiJieSuanVC *vc = [[LxmZiTiJieSuanVC alloc] init];
         vc.fahuoArr = addArr;
         [self.navigationController pushViewController:vc animated:YES];

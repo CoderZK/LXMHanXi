@@ -565,11 +565,14 @@
 
 - (void)addgoodsAction {
     
-    NSDictionary *dict = @{
+    NSMutableDictionary *dict = @{
         @"token" : SESSION_TOKEN,
         @"goodId" : self.detailModel.good.id,
         @"num" : @1
-    };
+    }.mutableCopy;
+    if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3) && self.isHaoCai == NO) {
+        dict[@"num"] = self.detailModel.good.buy_num;
+    }
     [SVProgressHUD show];
     WeakObj(self);
     [LxmNetworking networkingPOST:add_cart parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -578,7 +581,12 @@
         if ([responseObject[@"key"] integerValue] == 1000) {
             [SVProgressHUD showSuccessWithStatus:@"添加成功!"];
             NSInteger num = self.detailModel.cartNum.integerValue;
-            num++;
+            if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3) && self.isHaoCai == NO) {
+                dict[@"num"] = self.detailModel.good.buy_num;
+                num = num +self.detailModel.good.buy_num.intValue;
+            }else {
+                num++;
+            };
             self.detailModel.cartNum = @(num).stringValue;
             self.bottomView.carButton.num = self.detailModel.cartNum;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

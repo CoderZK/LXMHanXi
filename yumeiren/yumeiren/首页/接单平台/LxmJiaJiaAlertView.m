@@ -184,12 +184,12 @@
         [SVProgressHUD showErrorWithStatus:self.type == LxmJiaJiaAlertView_type_jiajia ? @"请输入加价金额!" : self.type == LxmJiaJiaAlertView_type_dafen ? @"请输入分数!" : @"请输入转余额金额"];
         return;
     }
-    if (self.textTF.text.floatValue == 0) {
+    if (self.textTF.text.doubleValue == 0) {
         [SVProgressHUD showErrorWithStatus:self.type == LxmJiaJiaAlertView_type_jiajia ? @"加价金额不能为0!" : self.type == LxmJiaJiaAlertView_type_dafen ? @"打分分数不能为0!" : @"转余额金额不能为0"];
         return;
     }
     if (self.type == LxmJiaJiaAlertView_type_dafen) {
-        if (self.textTF.text.floatValue > 100) {
+        if (self.textTF.text.doubleValue > 100) {
             [SVProgressHUD showErrorWithStatus:@"打分分数在0~100之间!"];
             return;
         }

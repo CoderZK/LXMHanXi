@@ -578,11 +578,14 @@
     WeakObj(self);
     void(^addCar)(void) = ^{
       
-        NSDictionary *dict = @{
+        NSMutableDictionary *dict = @{
                                @"token" : SESSION_TOKEN,
                                @"goodId" : goodModel.id,
                                @"num" : @1
-                               };
+        }.mutableCopy;
+        if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3) && self.isHaoCai == NO) {
+            dict[@"num"] = goodModel.buy_num;
+        }
         [SVProgressHUD show];
         [LxmNetworking networkingPOST:add_cart parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             [SVProgressHUD dismiss];

@@ -85,16 +85,16 @@
         if ([data.allKeys containsObject:@"scoreType"]) {
             if ([data.allKeys containsObject:@"money"]) {
                 
-                CGFloat money = [data[@"money"] floatValue];
+                CGFloat money = [data[@"money"] doubleValue];
                 
                 if ([data[@"scoreType"] intValue] == 2) {
-                    self.jifenModel.my_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue - money];
+                    self.jifenModel.my_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.doubleValue - money];
                     
-                    self.LB1.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue + self.jifenModel.group_score.floatValue] getPriceStr];
+                    self.LB1.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.doubleValue + self.jifenModel.group_score.doubleValue] getPriceStr];
                     self.LB2.text = [self.jifenModel.my_score getPriceStr];
                     
                 }else {
-                    self.jifenModel.direct_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.direct_score.floatValue - money];
+                    self.jifenModel.direct_score = [NSString stringWithFormat:@"%0.2f",self.jifenModel.direct_score.doubleValue - money];
                     self.LB3.text =   [self.jifenModel.direct_score getPriceStr];
                 }
             }
@@ -175,7 +175,7 @@
     
     UILabel * tuanDuiJiFen  = [[UILabel alloc] init];
     tuanDuiJiFen.font = [UIFont systemFontOfSize:30 weight:0.2];
-    tuanDuiJiFen.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue + self.jifenModel.group_score.floatValue] getPriceStr];
+    tuanDuiJiFen.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.doubleValue + self.jifenModel.group_score.doubleValue] getPriceStr];
     self.LB1 = tuanDuiJiFen;
     tuanDuiJiFen.textAlignment = NSTextAlignmentCenter;
     tuanDuiJiFen.textColor = [UIColor whiteColor];
@@ -193,7 +193,7 @@
     
     UILabel * jiFenLB  = [[UILabel alloc] init];
     jiFenLB.font = [UIFont systemFontOfSize:20 weight:0.2];
-    jiFenLB.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.floatValue]  getPriceStr];
+    jiFenLB.text = [[NSString stringWithFormat:@"%0.2f",self.jifenModel.my_score.doubleValue]  getPriceStr];
     jiFenLB.textAlignment = NSTextAlignmentCenter;
     jiFenLB.textColor = [UIColor whiteColor];
     [imageV  addSubview:jiFenLB];
@@ -217,7 +217,7 @@
     
     UILabel * jiFenLBTwo  = [[UILabel alloc] init];
     jiFenLBTwo.font = [UIFont systemFontOfSize:20 weight:0.2];
-    jiFenLBTwo.text = [[NSString stringWithFormat:@"%0.2f", self.jifenModel.group_score.floatValue] getPriceStr] ;
+    jiFenLBTwo.text = [[NSString stringWithFormat:@"%@", @(self.jifenModel.group_score.doubleValue).stringValue] getPriceStr] ;
     jiFenLBTwo.textAlignment = NSTextAlignmentCenter;
     jiFenLBTwo.textColor = [UIColor whiteColor];
     [imageV  addSubview:jiFenLBTwo];
@@ -620,14 +620,14 @@
             LxmZhuanChuJiFenVC * vc =[[LxmZhuanChuJiFenVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.top_name = self.jifenModel.top_name;
-            vc.jifen = self.jifenModel.my_score.floatValue;
+            vc.jifen = self.jifenModel.my_score.doubleValue;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
             //提现
             LxmTiXianVC *vc = [[LxmTiXianVC alloc] init];
             vc.isJiFen = YES;
             vc.scoreType = 2;
-            vc.score = self.jifenModel.my_score.floatValue;
+            vc.score = self.jifenModel.my_score.doubleValue;
             [self.navigationController pushViewController:vc animated:YES];
             
         }
@@ -643,7 +643,7 @@
         
         LxmTiXianVC *vc = [[LxmTiXianVC alloc] init];
         vc.isJiFen = YES;
-        vc.score = self.jifenModel.direct_score.floatValue;
+        vc.score = self.jifenModel.direct_score.doubleValue;
         vc.scoreType = 1;
         [self.navigationController pushViewController:vc animated:YES];
         

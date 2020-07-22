@@ -423,8 +423,9 @@
 
 - (NSString *)getPriceStr {
     
-    NSString * str =  [NSString stringWithFormat:@"%.2f",self.floatValue];;
+    NSString * str =  [NSString stringWithFormat:@"%.2f",self.doubleValue];;
     
+    return @([self doubleValue]).stringValue;
     
     if ([[str substringFromIndex:str.length-2] isEqualToString:@"00"]){
         return [str substringToIndex:str.length-3];
@@ -434,8 +435,10 @@
         str = [str substringToIndex:str.length-1];
     }
 
-    
     return str;
+
+    
+    
     
     
     

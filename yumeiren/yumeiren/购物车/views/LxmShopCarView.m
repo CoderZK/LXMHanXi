@@ -246,14 +246,41 @@
     [_numView endEditing:YES];
     NSInteger num =  _numView.numTF.text.intValue;
     if (btn == _numView.decButton) {
-        if (_numView.numTF.text.intValue > 1) {
-            num --;
+        
+        if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3) && self.isHaoCao == NO) {
+            if (_numView.numTF.text.intValue > self.carModel.buy_num.intValue) {
+                num --;
+            }else {
+                [SVProgressHUD showErrorWithStatus:@"受不了了,不能少于最低购买数量!"];
+                return;
+            }
+            
         }else {
-            [SVProgressHUD showErrorWithStatus:@"受不了了,不能再少了!"];
-            return;
+            if (_numView.numTF.text.intValue > 1) {
+                num --;
+            }else {
+                [SVProgressHUD showErrorWithStatus:@"受不了了,不能再少了!"];
+                return;
+            }
         }
+        
+        
+        
     } else {
-        num ++;
+        
+        if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3) && self.isHaoCao == NO) {
+            
+            if (num < self.carModel.buy_num.intValue) {
+                num = self.carModel.buy_num.intValue;
+            }else {
+                num++;
+            }
+            
+        }else {
+             num ++;
+        }
+        
+       
     }
     _numView.numTF.text = [NSString stringWithFormat:@"%ld", (long)num];
     NSString *maxNum = self.carModel.good_num.integerValue > self.carModel.com_num.integerValue ? self.carModel.good_num : self.carModel.com_num;
@@ -299,7 +326,7 @@
         return;
     }
 //    NSString *maxNum = self.carModel.good_num.integerValue > self.carModel.com_num.integerValue ? self.carModel.good_num : self.carModel.com_num;
-//    if (_numView.numTF.text.floatValue > maxNum.floatValue) {
+//    if (_numView.numTF.text.doubleValue > maxNum.doubleValue) {
 //        //库存不足
 //        UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"库存不足!" message:[NSString stringWithFormat:@"%@的库存量:%ld",self.carModel.good_name,maxNum.integerValue] preferredStyle:UIAlertControllerStyleAlert];
 //        [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -322,7 +349,7 @@
     _carModel = carModel;
     
 //    NSString *maxNum = _carModel.good_num.integerValue > _carModel.com_num.integerValue ? _carModel.good_num : _carModel.com_num;
-//    if (_carModel.num.floatValue > maxNum.floatValue) {
+//    if (_carModel.num.doubleValue > maxNum.doubleValue) {
 //        _kucunJinZhangLabel.hidden = NO;
 //        [self.moneyLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(self.kucunJinZhangLabel.mas_bottom).offset(10);
@@ -342,10 +369,10 @@
     [_iconImgView sd_setImageWithURL:[NSURL URLWithString:_carModel.list_pic] placeholderImage:[UIImage imageNamed:@"tupian"]];
     self.titleLabel.text = _carModel.good_name;
     
-    CGFloat f1 = _carModel.good_price.floatValue;
+    CGFloat f1 = _carModel.good_price.doubleValue;
     NSInteger d1 = _carModel.good_price.integerValue;
     
-    CGFloat f = _carModel.proxy_price.floatValue;
+    CGFloat f = _carModel.proxy_price.doubleValue;
     NSInteger d = _carModel.proxy_price.integerValue;
     
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:d == f ? [NSString stringWithFormat:@"¥%ld ",(long)d] : [NSString stringWithFormat:@"¥%.2f ",f] attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],NSForegroundColorAttributeName:MainColor}];

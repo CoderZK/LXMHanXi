@@ -571,11 +571,14 @@
         [UIViewController.topViewController presentViewController:alertView animated:YES completion:nil];
         
     } else {
-        NSDictionary *dict = @{
+        NSMutableDictionary *dict = @{
                                   @"token" : SESSION_TOKEN,
                                   @"goodId" : goodModel.id,
                                   @"num" : @1
-                                  };
+        }.mutableCopy;
+        if ((LxmTool.ShareTool.userModel.roleType.intValue == 2 || LxmTool.ShareTool.userModel.roleType.intValue == 3)) {
+            dict[@"num"] = goodModel.buy_num;
+        }
            [SVProgressHUD show];
            [LxmNetworking networkingPOST:add_cart parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                [SVProgressHUD dismiss];

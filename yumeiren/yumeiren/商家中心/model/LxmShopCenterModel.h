@@ -38,6 +38,8 @@
 @property (nonatomic, strong) NSString *order_id;/* 订单号 */
 
 @property (nonatomic, strong) NSString *num;/* 变动数量 */
+@property (nonatomic, strong) NSString *one_buy_num;
+@property (nonatomic, strong) NSString *two_buy_num;
 
 @property (nonatomic, strong) NSString *info_type;/* 1：采购入库，2：销售出库，3：自提出库 4后台入库 5 后台扣除*/
 

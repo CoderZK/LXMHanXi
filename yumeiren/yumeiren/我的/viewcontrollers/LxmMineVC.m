@@ -182,7 +182,7 @@
     cell.infoModel = [LxmTool ShareTool].userModel;
     cell.clipsToBounds = YES;
     if (indexPath.row == 3) {
-        cell.detaillabel.text = [[NSString stringWithFormat:@"%0.2f",self.jiFenModel.my_score.floatValue] getPriceStr];
+        cell.detaillabel.text = [[NSString stringWithFormat:@"%0.2f",self.jiFenModel.my_score.doubleValue] getPriceStr];
     }
     return cell;
 }

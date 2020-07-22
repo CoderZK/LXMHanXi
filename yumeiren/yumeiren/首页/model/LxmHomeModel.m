@@ -160,7 +160,9 @@
     return _num;
 }
 
+
 MJCodingImplementation
+
 
 @end
 
@@ -169,6 +171,7 @@ MJCodingImplementation
 + (NSDictionary *)mj_objectClassInArray {
     return @{@"goodList" : @"LxmHomeGoodsModel"};
 }
+
 
 @end
 
@@ -185,6 +188,7 @@ MJCodingImplementation
              @"goodTypes" : @"LxmHomeGoodsTypesModel"
              };
 }
+
 
 @end
 

@@ -54,17 +54,17 @@
         } else if ([[LxmTool ShareTool].userModel.roleType isEqualToString:@"3.1"]) {
             self.navigationItem.title = @" 当前等级-减肥单项-CEO";
         } else {
-            if ([LxmTool ShareTool].userModel.roleType.floatValue == -1) {
+            if ([LxmTool ShareTool].userModel.roleType.doubleValue == -1) {
                 self.navigationItem.title = @"当前等级-无";
-            } else if ([LxmTool ShareTool].userModel.roleType.floatValue == 0){
+            } else if ([LxmTool ShareTool].userModel.roleType.doubleValue == 0){
                 self.navigationItem.title = @"当前等级-vip门店";
-            } else if ([LxmTool ShareTool].userModel.roleType.floatValue == 1){
+            } else if ([LxmTool ShareTool].userModel.roleType.doubleValue == 1){
                 self.navigationItem.title = @"当前等级-经理";
-            } else if ([LxmTool ShareTool].userModel.roleType.floatValue == 2){
+            } else if ([LxmTool ShareTool].userModel.roleType.doubleValue == 2){
                 self.navigationItem.title = @"当前等级-总经理";
-            } else if ([LxmTool ShareTool].userModel.roleType.floatValue == 3){
+            } else if ([LxmTool ShareTool].userModel.roleType.doubleValue == 3){
                 self.navigationItem.title = @"当前等级-董事";
-            } else if ([LxmTool ShareTool].userModel.roleType.floatValue == 4){
+            } else if ([LxmTool ShareTool].userModel.roleType.doubleValue == 4){
                 self.navigationItem.title = @"当前等级-CEO";
             }
         }
@@ -356,19 +356,19 @@
         }
     }
     
-    if (_model.roleType.floatValue == -1) {
+    if (_model.roleType.doubleValue == -1) {
         _roleLabel.text = @"无";
-    } else if (_model.roleType.floatValue == -0.5){
+    } else if (_model.roleType.doubleValue == -0.5){
         _roleLabel.text = @"减肥单项";
-    } else if (_model.roleType.floatValue == 0){
+    } else if (_model.roleType.doubleValue == 0){
         _roleLabel.text = @"vip门店";
-    } else if (_model.roleType.floatValue == 1){
+    } else if (_model.roleType.doubleValue == 1){
         _roleLabel.text = @"经理";
-    } else if (_model.roleType.floatValue == 2){
+    } else if (_model.roleType.doubleValue == 2){
         _roleLabel.text = @"总经理";
-    } else if (_model.roleType.floatValue == 3){
+    } else if (_model.roleType.doubleValue == 3){
         _roleLabel.text = @"董事";
-    } else if (_model.roleType.floatValue == 4){
+    } else if (_model.roleType.doubleValue == 4){
         _roleLabel.text = @"CEO";
     }
     

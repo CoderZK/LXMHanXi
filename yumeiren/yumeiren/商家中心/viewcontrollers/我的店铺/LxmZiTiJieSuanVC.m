@@ -103,8 +103,8 @@
                 [self.ac_goods removeAllObjects];
                 if (ac_goodsModel.infoType.integerValue == 1) {
                     // 1：满金额赠送
-                    if (self.allPrice >= ac_goodsModel.infoMoney.floatValue) {
-                        ac_goodsModel.loc_num = floor(self.allPrice / ac_goodsModel.infoMoney.floatValue);
+                    if (self.allPrice >= ac_goodsModel.infoMoney.doubleValue) {
+                        ac_goodsModel.loc_num = floor(self.allPrice / ac_goodsModel.infoMoney.doubleValue);
                         [self.ac_goods addObject:ac_goodsModel];
                     }
                 } else if (ac_goodsModel.infoType.integerValue == 2) {

@@ -392,13 +392,22 @@
             if (model.isSelected) {
                 [tempArr addObject:model];
                 [ids addObject:model.id];
-                NSString *maxNum = model.good_num.integerValue > model.com_num.integerValue ? model.good_num : model.com_num;
-                if (model.num.doubleValue > maxNum.doubleValue) {
-                    model.pinjieStr = [NSString stringWithFormat:@"%@的库存量:%ld",model.good_name,(long)maxNum.integerValue];
-                    model.maxNum = maxNum;
-                    [buzuGoodsArr addObject:model];
-                    [buzuArr addObject:model.pinjieStr];
+                
+                if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"2"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3"]) {
+                   
+                    if (model.num.intValue < model.buy_num.intValue) {
+                        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@%@",model.good_name,@"商品购买量最低不能低于最低购买量"]];
+                        return; 
+                    }
                 }
+                
+//                NSString *maxNum = model.good_num.integerValue > model.com_num.integerValue ? model.good_num : model.com_num;
+//                if (model.num.doubleValue > maxNum.doubleValue) {
+//                    model.pinjieStr = [NSString stringWithFormat:@"%@的库存量:%ld",model.good_name,(long)maxNum.integerValue];
+//                    model.maxNum = maxNum;
+//                    [buzuGoodsArr addObject:model];
+//                    [buzuArr addObject:model.pinjieStr];
+//                }
             }
         }
         if (tempArr.count == 0) {
@@ -415,9 +424,9 @@
             return;
         }else {
             CGFloat money = LxmTool.ShareTool.userModel.upPayMoney.doubleValue;
-            if (money == 0) {
+            if (money == 0 || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3"]) {
                 if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"0"] ||[LxmTool.ShareTool.userModel.roleType isEqualToString:@"1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"2"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"4"]) {//正常角色
-                    CGFloat roletype = LxmTool.ShareTool.userModel.roleType.floatValue;
+                    CGFloat roletype = LxmTool.ShareTool.userModel.roleType.doubleValue;
                     if (roletype == 3 || roletype == 4) {//ceo直接下单
                        [selfWeak settleCarOrder:[ids componentsJoinedByString:@","] goods:tempArr];
                     }  else {//其他取正常上级的升级金额
@@ -426,8 +435,8 @@
                             if (responseObject.key.intValue == 1000) {
                                 for (LxmShengjiModel *m in responseObject.result.list) {
                                     
-                                    if (roletype + 1 == m.roleType.floatValue) {
-                                        shengjiMoney = m.payMoney.floatValue;
+                                    if (roletype + 1 == m.roleType.doubleValue) {
+                                        shengjiMoney = m.payMoney.doubleValue;
                                         if (selfWeak.proxyPrice >= shengjiMoney) {
                                         _bottomView.jiesuanButton.userInteractionEnabled = YES;
                                             UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"您已达到升级所满足的最低购物金额,进入升级通道,下单更便宜哦!" message:@"是否进入升级通道?" preferredStyle:UIAlertControllerStyleAlert];
@@ -462,27 +471,27 @@
                                 for (LxmShengjiModel *m in responseObject.result.list) {
                                     if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.5"]) {
                                         if ([m.roleType isEqualToString:@"-0.4"]) {
-                                            shengjiMoney = m.payMoney.floatValue;
+                                            shengjiMoney = m.payMoney.doubleValue;
                                             break;
                                         }
                                     } else if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.4"]) {
                                         if ([m.roleType isEqualToString:@"-0.3"]) {
-                                            shengjiMoney = m.payMoney.floatValue;
+                                            shengjiMoney = m.payMoney.doubleValue;
                                             break;
                                         }
                                     } else if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.3"]) {
                                         if ([m.roleType isEqualToString:@"1.1"]) {
-                                            shengjiMoney = m.payMoney.floatValue;
+                                            shengjiMoney = m.payMoney.doubleValue;
                                             break;
                                         }
                                     } else if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"1.1"]) {
                                         if ([m.roleType isEqualToString:@"2.1"]) {
-                                            shengjiMoney = m.payMoney.floatValue;
+                                            shengjiMoney = m.payMoney.doubleValue;
                                             break;
                                         }
                                     } else if ([LxmTool.ShareTool.userModel.roleType isEqualToString:@"2.1"]) {
                                         if ([m.roleType isEqualToString:@"3.1"]) {
-                                            shengjiMoney = m.payMoney.floatValue;
+                                            shengjiMoney = m.payMoney.doubleValue;
                                             break;
                                         }
                                     }

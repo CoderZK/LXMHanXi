@@ -612,7 +612,7 @@
 - (UIImageView *)topView {
     if (!_topView) {
         _topView = [UIImageView new];
-        _topView.image = [UIImage imageNamed:@"iii"];
+        _topView.image = [UIImage imageNamed:@"wdqb_bg"];
     }
     return _topView;
 }

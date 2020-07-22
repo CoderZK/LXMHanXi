@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSString *good_id;/* 商品id */
 
 @property (nonatomic, strong) NSString *num;/* 数量 */
+@property (nonatomic, strong) NSString *buy_num;/* 数量 */
 
 @property (nonatomic, strong) NSString *good_num;/* 数量 */
 

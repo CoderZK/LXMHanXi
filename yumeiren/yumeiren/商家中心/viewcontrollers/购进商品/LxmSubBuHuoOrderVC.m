@@ -476,7 +476,7 @@
     _orderModel = orderModel;
 //    CGFloat f = 0;
 //    for (LxmShopCenterOrderGoodsModel *m in _orderModel.sub2) {
-//        f += m.proxy_price.floatValue;
+//        f += m.proxy_price.doubleValue;
 //    }
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"商品总计： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",_orderModel.total_money.doubleValue] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];
@@ -487,7 +487,7 @@
 //订单查询 详情
 - (void)setShifujineMoney:(NSString *)shifujineMoney {
     _shifujineMoney = shifujineMoney;
-    CGFloat f = _shifujineMoney.floatValue;
+    CGFloat f = _shifujineMoney.doubleValue;
     NSInteger d = _shifujineMoney.integerValue;
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.isDaiBuHuo ? @"待补货金额： " : @"实付金额： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
     NSAttributedString *str = [[NSAttributedString alloc] initWithString: d==f ? [NSString stringWithFormat:@"¥%ld",d] : [NSString stringWithFormat:@"¥%.2f",f] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];

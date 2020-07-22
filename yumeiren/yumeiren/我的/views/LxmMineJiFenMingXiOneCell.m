@@ -42,7 +42,7 @@
          [self.typeBt setTitleColor:RGB(255, 134, 62) forState:UIControlStateNormal];
         [self.typeBt setImage:[UIImage imageNamed:@"kk940"] forState:UIControlStateNormal];
         self.typeBt.titleLabel.font = [UIFont systemFontOfSize:10];
-        [self.typeBt setTitle:[NSString stringWithFormat:@"直属购进奖励%0.1f%%",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];
+        [self.typeBt setTitle:[NSString stringWithFormat:@"直属购进奖励%0.1f%%",model.sale_rate.doubleValue * 100] forState:UIControlStateNormal];
         
         
     }else if (type == 2) {
@@ -78,7 +78,7 @@
          [self.typeBt setTitleColor:RGB(255, 134, 62) forState:UIControlStateNormal];
         [self.typeBt setImage:[UIImage imageNamed:@"kk940"] forState:UIControlStateNormal];
         self.typeBt.titleLabel.font = [UIFont systemFontOfSize:10];
-        [self.typeBt setTitle:[NSString stringWithFormat:@" 收入小晞 = 销售业绩 x %0.1f%% - 下级分配",model.sale_rate.floatValue * 100] forState:UIControlStateNormal];
+        [self.typeBt setTitle:[NSString stringWithFormat:@" 收入小晞 = 销售业绩 x %0.1f%% - 下级分配",model.sale_rate.doubleValue * 100] forState:UIControlStateNormal];
         
     }else if (type == 6) {
         self.titleLB.text = [NSString stringWithFormat:@"转入-来自%@",model.by_name];

@@ -26,6 +26,7 @@
 #import "LxmOrderDetailVC.h"
 
 #import "LxmMyBaoZhengJinVC.h"
+#import "LxmJiFenDeatilOneTVC.h"
 
 @interface LxmQianBaoMessageVC ()
 
@@ -203,7 +204,7 @@
                     [view setConstrains:YES money:str];
                     
                 } else {
-                    [SVProgressHUD showSuccessWithStatus:@"已阅读!"];
+//                    [SVProgressHUD showSuccessWithStatus:@"已阅读!"];
                 }
                 model.read_status = @"2";
                 [selfWeak.tableView reloadData];
@@ -298,6 +299,15 @@
                     [selfWeak readorno:model isChai:NO view:nil];
                 };
                 [self.navigationController pushViewController:vc animated:YES];
+            }else if (model.second_type.intValue == 35 || model.second_type.intValue == 36) {
+             
+                
+                LxmJiFenDeatilOneTVC * vc =[[LxmJiFenDeatilOneTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.ID = model.info_id;
+                [self readorno:model isChai:NO view:nil];
+                [self.navigationController pushViewController:vc animated:YES];
+                
             } else {
                 LxmQianBaoVC *vc = [[LxmQianBaoVC alloc] init];
                 vc.readBlock = ^{

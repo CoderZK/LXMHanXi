@@ -134,7 +134,7 @@
                model.read_status = @"2";
                [selfWeak.tableView reloadData];
            } else {
-               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+//               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
            }
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
            [SVProgressHUD dismiss];

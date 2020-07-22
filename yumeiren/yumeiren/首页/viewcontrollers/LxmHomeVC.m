@@ -154,6 +154,7 @@
         if (!cell) {
             cell = [[LxmHomeGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmHomeGoodsCell"];
         }
+        
         cell.model = self.homeModel.goodTypes[indexPath.section - 1];
         return cell;
     }

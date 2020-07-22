@@ -1425,7 +1425,7 @@
 - (void)setGoodsModel:(LxmHomeGoodsModel *)goodsModel {
     _goodsModel = goodsModel;
 //    NSString *maxNum = _goodsModel.up_num.integerValue > _goodsModel.com_num.integerValue ? _goodsModel.up_num : _goodsModel.com_num;
-//    if (_goodsModel.num.floatValue > maxNum.floatValue) {
+//    if (_goodsModel.num.doubleValue > maxNum.doubleValue) {
 //        _kucunJinZhangLabel.hidden = NO;
 //        [self.moneyLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(self.kucunJinZhangLabel.mas_bottom).offset(10);

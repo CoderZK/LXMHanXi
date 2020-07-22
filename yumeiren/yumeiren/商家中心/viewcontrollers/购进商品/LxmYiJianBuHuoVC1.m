@@ -209,7 +209,7 @@
 
 - (void)loadData1 {
     [SVProgressHUD show];
-    [LxmNetworking networkingPOST:good_stock_list parameters:@{@"token":SESSION_TOKEN} returnClass:LxmShopCenterRootModel.class success:^(NSURLSessionDataTask *task, LxmShopCenterRootModel *responseObject) {
+    [LxmNetworking networkingPOST:good_stock_list parameters:@{@"token":SESSION_TOKEN,@"noVip":@"1"} returnClass:LxmShopCenterRootModel.class success:^(NSURLSessionDataTask *task, LxmShopCenterRootModel *responseObject) {
         
         if (responseObject.key.intValue == 1000) {
             if (([LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.5"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.4"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"-0.3"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"1.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"2.1"] || [LxmTool.ShareTool.userModel.roleType isEqualToString:@"3.1"])) {
@@ -320,7 +320,7 @@
     }
     
     
-    if (shifuMoney < LxmTool.ShareTool.userModel.lowMoney.floatValue) {
+    if (shifuMoney < LxmTool.ShareTool.userModel.lowMoney.doubleValue) {
         UIAlertController * alertView = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"请满足最低下单金额%@元",LxmTool.ShareTool.userModel.lowMoney] message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil]];
         [UIViewController.topViewController presentViewController:alertView animated:YES completion:nil];
@@ -533,9 +533,30 @@
     NSInteger num =  _numView.numTF.text.intValue;
     if (btn == _numView.decButton) {
         if (_numView.numTF.text.integerValue > self.buhuoModel.tempbuhuoNum.integerValue) {
-            num --;
+            
+            if ([LxmTool ShareTool].userModel.roleType.intValue == 2) {
+                //总经理
+                if (num>self.buhuoModel.one_buy_num.intValue) {
+                    num--;
+                }else {
+                     [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"购进数量不能少于%ld",self.buhuoModel.one_buy_num.integerValue]];
+                }
+                
+            }else if ([LxmTool ShareTool].userModel.roleType.intValue == 3 ) {
+                //董事
+                if (num>self.buhuoModel.two_buy_num.intValue) {
+                    num--;
+                }else {
+                     [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"购进数量不能少于%ld",self.buhuoModel.two_buy_num.integerValue]];
+                }
+            }else {
+                num --;
+                
+            }
+            
             _numView.numTF.text = @(num).stringValue;
             self.buhuoModel.buhuoNum = @(num).stringValue;
+           
             if (self.incOrDecClickBlock) {
                 self.incOrDecClickBlock();
             }
@@ -548,7 +569,26 @@
             return;
         }
     } else {
-        num ++;
+        
+        
+        if ([LxmTool ShareTool].userModel.roleType.intValue == 2) {
+            //总经理
+            if (num<self.buhuoModel.one_buy_num.intValue) {
+                num = self.buhuoModel.one_buy_num.intValue;
+            }else {
+                num++;
+            }
+            
+        }else if ([LxmTool ShareTool].userModel.roleType.intValue == 3 ) {
+            //董事
+            if (num<self.buhuoModel.two_buy_num.intValue) {
+                num = self.buhuoModel.two_buy_num.intValue;
+            }else {
+                num++;
+            }
+        }else {
+            num ++;
+        }
         _numView.numTF.text = @(num).stringValue;
         self.buhuoModel.buhuoNum = @(num).stringValue;
         if (self.incOrDecClickBlock) {

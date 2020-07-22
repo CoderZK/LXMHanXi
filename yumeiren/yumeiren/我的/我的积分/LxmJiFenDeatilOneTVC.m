@@ -198,7 +198,7 @@
             cell.rightLB.text = self.dataModel.order_code;
         }else if (row == 2) {
             cell.leftLB.text = @"小晞比例";
-            cell.rightLB.text = [NSString stringWithFormat:@"%0.2f%%",self.dataModel.sale_rate.floatValue * 100 ];
+            cell.rightLB.text = [NSString stringWithFormat:@"%0.2f%%",self.dataModel.sale_rate.doubleValue * 100 ];
         }else if (row == 3) {
             cell.leftLB.text = @"时间";
             cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];
@@ -228,7 +228,7 @@
             cell.rightLB.text = self.dataModel.sale_money;
         }else if (row == 1) {
             cell.leftLB.text = @"小晞比例";
-            cell.rightLB.text = [NSString stringWithFormat:@"%0.2f%%",self.dataModel.sale_rate.floatValue * 100 ];
+            cell.rightLB.text = [NSString stringWithFormat:@"%0.2f%%",self.dataModel.sale_rate.doubleValue * 100 ];
         }else if (row == 2) {
             cell.leftLB.text = @"收入时间";
             cell.rightLB.text = [self.dataModel.create_time getIntervalToZHXLongTime];;

@@ -58,6 +58,7 @@
 @property (nonatomic, strong) NSString *goodPrice;/**价格*/
 
 @property (nonatomic, strong) NSString *num;/*本地商品数量*/
+@property (nonatomic, strong) NSString *buy_num;/*更具身份添最低购物*/
 
 @property (nonatomic, assign) CGFloat titleH;//标题高度
 

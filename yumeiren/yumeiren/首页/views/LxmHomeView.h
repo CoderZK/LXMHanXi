@@ -67,4 +67,6 @@
 
 @property (nonatomic, strong) LxmHomeGoodsTypesModel *model;
 
+
+
 @end

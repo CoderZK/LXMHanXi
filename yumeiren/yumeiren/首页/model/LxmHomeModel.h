@@ -357,6 +357,9 @@
 @property (nonatomic, strong) NSString *proxy_price;/*商品代理价格*/
 
 @property (nonatomic, strong) NSString *num;//本地列表商品数量
+@property (nonatomic, strong) NSString* buy_num;//根据身份必须最低购买量
+//@property (nonatomic, strong) NSString* one_buy_num;//根据身份必须最低购买量
+//@property (nonatomic, strong) NSString* two_buy_num;//根据身份必须最低购买量
 
 @property (nonatomic, assign) BOOL isSelected;/* 本地列表商品是否选中 */
 
@@ -376,6 +379,7 @@
 @property (nonatomic, strong) NSString *id;/*商品所属分类id*/
 
 @property (nonatomic, strong) NSString *title;/*商品所属分类标题*/
+@property (nonatomic, strong) NSString *buy_num;/*根据用户身份需要的最低购买量*/
 
 @property (nonatomic, strong) NSString *listPic;/*商品所属分类banner*/
 

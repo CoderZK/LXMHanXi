@@ -30,7 +30,7 @@
         return;
     }
     
-    if (self.TF.text.floatValue > self.jifen) {
+    if (self.TF.text.doubleValue > self.jifen) {
         [SVProgressHUD showErrorWithStatus:@"小晞不足!"];
         return;
     }
