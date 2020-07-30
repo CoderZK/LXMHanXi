@@ -11,13 +11,13 @@
 #define ISLOGIN [LxmTool ShareTool].isLogin
 #define TOKEN [LxmTool ShareTool].session_token
 
-//#define Base_URL @"http://app.hkymr.com:8989"
+#define Base_URL @"http://app.chaoci666.com:8989"
 
-#define Base_URL @"http://106.15.91.60"
+//#define Base_URL @"http://106.15.91.60"
 
-//#define Base_URL @"https://app.hkymr.com"
+//#define Base_URL @"http://chaoci666.com/"
 
-#define Base_RESOURSE_URL @"https://vedio.hkymr.com"
+//#define Base_RESOURSE_URL @"https://vedio.hkymr.com"
 
 /**
  单张图片上传 或视频上传

@@ -27,6 +27,7 @@
 
 #import "LxmMyBaoZhengJinVC.h"
 #import "LxmJiFenDeatilOneTVC.h"
+#import "LxmMyHongBaoVC.h"
 
 @interface LxmQianBaoMessageVC ()
 
@@ -278,13 +279,18 @@
         }
             break;
         case 3: {//3-钱包消息
-            if (model.second_type.intValue == 38) {//跳转补货订单详情
-                LxmBuHuoDetailVC *vc = [[LxmBuHuoDetailVC alloc] init];
-                vc.orderID = model.info_id;
-                vc.readBlock = ^{
-                    [selfWeak readorno:model isChai:NO view:nil];
-                };
+            if (model.second_type.intValue == 38) {//套转到红包
+//                LxmBuHuoDetailVC *vc = [[LxmBuHuoDetailVC alloc] init];
+//                vc.orderID = model.info_id;
+//                vc.readBlock = ^{
+//                    [selfWeak readorno:model isChai:NO view:nil];
+//                };
+//                [self.navigationController pushViewController:vc animated:YES];
+                
+                LxmMyHongBaoVC *vc = [[LxmMyHongBaoVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+                vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
+                
             } else if (model.second_type.intValue == 39) {//跳转购进订单详情
                 LxmOrderDetailVC *vc = [[LxmOrderDetailVC alloc] init];
                 vc.iscaiGouandXiaoshou = YES;
@@ -293,13 +299,13 @@
                     [selfWeak readorno:model isChai:NO view:nil];
                 };
                 [self.navigationController pushViewController:vc animated:YES];
-            } else if (model.second_type.intValue == 40) {//保证金退回到余额
+            } else if (model.second_type.intValue == 40 || model.second_type.intValue == 35) {//保证金退回到余额
                 LxmMyBaoZhengJinVC *vc = [[LxmMyBaoZhengJinVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
                 vc.readBlock = ^{
                     [selfWeak readorno:model isChai:NO view:nil];
                 };
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (model.second_type.intValue == 35 || model.second_type.intValue == 36) {
+            }else if (model.second_type.intValue == 85 || model.second_type.intValue == 86) {
              
                 
                 LxmJiFenDeatilOneTVC * vc =[[LxmJiFenDeatilOneTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
@@ -308,7 +314,7 @@
                 [self readorno:model isChai:NO view:nil];
                 [self.navigationController pushViewController:vc animated:YES];
                 
-            } else {
+            }  else {
                 LxmQianBaoVC *vc = [[LxmQianBaoVC alloc] init];
                 vc.readBlock = ^{
                     [selfWeak readorno:model isChai:NO view:nil];

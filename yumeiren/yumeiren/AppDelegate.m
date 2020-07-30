@@ -38,6 +38,7 @@
 
 #import "LxmMyBaoZhengJinVC.h"
 #import "LxmMineJiFenXiaJiTVC.h"
+#import "LxmMyHongBaoVC.h"
 
 //role_province和role_ceo  申请省代申请CEO,加个字段up_message，申请理由
 
@@ -51,12 +52,12 @@
 //高德地图；账号：13338797098；密码：YMR0627@
 // User Interface Style : Light
 
-#define WXAppID @"wx039d5ff19254f491"
-#define WXAppSecret @"dd7b2c888d05818d52b20932d5aa9add"
-#define UMKey @"5d5b49e1570df386a80007aa"
+#define WXAppID @"wxf864f7ade06a5c03"
+#define WXAppSecret @"34c030c037040e7fdffc753f4d43ca69"
+#define UMKey @"5efbfc5d895ccab8ee00002d"
 #define UMAppAecret @"arz1tz9irt79iuu1qsopqobafizt4xxb"
-#define QQAppSecret @"I3XA6kvgze9wBAQE"
-#define QQAppID @"1109487321"
+#define QQAppSecret @"HQymNSwEkhNLnyNG"
+#define QQAppID @"1110529433"
 #define AMapKey @"91c7d905a625e4ee5efc65dbf919d1b8"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate,WXApiDelegate>
@@ -276,19 +277,19 @@
         }
             break;
         case 3: {//3-钱包消息
-            if (model.secondType.intValue == 38) {//跳转补货订单详情
-                LxmBuHuoDetailVC *vc = [[LxmBuHuoDetailVC alloc] init];
-                vc.orderID = model.infoId;
+            if (model.secondType.intValue == 38) {//跳转红包
+                LxmMyHongBaoVC *vc = [[LxmMyHongBaoVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+                vc.hidesBottomBarWhenPushed = YES;
                 [nav pushViewController:vc animated:YES];
             } else if (model.secondType.intValue == 39) {//跳转购进订单详情
                 LxmOrderDetailVC *vc = [[LxmOrderDetailVC alloc] init];
                 vc.iscaiGouandXiaoshou = YES;
                 vc.orderID = model.infoId;
                 [nav pushViewController:vc animated:YES];
-            } else if (model.secondType.intValue == 40) {//保证金退回到余额
+            } else if (model.secondType.intValue == 40 || model.secondType.intValue == 35 ) {//保证金退回到余额
                 LxmMyBaoZhengJinVC *vc = [[LxmMyBaoZhengJinVC alloc] initWithTableViewStyle:UITableViewStyleGrouped];
                 [nav pushViewController:vc animated:YES];
-            }else if (model.secondType.intValue == 35 || model.secondType.intValue == 36) {
+            }else if (model.secondType.intValue == 85 || model.secondType.intValue == 86) {
                 LxmMineJiFenXiaJiTVC * vc =[[LxmMineJiFenXiaJiTVC alloc] init];
                 vc.hidesBottomBarWhenPushed = YES;
                 [nav pushViewController:vc animated:YES];
@@ -327,9 +328,9 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ZhiFuBaoPay" object:resultDic];
         }];
-    } else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//pay"]) {
+    } else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//pay"]) {
         [WXApi handleOpenURL:url delegate:self];
-    }  else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//oauth"]) {
+    }  else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//oauth"]) {
         [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
     } else if ([url.scheme containsString:@"QQ"]) {
         [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
@@ -344,9 +345,9 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ZhiFuBaoPay" object:resultDic];
         }];
-    } else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//pay"]) {
+    } else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//pay"]) {
         [WXApi handleOpenURL:url delegate:self];
-    } else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//oauth"]) {
+    } else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//oauth"]) {
         [[UMSocialManager defaultManager] handleOpenURL:url options:options];
     } else if ([url.scheme containsString:@"QQ"]) {
         [[UMSocialManager defaultManager] handleOpenURL:url options:options];
@@ -360,9 +361,9 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ZhiFuBaoPay" object:resultDic];
         }];
-    } else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//pay"]) {
+    } else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//pay"]) {
         [WXApi handleOpenURL:url delegate:self];
-    }  else if([url.scheme isEqualToString:@"wx039d5ff19254f491"]&&[url.resourceSpecifier containsString:@"//oauth"]) {
+    }  else if([url.scheme isEqualToString:WXAppID]&&[url.resourceSpecifier containsString:@"//oauth"]) {
         [[UMSocialManager defaultManager] handleOpenURL:url];
     } else if ([url.scheme containsString:@"QQ"]) {
          [[UMSocialManager defaultManager] handleOpenURL:url];
