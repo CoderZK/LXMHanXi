@@ -562,6 +562,16 @@
  */
 #define my_group_total_sale  Base_URL"/app/user/my_group_total_sale"
 
+/**
+ 新增接口 获取历史团队小晞
+ */
+#define month_total_group_score Base_URL"/app/user/month_total_group_score"
+
+/**
+ 新增接口 按月-查看直属小晞 提现和收入汇总
+ */
+#define month_total_direct_score Base_URL"/app/user/month_total_direct_score"
+
 
 /**
  获取图片地址

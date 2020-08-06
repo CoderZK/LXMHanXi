@@ -217,7 +217,7 @@
 
 @property (nonatomic, strong) UILabel *allLabel;//全部提现文字描述
 
-@property (nonatomic, strong) LxmTiXianButton *zhifubaoBtn;//支付宝按钮
+//@property (nonatomic, strong) LxmTiXianButton *zhifubaoBtn;//支付宝按钮
 
 @property (nonatomic, strong) LxmTiXianButton *yinhangkaBtn;//银行卡按钮
 
@@ -285,13 +285,13 @@
     [self.selectButton addSubview:self.textLabel1];
     [self.selectButton addSubview:self.accImgVIew];
     
-    [self addSubview:self.zhifubaoBtn];
+//    [self addSubview:self.zhifubaoBtn];
     [self addSubview:self.yinhangkaBtn];
     [self addSubview:self.detailInfoLabel];
     
     [self addSubview:self.addImgView];
     [self.addImgView addSubview:self.bankCardNo];
-    [self addSubview:self.zhifubaoView];
+//    [self addSubview:self.zhifubaoView];
     
     [self addSubview:self.textLabel2];
     [self addSubview:self.codeTF];
@@ -363,13 +363,13 @@
         make.width.height.equalTo(@15);
     }];
     
-    [self.zhifubaoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.selectButton.mas_bottom);
-        make.leading.trailing.equalTo(self);
-        make.height.equalTo(@50);
-    }];
+//    [self.zhifubaoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.selectButton.mas_bottom);
+//        make.leading.trailing.equalTo(self);
+//        make.height.equalTo(@50);
+//    }];
     [self.yinhangkaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.zhifubaoBtn.mas_bottom);
+        make.top.equalTo(self.selectButton.mas_bottom);
         make.leading.trailing.equalTo(self);
         make.height.equalTo(@50);
     }];
@@ -378,11 +378,11 @@
         make.leading.equalTo(self).offset(15);
         make.height.equalTo(@40);
     }];
-    [self.zhifubaoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailInfoLabel.mas_bottom);
-        make.leading.trailing.equalTo(self);
-        make.height.equalTo(@100);
-    }];
+//    [self.zhifubaoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.detailInfoLabel.mas_bottom);
+//        make.leading.trailing.equalTo(self);
+//        make.height.equalTo(@100);
+//    }];
     [self.addImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.detailInfoLabel.mas_bottom);
         make.leading.equalTo(self).offset(15);
@@ -394,8 +394,12 @@
         make.centerY.equalTo(self.addImgView);
     }];
     [self.textLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.zhifubaoView.mas_bottom).offset(20);
+//        make.top.equalTo(self.zhifubaoView.mas_bottom).offset(20);
+//        make.leading.equalTo(self).offset(15);
+        
+        make.top.equalTo(self.addImgView.mas_bottom).offset(20);
         make.leading.equalTo(self).offset(15);
+        
     }];
     [self.codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.textLabel2.mas_bottom).offset(10);
@@ -438,8 +442,8 @@
     
     if (isJiFen) {
         self.textLabel.text = @"提取小晞";
-           self.moneyTF.placeholder = [NSString stringWithFormat:@"单笔小晞提现最低%@",LxmTool.ShareTool.userModel.cashMoney];;
-           self.shuomingLabel.text = @"提取说明：提现后将于T+2确认到账结果。其中T日指提取日当天（下午5点以前，下午5点以后为下一交易日），T+2日指T日的第二天，例如T日为周一则T+2为周三，遇周末或法定节假日顺延。";
+           self.moneyTF.placeholder = [NSString stringWithFormat:@"单笔小晞提取最低%@",LxmTool.ShareTool.userModel.cashMoney];;
+           self.shuomingLabel.text = @"提取说明：提取后将于T+2确认到账结果。其中T日指提取日当天（下午5点以前，下午5点以后为下一交易日），T+2日指T日的第二天，例如T日为周一则T+2为周三，遇周末或法定节假日顺延。";
         self.yuanlabel.text = @"";
     }else {
         self.textLabel.text = @"提现";
@@ -546,23 +550,23 @@
 }
 
 
-- (LxmTiXianButton *)zhifubaoBtn {
-    if (!_zhifubaoBtn) {
-        _zhifubaoBtn = [LxmTiXianButton new];
-        _zhifubaoBtn.iconImgView.image = [UIImage imageNamed:@"alipay_pay"];
-        _zhifubaoBtn.titleLabel1.text = @"支付宝";
-        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
-        [_zhifubaoBtn addTarget:self action:@selector(selectedClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _zhifubaoBtn;
-}
+//- (LxmTiXianButton *)zhifubaoBtn {
+//    if (!_zhifubaoBtn) {
+//        _zhifubaoBtn = [LxmTiXianButton new];
+//        _zhifubaoBtn.iconImgView.image = [UIImage imageNamed:@"alipay_pay"];
+//        _zhifubaoBtn.titleLabel1.text = @"支付宝";
+//        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
+//        [_zhifubaoBtn addTarget:self action:@selector(selectedClick:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _zhifubaoBtn;
+//}
 
 - (LxmTiXianButton *)yinhangkaBtn {
     if (!_yinhangkaBtn) {
         _yinhangkaBtn = [LxmTiXianButton new];
         _yinhangkaBtn.iconImgView.image = [UIImage imageNamed:@"yinhangka"];
         _yinhangkaBtn.titleLabel1.text = @"银行卡";
-        _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
+        _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
         [_yinhangkaBtn addTarget:self action:@selector(selectedClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _yinhangkaBtn;
@@ -585,7 +589,7 @@
         _addImgView.userInteractionEnabled = YES;
         _addImgView.layer.cornerRadius = 3;
         _addImgView.layer.masksToBounds = YES;
-        _addImgView.hidden = YES;
+//        _addImgView.hidden = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAddImgView)];
         [_addImgView addGestureRecognizer:tap];
     }
@@ -656,8 +660,8 @@
 }
 
 - (void)setBankModel:(LxmMyBankModel *)bankModel {
-    _zhifubaoBtn.selected = NO;
-    _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
+//    _zhifubaoBtn.selected = NO;
+//    _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
     _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
     _zhifubaoView.hidden = YES;
     _addImgView.hidden = NO;
@@ -672,22 +676,22 @@
 - (void)selectedClick:(UIButton *)btn {
     btn.selected = YES;
     NSInteger index = 111;
-    if (btn == _zhifubaoBtn) {
-        _yinhangkaBtn.selected = NO;
-        _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
-        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
-        _addImgView.hidden = YES;
-        _zhifubaoView.hidden = NO;
-        [self bringSubviewToFront:_zhifubaoView];
-        [self.textLabel2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.zhifubaoView.mas_bottom).offset(20);
-            make.leading.equalTo(self).offset(15);
-        }];
-        index = 111;
-        
-    } else {
-        _zhifubaoBtn.selected = NO;
-        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
+//    if (btn == _zhifubaoBtn) {
+//        _yinhangkaBtn.selected = NO;
+//        _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
+//        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
+//        _addImgView.hidden = YES;
+//        _zhifubaoView.hidden = NO;
+//        [self bringSubviewToFront:_zhifubaoView];
+//        [self.textLabel2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.zhifubaoView.mas_bottom).offset(20);
+//            make.leading.equalTo(self).offset(15);
+//        }];
+//        index = 111;
+//
+//    } else {
+//        _zhifubaoBtn.selected = NO;
+//        _zhifubaoBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_n"];
         _yinhangkaBtn.selectImgView.image = [UIImage imageNamed:@"xuanzhong_y"];
         _zhifubaoView.hidden = YES;
         _addImgView.hidden = NO;
@@ -697,7 +701,7 @@
             make.leading.equalTo(self).offset(15);
         }];
         index = 222;
-    }
+//    }
     [self layoutIfNeeded];
     if (self.tixianStyleClikBlock) {
         self.tixianStyleClikBlock(index);
@@ -745,7 +749,7 @@
 - (UIButton *)tixainButton {
     if (!_tixainButton) {
         _tixainButton = [[UIButton alloc] init];
-        [_tixainButton setTitle:@"小晞" forState:UIControlStateNormal];
+        [_tixainButton setTitle:@"提交" forState:UIControlStateNormal];
         if(self.isJiFen) {
             [_tixainButton setTitle:@"提取" forState:UIControlStateNormal];
         }
@@ -764,7 +768,7 @@
         NSString *str = @"提现说明：提现后将于T+2确认到账结果。其中T日指提现日当天（下午5点以前，下午5点以后为下一交易日），T+2日指T日的第二天，例如T日为周一则T+2为周三，遇周末或法定节假日顺延。";
         CGFloat h = [str getSizeWithMaxSize:CGSizeMake(ScreenW - 30, 999) withFontSize:13].height;
         
-        _headerView = [[LxmTiXianHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 330 + 140 + 100 + h + 10 - 40)];
+        _headerView = [[LxmTiXianHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 330 + 140 + 100 + h + 10 - 40 -  50)];
         WeakObj(self);
         _headerView.tixianStyleClikBlock = ^(NSInteger index) {
             [selfWeak tixianFangshiClick:index height:h];
@@ -814,7 +818,10 @@
     [self initSubviews];
     self.headerView.moneyTF.delegate = self;
     [self.headerView.sendCodeButton addTarget:self action:@selector(sendCodeButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    self.selectIndex = 111;//默认支付宝方式
+    self.selectIndex = 222;//默认一行卡
+    
+    [self loadbankListData];
+    
 }
 
 /**
@@ -867,6 +874,32 @@
         [SVProgressHUD dismiss];
     }];
 }
+//获取银行卡列表
+- (void)loadbankListData {
+  
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"token"] = SESSION_TOKEN;
+        dict[@"pageNum"] = @(1);
+        dict[@"pageSize"] = @10;
+        [LxmNetworking networkingPOST:bank_list parameters:dict returnClass:LxmMyBankRootModel.class success:^(NSURLSessionDataTask *task, LxmMyBankRootModel *responseObject) {
+            [self endRefrish];
+            if (responseObject.key.intValue == 1000) {
+                NSArray<LxmMyBankModel *> *arr = responseObject.result.list;
+                if (arr.count > 0 ) {
+                    self.bankModel = arr[0];
+                    [self setHeaderViewModel:arr[0]];
+                }
+                [self.tableView reloadData];
+            } else {
+                [UIAlertController showAlertWithmessage:responseObject.message];
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [self endRefrish];
+        }];
+    
+}
+
+
 
 /**
  定时器 验证码

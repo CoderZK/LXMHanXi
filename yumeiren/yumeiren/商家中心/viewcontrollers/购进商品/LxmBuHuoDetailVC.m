@@ -205,7 +205,7 @@
             if (LxmTool.ShareTool.userModel.postMoney.intValue == 0) {
                 cell.detailLabel.text = @"物流发货";
             } else {
-                cell.detailLabel.text = [NSString stringWithFormat:@"满%@包邮或者到付",LxmTool.ShareTool.userModel.postMoney];
+                cell.detailLabel.text = [NSString stringWithFormat:@"满%@包邮或运费按位置和货物重量，实际核算",LxmTool.ShareTool.userModel.postMoney];
             }
         }
         return cell;

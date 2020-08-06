@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) NSMutableArray <LxmJiFenModel *>*dataArr;
 @property (nonatomic, strong) LxmEmptyView *emptyView;//空界面
+@property(nonatomic,strong)UIView *bottomV;
+@property(nonatomic,strong)UILabel *allXiaoXiLB,*monthXiaoXiLB;
 
 
 
@@ -43,12 +45,12 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的小晞明细";
-    if (self.scoreType == 1) {
-        self.navigationItem.title = @"我的直属小晞";
-    }
+    
     
     [self.view addSubview:self.emptyView];
     [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,6 +71,13 @@
     [dateFormatter setDateFormat:@"yyyy-MM"];
     self.montyStr = [dateFormatter stringFromDate:[NSDate date]];
     self.dataArr = [NSMutableArray array];
+    
+    if (self.scoreType == 1) {
+        self.navigationItem.title = @"我的直属小晞";
+        [self initBottomV];
+        [self getJiFenData];
+    }
+    
     self.page = 1;
     [self loadData];
     WeakObj(self);
@@ -86,6 +95,120 @@
     
     
 }
+
+- (void)getJiFenData  {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = [LxmTool ShareTool].session_token;
+    dict[@"month"] = self.montyStr;
+    [LxmNetworking networkingPOST:month_total_direct_score
+
+                       parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] integerValue] == 1000) {
+            
+            self.allXiaoXiLB.text = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"totalGet"]] getPriceStr];;
+            self.monthXiaoXiLB.text =[[NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"totalOut"]] getPriceStr];
+            
+            
+        } else {
+          
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+         [SVProgressHUD dismiss];
+        
+    }];
+    
+    
+    
+    
+    
+}
+
+
+
+- (void)initBottomV {
+    
+    self.bottomV = [[UIView alloc] init];
+    self.bottomV.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.bottomV];
+    [self.bottomV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        if (StateBarH >20) {
+            make.bottom.equalTo(self.view).offset(-34);
+        }else {
+            make.bottom.equalTo(self.view);
+        }
+        make.height.equalTo(@50);
+    }];
+    self.bottomV.layer.shadowColor = CharacterDarkColor.CGColor;
+    self.bottomV.layer.shadowOpacity = 0.1;
+    self.bottomV.layer.shadowRadius = 3;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.bottomV.mas_top);
+    }];
+    
+    UILabel * lb1  =[[UILabel alloc] init];
+    lb1.font = [UIFont systemFontOfSize:13];
+    lb1.text = @"当月总小晞: ";
+    lb1.textColor = CharacterDarkColor;
+    [self.bottomV addSubview:lb1];
+    [lb1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomV);
+        make.height.equalTo(@20);
+        make.left.equalTo(self.bottomV).offset(15);
+    }];
+    
+    
+    UILabel * lb2  =[[UILabel alloc] init];
+    lb2.font = [UIFont systemFontOfSize:14];
+    lb2.text = @"2000";
+    lb2.textColor = MainColor;
+    [self.bottomV addSubview:lb2];
+    [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomV);
+        make.height.equalTo(@20);
+        make.left.equalTo(lb1.mas_right).offset(15);
+    }];
+    self.allXiaoXiLB = lb2;
+    
+    
+    
+    
+    
+    UILabel * lb4  =[[UILabel alloc] init];
+    lb4.font = [UIFont systemFontOfSize:14];
+    lb4.text = @"2000";
+    lb4.textColor = MainColor;
+    [self.bottomV addSubview:lb4];
+    [lb4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomV);
+        make.height.equalTo(@20);
+        make.right.equalTo(self.bottomV).offset(-15);
+    }];
+    self.monthXiaoXiLB = lb4;
+    
+    
+    UILabel * lb3  =[[UILabel alloc] init];
+    lb3.font = [UIFont systemFontOfSize:13];
+    lb3.text = @"当月提取小晞: ";
+    lb3.textColor = CharacterDarkColor;
+    [self.bottomV addSubview:lb3];
+    [lb3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.bottomV);
+        make.height.equalTo(@20);
+        make.right.equalTo(self.monthXiaoXiLB.mas_left).offset(-10);
+    }];
+    
+    
+}
+
 
 - (void)setHeadSubViews {
     
@@ -136,6 +259,7 @@
         
         selfWeak.page = 1;
         [selfWeak loadData];
+        [selfWeak getJiFenData];
     };
     [view show];
 }
@@ -173,24 +297,24 @@
 
 - (void)confirmScoreWithModel:(LxmJiFenModel *)model {
     
-       [SVProgressHUD show];
-       NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-       dict[@"token"] = SESSION_TOKEN;
-       dict[@"infoType"] = @(self.scoreType);
-       dict[@"id"] = model.ID;
-       [LxmNetworking networkingPOST:confirm_score parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-           [self endRefrish];
-           if ([responseObject[@"key"] intValue] == 1000) {
-               
-               model.status = @"2";
-               [self.tableView reloadData];
-               
-           } else {
-               [UIAlertController showAlertWithmessage:responseObject[@"message"]];
-           }
-       } failure:^(NSURLSessionDataTask *task, NSError *error) {
-           [self endRefrish];
-       }];
+    [SVProgressHUD show];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = SESSION_TOKEN;
+    dict[@"infoType"] = @(self.scoreType);
+    dict[@"id"] = model.ID;
+    [LxmNetworking networkingPOST:confirm_score parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self endRefrish];
+        if ([responseObject[@"key"] intValue] == 1000) {
+            
+            model.status = @"2";
+            [self.tableView reloadData];
+            
+        } else {
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self endRefrish];
+    }];
     
     
 }
@@ -221,7 +345,7 @@
         cell.typeBt.tag = indexPath.row;
         [cell.typeBt addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
     }else {
-         cell.typeBt.userInteractionEnabled = NO;
+        cell.typeBt.userInteractionEnabled = NO;
         
     }
     return cell;
@@ -234,7 +358,7 @@
     
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-         [self confirmScoreWithModel:self.dataArr[button.tag]];
+        [self confirmScoreWithModel:self.dataArr[button.tag]];
         
     }];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -246,7 +370,7 @@
     [ac addAction:action2];
     [self.navigationController presentViewController:ac animated:YES completion:nil];
     
-   
+    
     
     
 }

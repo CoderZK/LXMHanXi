@@ -255,6 +255,7 @@
         
         cell.iconImgView.image = [UIImage imageNamed:@"yue_pay"];
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"余额支付"];
+      
         NSAttributedString *str = [[NSAttributedString alloc] initWithString:f == d ? [NSString stringWithFormat:@"¥%ld",(long)d] : [NSString stringWithFormat:@"¥%.2f",f] attributes:@{NSForegroundColorAttributeName:MainColor}];
         [att appendAttributedString:str];
         cell.titleLabel.attributedText = att;

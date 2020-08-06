@@ -218,6 +218,8 @@
 
 @property (nonatomic, strong) NSString *order_code;/* 订单号 */
 
+@property(nonatomic,strong)NSString *r_create_time;
+
 @property (nonatomic, strong) NSString *t_name;/* 补货人姓名 */
 
 @property (nonatomic, strong) NSString *t_tel;/* 补货人手机号 */

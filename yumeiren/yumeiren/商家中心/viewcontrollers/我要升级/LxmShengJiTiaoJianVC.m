@@ -204,7 +204,7 @@
         [self.headerView.shengjiButton setTitle:@"审核成功可升级" forState:UIControlStateNormal];
     } else if (state == 6) {
         if (self.model.checkType.intValue == 4) {//直接完善信息购物
-            [self.headerView.shengjiButton setTitle:@"完善信息" forState:UIControlStateNormal];
+            [self.headerView.shengjiButton setTitle:@"立即升级" forState:UIControlStateNormal];
         } else {
             self.headerView.shengjiButton.hidden = NO;
             self.headerView.shengjiButton.userInteractionEnabled = YES;

@@ -260,8 +260,8 @@
                
            };
         cell.titleStr = @"账户: 1234569872522451;账户名称: 张小飞";
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-           return cell;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
            
     }else {
         LxmPayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmPayCell"];

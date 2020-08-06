@@ -24,7 +24,7 @@
 #import "LxmReadProtocolVC.h"
 #import "LxmSafeAutherVC.h"
 #import "LxmInfoClassVC.h"
-
+#import "LxmHomeOneCell.h"
 @interface LxmHomeVC ()<SDCycleScrollViewDelegate,UITabBarControllerDelegate>
 
 @property (nonatomic, strong) UIButton *rightButton;//导航栏右侧按钮
@@ -118,6 +118,8 @@
         StrongObj(self);
         [self loadIndexData];
     }];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LxmHomeOneCell" bundle:nil] forCellReuseIdentifier:@"LxmHomeOneCell"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 /**
@@ -135,7 +137,7 @@
     if (section == 0) {
         return 1;
     }
-    return 1;
+    return self.homeModel.goodTypes[section - 1].goodList.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -150,13 +152,20 @@
         cell.currentRole = LxmTool.ShareTool.userModel.roleType.integerValue;
         return cell;
     } else {
-        LxmHomeGoodsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmHomeGoodsCell"];
-        if (!cell) {
-            cell = [[LxmHomeGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmHomeGoodsCell"];
-        }
         
-        cell.model = self.homeModel.goodTypes[indexPath.section - 1];
+        LxmHomeOneCell  * cell  = [tableView dequeueReusableCellWithIdentifier:@"LxmHomeOneCell" forIndexPath:indexPath];
+        cell.model = self.homeModel.goodTypes[indexPath.section - 1].goodList[indexPath.row];
+        cell.desTStr = self.homeModel.goodTypes[indexPath.section - 1].title;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+        
+//        LxmHomeGoodsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LxmHomeGoodsCell"];
+//        if (!cell) {
+//            cell = [[LxmHomeGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmHomeGoodsCell"];
+//        }
+//
+//        cell.model = self.homeModel.goodTypes[indexPath.section - 1];
+//        return cell;
     }
 }
 
@@ -173,12 +182,26 @@
     return headerView;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section > 0) {
+        LxmGoodsDetailVC *vc = [[LxmGoodsDetailVC alloc] init];
+        vc.goodsID = self.homeModel.goodTypes[indexPath.section - 1].goodList[indexPath.row].id;
+        [UIViewController.topViewController.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 100;
     }
-    LxmHomeGoodsTypesModel *model = self.homeModel.goodTypes[indexPath.section - 1];
-    return ((ScreenW - 25)/2 + 50 + 5)*ceil(model.goodList.count/2.0) + 20;
+    
+    return (ScreenW - 30) * 10 / 16  + 90+15;
+
+//    LxmHomeGoodsTypesModel *model = self.homeModel.goodTypes[indexPath.section - 1];
+//    return ((ScreenW - 25)/2 + 50 + 5)*ceil(model.goodList.count/2.0) + 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -225,6 +225,9 @@
 		40F7EE2D2315341000DF3E18 /* LxmSelectAreaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F7EE2C2315341000DF3E18 /* LxmSelectAreaVC.m */; };
 		40FA4F6F2406025500F10B72 /* LxmJianFeiShengJiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FA4F6E2406025500F10B72 /* LxmJianFeiShengJiVC.m */; };
 		5807E1DD24B46B7B0041766C /* LxmJiFenCYCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807E1DC24B46B7B0041766C /* LxmJiFenCYCell.m */; };
+		58835B5424D3AB9700347B22 /* LxmHomeOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58835B5224D3AB9700347B22 /* LxmHomeOneCell.m */; };
+		58835B5524D3AB9700347B22 /* LxmHomeOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58835B5324D3AB9700347B22 /* LxmHomeOneCell.xib */; };
+		588462E424D2C5D3007343D9 /* LxmLiShiXiaoXiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 588462E324D2C5D3007343D9 /* LxmLiShiXiaoXiVC.m */; };
 		588BEA6624B2FC33000CF7DB /* LxmChongZhiOderDetailPicsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BEA6524B2FC33000CF7DB /* LxmChongZhiOderDetailPicsCell.m */; };
 		588BEA6C24B2FE46000CF7DB /* zkPhotoShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BEA6824B2FE45000CF7DB /* zkPhotoShowVC.m */; };
 		588BEA6D24B2FE46000CF7DB /* zkPhotoShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588BEA6924B2FE45000CF7DB /* zkPhotoShowCell.m */; };
@@ -385,7 +388,7 @@
 		4072561123166DAB00AEB259 /* LxmRegistXieYiAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmRegistXieYiAlertView.m; sourceTree = "<group>"; };
 		4076385F233C466D0051D0DC /* LxmShenQingReasonAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmShenQingReasonAlertView.h; sourceTree = "<group>"; };
 		40763860233C466D0051D0DC /* LxmShenQingReasonAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmShenQingReasonAlertView.m; sourceTree = "<group>"; };
-		4078923D22D4440B00716C1C /* 寒晞测试.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "寒晞测试.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4078923D22D4440B00716C1C /* 寒晞.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "寒晞.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4078924022D4440C00716C1C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4078924122D4440C00716C1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4078924322D4440C00716C1C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -677,6 +680,11 @@
 		40FA4F6E2406025500F10B72 /* LxmJianFeiShengJiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmJianFeiShengJiVC.m; sourceTree = "<group>"; };
 		5807E1DB24B46B7B0041766C /* LxmJiFenCYCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmJiFenCYCell.h; sourceTree = "<group>"; };
 		5807E1DC24B46B7B0041766C /* LxmJiFenCYCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmJiFenCYCell.m; sourceTree = "<group>"; };
+		58835B5124D3AB9700347B22 /* LxmHomeOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmHomeOneCell.h; sourceTree = "<group>"; };
+		58835B5224D3AB9700347B22 /* LxmHomeOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmHomeOneCell.m; sourceTree = "<group>"; };
+		58835B5324D3AB9700347B22 /* LxmHomeOneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LxmHomeOneCell.xib; sourceTree = "<group>"; };
+		588462E224D2C5D3007343D9 /* LxmLiShiXiaoXiVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmLiShiXiaoXiVC.h; sourceTree = "<group>"; };
+		588462E324D2C5D3007343D9 /* LxmLiShiXiaoXiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmLiShiXiaoXiVC.m; sourceTree = "<group>"; };
 		588BEA6424B2FC33000CF7DB /* LxmChongZhiOderDetailPicsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LxmChongZhiOderDetailPicsCell.h; sourceTree = "<group>"; };
 		588BEA6524B2FC33000CF7DB /* LxmChongZhiOderDetailPicsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LxmChongZhiOderDetailPicsCell.m; sourceTree = "<group>"; };
 		588BEA6824B2FE45000CF7DB /* zkPhotoShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkPhotoShowVC.m; sourceTree = "<group>"; };
@@ -836,7 +844,7 @@
 		4078923E22D4440C00716C1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4078923D22D4440B00716C1C /* 寒晞测试.app */,
+				4078923D22D4440B00716C1C /* 寒晞.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1125,6 +1133,9 @@
 				407892AA22D47D3700716C1C /* LxmHomeView.m */,
 				40E4319B23177CFF00B1AE41 /* LxmKeTangNoAlertView.h */,
 				40E4319C23177CFF00B1AE41 /* LxmKeTangNoAlertView.m */,
+				58835B5124D3AB9700347B22 /* LxmHomeOneCell.h */,
+				58835B5224D3AB9700347B22 /* LxmHomeOneCell.m */,
+				58835B5324D3AB9700347B22 /* LxmHomeOneCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1715,6 +1726,8 @@
 				589142E724ADBFF2005DE41A /* LxmMineYeJiKaoTVC.m */,
 				58A8015F24B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.h */,
 				58A8016024B6FF9F004B05BD /* LxmShengYuDaiZhuanJiFenListTVC.m */,
+				588462E224D2C5D3007343D9 /* LxmLiShiXiaoXiVC.h */,
+				588462E324D2C5D3007343D9 /* LxmLiShiXiaoXiVC.m */,
 			);
 			path = "我的积分";
 			sourceTree = "<group>";
@@ -1757,7 +1770,7 @@
 			);
 			name = yumeiren;
 			productName = yumeiren;
-			productReference = 4078923D22D4440B00716C1C /* 寒晞测试.app */;
+			productReference = 4078923D22D4440B00716C1C /* 寒晞.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1815,6 +1828,7 @@
 				40B4F23E22F27E290077823C /* icon_fullscreen.png in Resources */,
 				58A5273924B80B8F00FA737B /* LxmJiFenDetailTwoCell.xib in Resources */,
 				589142E024ADB966005DE41A /* LxmZhuanChuJiFenVC.xib in Resources */,
+				58835B5524D3AB9700347B22 /* LxmHomeOneCell.xib in Resources */,
 				58CED80824AB2BB400CC7AF4 /* LxmShopCenterTwoCell.xib in Resources */,
 				4078924822D4440C00716C1C /* Main.storyboard in Resources */,
 				40E48496230A7072007793DB /* icon_sliderImage@2x.png in Resources */,
@@ -1976,6 +1990,7 @@
 				588D403424AC5917004CB895 /* LxmMineTeamJiFenMingXiTVC.m in Sources */,
 				4061A83A22E35858004D127C /* LxmSettingVC.m in Sources */,
 				4004610322E89DCC00142850 /* LxmSubYeJiVC.m in Sources */,
+				58835B5424D3AB9700347B22 /* LxmHomeOneCell.m in Sources */,
 				402F934E22E6F2D0009F5E06 /* LxmPeiSongAlertView.m in Sources */,
 				588D403024AC3754004CB895 /* LxmChongZhiPiceCell.m in Sources */,
 				40F4BEF622E803FB00C48BA2 /* LxmOrderChaXunVC.m in Sources */,
@@ -2056,6 +2071,7 @@
 				407892A522D47CF200716C1C /* LxmMineVC.m in Sources */,
 				4061C5D122E06CEE006F631F /* LxmFenLeiView.m in Sources */,
 				40DC053822E982E900570241 /* LxmChongZhiVC.m in Sources */,
+				588462E424D2C5D3007343D9 /* LxmLiShiXiaoXiVC.m in Sources */,
 				40B39C192325F29100972E9A /* NSMutableAttributedString+CheckSetColor.m in Sources */,
 				40CDFD362370494F005C621D /* LxmDaoJishiView.m in Sources */,
 				4078927622D466DC00716C1C /* UIViewController+TopVC.m in Sources */,
@@ -2227,7 +2243,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = JC4A2LS9A4;
+				DEVELOPMENT_TEAM = U3896XJ77N;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2253,9 +2269,9 @@
 					"$(PROJECT_DIR)/yumeiren/分享和推送/SocialLibraries/QQ",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.biuwork.hanxi333;
-				PRODUCT_NAME = "寒晞测试";
-				PROVISIONING_PROFILE_SPECIFIER = comxxxxx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.biuwork.hanxi;
+				PRODUCT_NAME = "寒晞";
+				PROVISIONING_PROFILE_SPECIFIER = comjiankangxxxx;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2270,7 +2286,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JC4A2LS9A4;
+				DEVELOPMENT_TEAM = U3896XJ77N;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2296,9 +2312,9 @@
 					"$(PROJECT_DIR)/yumeiren/分享和推送/SocialLibraries/QQ",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.biuwork.hanxi333;
-				PRODUCT_NAME = "寒晞测试";
-				PROVISIONING_PROFILE_SPECIFIER = comxxxxx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.biuwork.hanxi;
+				PRODUCT_NAME = "寒晞";
+				PROVISIONING_PROFILE_SPECIFIER = comjiankangxxxx;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

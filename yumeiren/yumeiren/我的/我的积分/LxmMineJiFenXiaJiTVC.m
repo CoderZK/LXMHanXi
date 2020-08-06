@@ -15,16 +15,18 @@
 #import "LxmMineJiFenXiaJiSubTVC.h"
 #import "LxmTiXianVC.h"
 #import "LxmShengYuDaiZhuanJiFenListTVC.h"
+#import "LxmLiShiXiaoXiVC.h"
 @interface LxmMineJiFenXiaJiTVC ()
 @property(nonatomic,strong)UIButton *leftButton,*rightButton;
 @property(nonatomic,strong)UIView *navTitleV;
 @property(nonatomic,strong)UIView *headViewOne,*headViewTwo;
 @property(nonatomic,strong)UILabel *numberLB,*LB1,*LB2,*LB3,*LB4,*JifenLB;
-@property(nonatomic,strong)UIButton  *tixianBt,*mineJiFenBt,*shengYujiFenBt;
+@property(nonatomic,strong)UIButton  *tixianBt,*mineJiFenBt,*shengYujiFenBt,*liShiXiaoXiBt;
 @property(nonatomic,strong)UIImageView *imgV1,*imgV2;
 @property(nonatomic,strong)UIView  *redV;
 @property(nonatomic,strong)UIView *btView;
 @property(nonatomic,strong)LxmMineJiFenXiaJiSubTVC *subTVC;
+
 
 
 
@@ -166,6 +168,19 @@
     self.numberLB = numberLb;
     
     
+    self.liShiXiaoXiBt  = [[UIButton alloc] init];
+    [self.liShiXiaoXiBt setTitle:@"历史小晞 >" forState:UIControlStateNormal];
+    [self.liShiXiaoXiBt setTitleColor:MainColor forState:UIControlStateNormal];
+    self.liShiXiaoXiBt.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self.headViewOne addSubview:self.liShiXiaoXiBt];
+    self.liShiXiaoXiBt.layer.cornerRadius = 10;
+    self.liShiXiaoXiBt.clipsToBounds = YES;
+    self.liShiXiaoXiBt.layer.borderColor = MainColor.CGColor;
+    self.liShiXiaoXiBt.layer.borderWidth = 0.5;
+    [self.liShiXiaoXiBt addTarget:self action:@selector(lishiAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
     
     UIImageView * imageV = [[UIImageView alloc] init];
     imageV.image = [UIImage imageNamed:@"kkjifenback"];
@@ -303,17 +318,29 @@
     
     [numberLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.headViewOne).offset(15);
+        make.height.equalTo(@20);
+        make.top.equalTo(self.headViewOne).offset(5);
         
         if  ([self.jifenModel.rank isEqualToString:@"-1"]) {
-            make.height.equalTo(@0);
-            make.top.equalTo(self.headViewOne).offset(0);
+//            make.height.equalTo(@0);
+//            make.top.equalTo(self.headViewOne).offset(0);
+            self.numberLB.hidden = YES;
         }else {
-            make.height.equalTo(@20);
-            make.top.equalTo(self.headViewOne).offset(5);
+//            make.height.equalTo(@20);
+//            make.top.equalTo(self.headViewOne).offset(5);
+            self.numberLB.hidden = NO;
         }
         
         
     }];
+    
+    [self.liShiXiaoXiBt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.headViewOne).offset(-15);
+        make.centerY.equalTo(self.numberLB);
+        make.height.equalTo(@20);
+        make.width.equalTo(@80);
+    }];
+    
     
     
     
@@ -651,6 +678,13 @@
     
     
     
+}
+
+
+- (void)lishiAction{
+    LxmLiShiXiaoXiVC * vc =[[LxmLiShiXiaoXiVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
