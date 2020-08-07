@@ -12,7 +12,7 @@
 #import "LxmMyAddressVC.h"
 #import "LxmOrderChaXunVC.h"
 #import "LxmZiTiVC.h"
-
+#import "LxmPayVC.h"
 @interface LxmZiTiJieSuanVC ()<UITextViewDelegate>
 
 @property (nonatomic, strong) UIView *lineView;//
@@ -78,6 +78,7 @@
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",self.allPrice] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20], NSForegroundColorAttributeName:MainColor}];
     [att appendAttributedString:str];
     self.bottomView.moneyLabel.attributedText = att;
+    self.bottomView.moneyLabel.hidden = YES;
     WeakObj(self);
     self.bottomView.tijiaoBlock = ^{
         [selfWeak tijiaoOrder];
@@ -91,8 +92,8 @@
 }
 
 /**
-查看有没有赠品活动
-*/
+ 查看有没有赠品活动
+ */
 - (void)seeFavourable {
     [LxmNetworking networkingPOST:get_send_ac parameters:@{@"token" : SESSION_TOKEN} returnClass:nil success:^(NSURLSessionDataTask *task, NSDictionary *responseObject) {
         if ([responseObject isKindOfClass:NSDictionary.class] && [responseObject[@"key"] integerValue] == 1000) {
@@ -139,18 +140,18 @@
  */
 - (void)loadMorenAddressData {
     [LxmNetworking networkingPOST:address_list parameters:@{@"token":SESSION_TOKEN,@"pageNum": @1,@"defaultStatus":@2} returnClass:LxmAddressRootModel.class success:^(NSURLSessionDataTask *task, LxmAddressRootModel *responseObject) {
-            if (responseObject.key.intValue == 1000) {
-                NSArray *tempArr = responseObject.result.list;
-                if ([tempArr isKindOfClass:NSArray.class]) {
-                    if (tempArr.count > 0) {
-                        self.addressModel = tempArr.firstObject;
-                    }
+        if (responseObject.key.intValue == 1000) {
+            NSArray *tempArr = responseObject.result.list;
+            if ([tempArr isKindOfClass:NSArray.class]) {
+                if (tempArr.count > 0) {
+                    self.addressModel = tempArr.firstObject;
                 }
-                [self.tableView reloadData];
             }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        }];
+    }];
 }
 
 
@@ -363,29 +364,47 @@
     }
     
     if (self.noteView.text.isValid) {
-       dict[@"order_info"] = self.noteView.text;
+        dict[@"order_info"] = self.noteView.text;
     }
     
     [SVProgressHUD show];
     WeakObj(self);
-    [LxmNetworking networkingPOST:send_good_order parameters:dict returnClass:LxmBaseModel.class success:^(NSURLSessionDataTask *task, LxmBaseModel *responseObject) {
-        [SVProgressHUD dismiss];
-        if (responseObject.key.integerValue == 1000) {
-            [SVProgressHUD showSuccessWithStatus:@"发货下单成功!"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [LxmNetworking networkingPOST:send_good_order parameters:dict returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"key"] integerValue] == 1000) {
+            
+            
+            if (self.style == 100) {
+                //发货
                 [LxmEventBus sendEvent:@"fahuoxaidanSuccess" data:nil];
-                LxmOrderChaXunVC *vc = [LxmOrderChaXunVC new];
-                [self.navigationController pushViewController:vc animated:YES];
-                [self popSelfVC];
-//                for (UIViewController *vc in selfWeak.navigationController.viewControllers) {
-//                    if ([vc isKindOfClass:[LxmZiTiVC class]]) {
-//                        [selfWeak.navigationController popToViewController:vc animated:YES];
-//                    }
-//                }
-            });
-//            [selfWeak.navigationController popViewControllerAnimated:YES];
+                
+                if([[responseObject[@"result"] allKeys] containsObject:@"map"]) {
+                    LxmPayVC *vc = [[LxmPayVC alloc] initWithTableViewStyle:UITableViewStyleGrouped type:LxmPayVC_type_shengjigouwu];
+            
+                    vc.orderID = [NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"orderId"]];
+                    vc.shifuMoney = [NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"price"]];;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                
+            }else {
+                [SVProgressHUD showSuccessWithStatus:@"发货下单成功!"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [LxmEventBus sendEvent:@"fahuoxaidanSuccess" data:nil];
+                    LxmOrderChaXunVC *vc = [LxmOrderChaXunVC new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    [self popSelfVC];
+                    //                for (UIViewController *vc in selfWeak.navigationController.viewControllers) {
+                    //                    if ([vc isKindOfClass:[LxmZiTiVC class]]) {
+                    //                        [selfWeak.navigationController popToViewController:vc animated:YES];
+                    //                    }
+                    //                }
+                });
+                //            [selfWeak.navigationController popViewControllerAnimated:YES];
+            }
+            
+            
         } else {
-            [UIAlertController showAlertWithmessage:responseObject.message];
+            [UIAlertController showAlertWithmessage:responseObject[@"message"]];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD dismiss];

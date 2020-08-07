@@ -11,6 +11,7 @@
 @implementation UIAlertController (AlertWithKey)
 
 + (void)showAlertWithmessage:(NSString *)message {
+    [SVProgressHUD dismiss];
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
     

@@ -212,6 +212,8 @@
 
 @interface LxmShopCenterOrderModel : NSObject
 
+@property (nonatomic, strong) NSString *way_money; //物流费
+
 @property (nonatomic, strong) NSString *no_vip; //是否是耗材1不是  2 是
 
 @property (nonatomic, strong) NSString *role_type;/* 等级*/

@@ -117,9 +117,20 @@
             cell = [[LxmSubBuHuoOrderButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LxmSubBuHuoOrderButtonCell"];
         }
         cell.orderModel = self.dataArr[indexPath.section];
+        
+        
+        if (self.dataArr[indexPath.section].status.integerValue == 1) {
+            cell.leftButton.hidden = NO;
+            
+        } else {
+            cell.leftButton.hidden = YES;
+        }
         WeakObj(self);
-        cell.gotobuhuoBlock = ^{
+        cell.gotobuhuoBlock = ^{//1 待支付 4已完成
             [selfWeak buttonAction:selfWeak.dataArr[indexPath.section]];
+        };
+        cell.tuidanBlock = ^{
+            [selfWeak tuidan:selfWeak.dataArr[indexPath.section]];
         };
         return cell;
     } else {
@@ -144,10 +155,14 @@
     } else if (indexPath.row == self.dataArr[indexPath.section].sub.count + 4 - 2) {
         return 44;
     } else if(indexPath.row == self.dataArr[indexPath.section].sub.count + 4 - 1) {
-        if (orderModel.status.intValue == 2 || orderModel.status.intValue == 3 || orderModel.status.intValue == 8) {
+//        if (orderModel.status.intValue == 2 || orderModel.status.intValue == 3 || orderModel.status.intValue == 8) {
+//            return 60;
+//        }
+//        return 0.001;
+        if (self.dataArr[indexPath.section].status.intValue == 1) {//去支付
             return 60;
         }
-        return 0.001;
+        return 0;
     } else {
         return 110;
     }
@@ -216,7 +231,13 @@
  2 申请退单 3 确认收货 7 确认自提
  */
 - (void)buttonAction:(LxmShopCenterOrderModel *)model {
-    if (model.status.intValue == 2) {
+    
+    if (model.status.integerValue == 1) {//去支付
+           LxmPayVC *vc = [[LxmPayVC alloc] initWithTableViewStyle:UITableViewStyleGrouped type:LxmPayVC_type_ddcx];
+           vc.orderID = model.id;
+           vc.shifuMoney = model.total_money;
+           [self.navigationController pushViewController:vc animated:YES];
+    }else if (model.status.intValue == 2) {
         [self shenqingTuidan:model];
     } else if (model.status.intValue == 3) {
         [self sureshouhuo:model isOver:NO];

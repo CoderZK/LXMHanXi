@@ -478,10 +478,24 @@
 //    for (LxmShopCenterOrderGoodsModel *m in _orderModel.sub2) {
 //        f += m.proxy_price.doubleValue;
 //    }
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"商品总计： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",_orderModel.total_money.doubleValue] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];
-    [att appendAttributedString:str];
-    _priceLabel.attributedText = att;
+    
+    if (orderModel.postage_type.intValue == 2) {
+        
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"运费总计： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
+        NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",_orderModel.way_money.doubleValue] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];
+        [att appendAttributedString:str];
+        _priceLabel.attributedText = att;
+        
+    }else {
+        
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"商品总计： " attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13],NSForegroundColorAttributeName:CharacterDarkColor}];
+        NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f",_orderModel.total_money.doubleValue] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:MainColor}];
+        [att appendAttributedString:str];
+        _priceLabel.attributedText = att;
+        
+    }
+    
+    
 }
 
 //订单查询 详情

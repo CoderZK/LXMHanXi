@@ -130,6 +130,9 @@
     } else if (section == 2) {
         return self.xiajiGoodsArr.count;
     } else if (section == 3) {
+        if (self.detailModel.map.order_type.integerValue == 1) {
+            return 5;
+        }
         return 6;
     }
     return 2;
@@ -220,11 +223,17 @@
         } else if (indexPath.row == 4){
             cell.titleLabel.text = @"运费";
             cell.detailLabel.textColor = MainColor;
-            if (LxmTool.ShareTool.userModel.postMoney.intValue == 0) {
-                cell.detailLabel.text = @"物流发货";
-            } else {
-                cell.detailLabel.text = [NSString stringWithFormat:@"满%@包邮或者到付",LxmTool.ShareTool.userModel.postMoney];
-            }
+            
+            CGFloat f = [self.detailModel.map.way_money floatValue];
+            NSInteger d = [self.detailModel.map.way_money integerValue];
+            cell.detailLabel.text = f == d ? [NSString stringWithFormat:@"¥%ld",(long)d] : [NSString stringWithFormat:@"¥%.2f",f];
+            
+            
+//            if (LxmTool.ShareTool.userModel.postMoney.intValue == 0) {
+//                cell.detailLabel.text = @"物流发货";
+//            } else {
+//                cell.detailLabel.text = [NSString stringWithFormat:@"满%@包邮或者到付",LxmTool.ShareTool.userModel.postMoney];
+//            }
         }
         return cell;
     } else {
@@ -430,11 +439,18 @@
                 return;
             }
             LxmPayVC *vc = [[LxmPayVC alloc] initWithTableViewStyle:UITableViewStyleGrouped type:LxmPayVC_type_ddcx];
-            
+//
             vc.isDDcxDetail = YES;
             vc.orderID = self.detailModel.map.id;
-            vc.shifuMoney = @(self.shangpinTotalPrice).stringValue;
+            if (self.detailModel.map.order_type.integerValue == 1) {
+               vc.shifuMoney = @(self.shangpinTotalPrice).stringValue;
+            }else {
+               vc.shifuMoney = self.detailModel.map.way_money;
+            }
+            
             [self.navigationController pushViewController:vc animated:YES];
+
+            
           
         } else if (status == 2) {//申请退单
             [self shenqingTuidan];
