@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, LxmPayVC_type) {
 
 @property (nonatomic, assign) BOOL isDDcxDetail;
 
+@property(nonatomic,assign)BOOL isPayWuLiu;
+
 @property (nonatomic, assign) BOOL isShengji;//无身份 升级中的单子
 
 @property (nonatomic, assign) BOOL isBuJiao;

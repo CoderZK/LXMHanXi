@@ -79,6 +79,8 @@
     //获取个人信息
     [LxmNetworking networkingPOST:my_info parameters:@{@"token":TOKEN} returnClass:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] integerValue] == 1000) {
+         
+            
             [LxmTool ShareTool].userModel = [LxmUserInfoModel mj_objectWithKeyValues:responseObject[@"result"][@"data"]];
             [LxmEventBus sendEvent:@"userInfo" data:nil];
             if (okBlock) {

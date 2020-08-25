@@ -444,6 +444,7 @@
             vc.orderID = self.detailModel.map.id;
             if (self.detailModel.map.order_type.integerValue == 1 && self.detailModel.map.way_money.length > 0) {
                  vc.shifuMoney = self.detailModel.map.way_money;
+                vc.isPayWuLiu = YES;
             }else {
                vc.shifuMoney = @(self.shangpinTotalPrice).stringValue;
             }

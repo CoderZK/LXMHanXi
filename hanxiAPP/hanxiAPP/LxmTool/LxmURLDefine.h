@@ -15,7 +15,7 @@
 
 //#define Base_URL @"http://106.15.91.60"
 //正式
-#define Base_URL @"https://app.chaoci666.com/"
+#define Base_URL @"https://app.chaoci666.com"
 
 //#define Base_RESOURSE_URL @"https://vedio.hkymr.com"
 

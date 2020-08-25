@@ -72,11 +72,12 @@
     [NSUserDefaults.standardUserDefaults objectForKey:@"userModel"];
     [NSThread sleepForTimeInterval:2];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    if ([LxmTool ShareTool].isLogin) {
-        self.window.rootViewController = [[LxmTabBarVC alloc] init];
-    } else {
-        self.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:[[LxmLoginVC alloc] init]];
-    }
+    self.window.rootViewController = [[LxmTabBarVC alloc] init];
+//    if ([LxmTool ShareTool].isLogin) {
+//        self.window.rootViewController = [[LxmTabBarVC alloc] init];
+//    } else {
+//        self.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:[[LxmLoginVC alloc] init]];
+//    }
     [self initPush];
     [self initUMeng:launchOptions];
     
@@ -171,6 +172,7 @@
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
         
     }
+    [[LxmTool ShareTool] uploadDeviceToken];
     return token;
     
 }

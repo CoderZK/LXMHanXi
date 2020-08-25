@@ -237,6 +237,7 @@
            vc.orderID = model.id;
         if (model.way_money.length > 0 && model.order_type.intValue == 1) {
             vc.shifuMoney = model.way_money;
+            vc.isPayWuLiu = YES;
         }else {
            vc.shifuMoney = model.total_money;
         }

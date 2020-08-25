@@ -383,6 +383,7 @@
             
                     vc.orderID = [NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"orderId"]];
                     vc.shifuMoney = [NSString stringWithFormat:@"%@",responseObject[@"result"][@"map"][@"price"]];;
+//                    vc.isPayWuLiu = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                 

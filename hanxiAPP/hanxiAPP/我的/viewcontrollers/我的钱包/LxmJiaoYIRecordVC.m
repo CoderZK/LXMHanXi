@@ -538,12 +538,14 @@
             if (model.status.intValue == 133) {
                 self.titleLabel.text = @"物流退回";
                 self.iconImgView.image = [UIImage imageNamed:@"htcz_1"];
+                self.moneyLabel.text = [NSString stringWithFormat:@"+%@",[model.info_money getPriceStr]];
                 self.stateLabel.text = @"已完成";
             }
         }
+            break;
         case 20: {
             self.titleLabel.text = @"物流支付";
-            self.iconImgView.image = [UIImage imageNamed:@"pfcg_1"];
+            self.iconImgView.image = [UIImage imageNamed:@"jdth_1"];
             self.moneyLabel.text = [NSString stringWithFormat:@"-%@",[model.info_money getPriceStr]];
             self.stateLabel.text = @"已完成";
         }

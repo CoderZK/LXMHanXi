@@ -27,7 +27,7 @@
 #import "LxmShengjiGouWuVC.h"
 #import "LxmMineJiFenXiaJiTVC.h"
 #import "LxmRenZhengProtocolVC.h"
-
+#import "LxmLoginVC.h"
 
 @interface LxmMineVC ()
 
@@ -86,6 +86,14 @@
         
     }];
     
+    if  (![LxmTool ShareTool].isLogin) {
+        [LxmTool ShareTool].userModel = nil;
+        [LxmTool ShareTool].isLogin = NO;
+        [LxmTool ShareTool].session_token = nil;
+        LxmLoginVC *vc = [LxmLoginVC new];
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [[UIViewController topViewController] presentViewController: [[BaseNavigationController alloc] initWithRootViewController:vc] animated:YES completion:nil];
+    }
    
     
 }

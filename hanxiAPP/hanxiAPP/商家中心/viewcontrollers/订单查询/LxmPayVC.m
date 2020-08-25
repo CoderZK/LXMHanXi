@@ -180,7 +180,12 @@
     } else if (self.type == LxmPayVC_type_ddcx) {
         CGFloat f = self.shifuMoney.doubleValue;
         NSInteger d = self.shifuMoney.integerValue;
-        [_payButton setTitle:d == f ? [NSString stringWithFormat:@"支付%ld元",(long)d] : [NSString stringWithFormat:@"支付%.2f元",f] forState:UIControlStateNormal];
+        if (self.isPayWuLiu) {
+            [_payButton setTitle:d == f ? [NSString stringWithFormat:@"运费支付%ld元",(long)d] : [NSString stringWithFormat:@"运费支付%.2f元",f] forState:UIControlStateNormal];
+        }else {
+           [_payButton setTitle:d == f ? [NSString stringWithFormat:@"支付%ld元",(long)d] : [NSString stringWithFormat:@"支付%.2f元",f] forState:UIControlStateNormal];
+        }
+        
     } else if (self.type == LxmPayVC_type_zjgm) {
         CGFloat f = self.zhijieGoumaiMoney.doubleValue;
         NSInteger d = self.zhijieGoumaiMoney.integerValue;
@@ -205,7 +210,14 @@
         } else {
             CGFloat f = self.shifuMoney.doubleValue;
             NSInteger d = self.shifuMoney.integerValue;
-            [_payButton setTitle:d == f ? [NSString stringWithFormat:@"支付%ld元",(long)d] : [NSString stringWithFormat:@"支付%.2f元",f] forState:UIControlStateNormal];
+            
+            if (self.isPayWuLiu) {
+                 [_payButton setTitle:d == f ? [NSString stringWithFormat:@"运费支付%ld元",(long)d] : [NSString stringWithFormat:@"运费支付%.2f元",f] forState:UIControlStateNormal];
+            }else {
+                 [_payButton setTitle:d == f ? [NSString stringWithFormat:@"支付%ld元",(long)d] : [NSString stringWithFormat:@"支付%.2f元",f] forState:UIControlStateNormal];
+            }
+            
+           
         }
         
     } else{
