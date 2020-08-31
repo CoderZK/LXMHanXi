@@ -700,13 +700,15 @@
         self.headViewOne.hidden = NO;
         self.subTVC.view.hidden = NO;
         
+        self.bottomV.hidden = NO;
+        
     }else {
         self.leftButton.selected = NO;
         self.rightButton.selected = YES;
         self.headViewTwo.hidden = NO;
         self.headViewOne.hidden = YES;
         self.subTVC.view.hidden = YES;
-        
+        self.bottomV.hidden = YES;
         
     }
     

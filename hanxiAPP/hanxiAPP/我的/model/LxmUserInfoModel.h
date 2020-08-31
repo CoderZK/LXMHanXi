@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic , strong) NSString *my_score;//团队小晞
 
-
+@property(nonatomic,strong)NSDictionary *map;
 
 
 @property (nonatomic , strong) LxmUserShopInfoModel *shopInfo;//

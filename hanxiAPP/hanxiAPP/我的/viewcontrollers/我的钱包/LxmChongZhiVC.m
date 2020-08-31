@@ -259,8 +259,36 @@
                
                
            };
-        cell.titleStr = @"账户: 1234569872522451;账户名称: 张小飞";
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSDictionary * dict = [LxmTool ShareTool].map;
+        NSString * str1 = @"";
+        NSString * str2 = @"";
+        NSString * str3 = @"";
+        
+        if (self.currentIndex == 0) {
+            if ([dict.allKeys containsObject:@"zhiAccount"]) {
+                str2 = dict[@"zhiAccount"];
+            }
+            if ([dict.allKeys containsObject:@"zhiName"]) {
+                str1 = dict[@"zhiName"];
+            }
+            cell.titleStr =[NSString stringWithFormat:@"账号: %@ 账号名称: %@",str2,str1];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }else {
+            if ([dict.allKeys containsObject:@"bankNo"]) {
+                str2 = dict[@"bankNo"];
+            }
+            if ([dict.allKeys containsObject:@"bankName"]) {
+                str1 = dict[@"bankName"];
+            }
+            if ([dict.allKeys containsObject:@"bankUserName"]) {
+                str3 = dict[@"bankUserName"];
+            }
+            cell.titleStr =[NSString stringWithFormat:@"%@:%@ 持卡人:%@",str1,str2,str3];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        
         return cell;
            
     }else {

@@ -63,6 +63,14 @@ static LxmTool * __tool = nil;
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
 }
 
+- (void)setMap:(NSDictionary *)map {
+    [[NSUserDefaults standardUserDefaults] setObject:map forKey:@"map"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSDictionary *)map {
+     return [[NSUserDefaults standardUserDefaults] objectForKey:@"map"];
+}
+
 - (void)setUserModel:(LxmUserInfoModel *)userModel{
     _userModel = userModel;
     if (userModel) {
@@ -91,6 +99,8 @@ static LxmTool * __tool = nil;
     NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return arr;
 }
+
+
 
 - (NSArray<LxmHomeGoodsModel *> *)goodsList {
     NSString *filePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/goods.plist"];

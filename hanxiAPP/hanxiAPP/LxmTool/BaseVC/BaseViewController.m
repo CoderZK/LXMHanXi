@@ -82,6 +82,7 @@
          
             
             [LxmTool ShareTool].userModel = [LxmUserInfoModel mj_objectWithKeyValues:responseObject[@"result"][@"data"]];
+            [LxmTool ShareTool].map = responseObject[@"result"][@"map"];
             [LxmEventBus sendEvent:@"userInfo" data:nil];
             if (okBlock) {
                 okBlock();

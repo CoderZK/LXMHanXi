@@ -48,28 +48,28 @@
             self.dataModel = [LxmJiFenModel mj_objectWithKeyValues:responseObject[@"result"][@"map"]];
             
             if (self.dataModel.second_type.intValue == 1) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score.getPriceStr];
                 self.typeLB.text = @"直属推荐奖励";
                }else if (self.dataModel.second_type.intValue == 2) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score.getPriceStr];
                    self.typeLB.text = @"转出";
                }else if (self.dataModel.second_type.intValue == 3) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score.getPriceStr];
                    self.typeLB.text = @"转入";
                }else if (self.dataModel.second_type.intValue == 4) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score.getPriceStr];
                    self.typeLB.text = @"提取";
                }else if (self.dataModel.second_type.intValue == 5) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score.getPriceStr];
                    self.typeLB.text = @"团队销售业绩收入";
                }else if (self.dataModel.second_type.intValue == 6) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score.getPriceStr];
                     self.typeLB.text = @"转入";
                }else if (self.dataModel.second_type.intValue == 7) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"-%@",self.dataModel.score.getPriceStr];
                    self.typeLB.text = @"转出";
                }else if (self.dataModel.second_type.intValue == 8) {
-                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score];
+                   self.moneyLB.text = [NSString stringWithFormat:@"+%@",self.dataModel.score.getPriceStr];
                     self.typeLB.text = @"提取";
                }
 

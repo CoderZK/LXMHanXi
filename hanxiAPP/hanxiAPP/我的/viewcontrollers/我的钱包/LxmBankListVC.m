@@ -66,7 +66,16 @@
         _bankCardNo = [UILabel new];
         _bankCardNo.textColor = UIColor.whiteColor;
         _bankCardNo.font = [UIFont systemFontOfSize:14];
-        _bankCardNo.text = @"华夏银行 1234567897144523123";
+        NSDictionary * dict = [LxmTool ShareTool].map;
+               NSString * str1 = @"";
+               NSString * str2 = @"";
+               if ([dict.allKeys containsObject:@"bankNo"]) {
+                   str2 = dict[@"bankNo"];
+               }
+               if ([dict.allKeys containsObject:@"bankName"]) {
+                   str1 = dict[@"bankName"];
+               }
+        _bankCardNo.text = [NSString stringWithFormat:@"%@  %@",str2,str1];
     }
     return _bankCardNo;
 }

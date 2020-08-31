@@ -54,6 +54,9 @@
 
 @property (nonatomic,strong)LxmUserInfoModel * userModel;
 
+@property(nonatomic,strong)NSDictionary *map;
+
+
 //推送token
 @property(nonatomic,strong)NSString * deviceToken;
 
