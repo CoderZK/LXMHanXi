@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "37472F30-1762-4F06-9CD3-9501DC4FEF38"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            uuid = "7177DC97-2E5C-4BC2-855C-02B0A7155EC7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4DA014AF-A041-4A74-8D39-8FB69D9F40B4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hanxiAPP/&#x6211;&#x7684;/viewcontrollers/&#x6211;&#x7684;&#x94b1;&#x5305;/LxmTiXianVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "906"
+            endingLineNumber = "906"
+            landmarkName = "-loadbankListData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E980B0F9-4CB4-4654-A7D8-CB3F02FBA661"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hanxiAPP/&#x6211;&#x7684;/viewcontrollers/&#x6211;&#x7684;&#x94b1;&#x5305;/LxmTiXianVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "908"
+            endingLineNumber = "908"
+            landmarkName = "-loadbankListData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0EC201C3-1581-4700-9845-1B549ECED34F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hanxiAPP/&#x6211;&#x7684;/&#x6211;&#x7684;&#x79ef;&#x5206;/LxmMineJiFenXiaJiTVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "-loadGroupData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0EC201C3-1581-4700-9845-1B549ECED34F - 22c5604e47699d61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LxmMineJiFenXiaJiTVC loadGroupData]"
+                  moduleName = "&#x5bd2;&#x665e;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/LXM/%E6%B6%B5%E6%9B%A6/hanxiAPP/hanxiAPP/%E6%88%91%E7%9A%84/%E6%88%91%E7%9A%84%E7%A7%AF%E5%88%86/LxmMineJiFenXiaJiTVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "231"
+                  endingLineNumber = "231"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "0EC201C3-1581-4700-9845-1B549ECED34F - 91c9afa1b47504ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__37-[LxmMineJiFenXiaJiTVC loadGroupData]_block_invoke"
+                  moduleName = "&#x5bd2;&#x665e;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/LXM/%E6%B6%B5%E6%9B%A6/hanxiAPP/hanxiAPP/%E6%88%91%E7%9A%84/%E6%88%91%E7%9A%84%E7%A7%AF%E5%88%86/LxmMineJiFenXiaJiTVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "233"
+                  endingLineNumber = "233"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEDD0AE4-7CC8-4216-8507-56DEF0A2D00E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hanxiAPP/LxmTool/LxmTool.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-uploadDeviceToken"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
